@@ -1,0 +1,11 @@
+{
+  "name": "domoklub",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs dev",
+    "build": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs build",
+    "preview": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs preview"
+  }
+}

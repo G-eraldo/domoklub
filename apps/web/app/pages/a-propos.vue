@@ -1,0 +1,8 @@
+<script setup>
+import { canonicalPath, publicRobots } from '~/data/site.js'
+definePageMeta({ layout: 'default' })
+const description = 'DomoKlub, média français en préparation pour comprendre et choisir la maison connectée.'
+useSeoMeta({ title: 'À propos · DomoKlub', description, ogTitle: 'À propos · DomoKlub', ogDescription: description, robots: publicRobots() })
+useHead({ link: [{ rel: 'canonical', href: canonicalPath('/a-propos') }] })
+</script>
+<template><div><header class="page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><NuxtLink to="/">Accueil</NuxtLink><span class="separator">/</span><span aria-current="page">À propos</span></nav><span class="eyebrow">La maison connectée, simplement</span><h1>À propos de DomoKlub<span style="color:var(--orange)">.</span></h1><p>Un média français édité par La Fabrique du Code.</p></div></header><div class="container page-body"><div class="reading-width"><p class="lead">DomoKlub, édité par Gérald François pour La Fabrique du Code, aide à comprendre les technologies de la maison connectée et à choisir avec des informations vérifiables.</p><h2>Pourquoi ce site ?</h2><p>Les compatibilités, standards et usages changent vite. Nous voulons rendre les choix plus lisibles avec des guides, tutoriels, tests réels et comparatifs explicites.</p><h2>Comment nous travaillons</h2><p>Les contenus éditoriaux et fiches produits attendent une validation humaine avant publication. Les sources, dates et limites doivent accompagner les informations importantes.</p><p><NuxtLink to="/methodologie" class="text-link">Découvrir notre méthode <span aria-hidden="true">↗</span></NuxtLink></p></div></div></div></template>
