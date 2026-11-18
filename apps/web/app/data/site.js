@@ -37,3 +37,7 @@ export function isSiteLive() {
   const value = useRuntimeConfig().public.siteLive
   return value === true || value === 'true'
 }
+
+export function safeJsonLd(value) {
+  return JSON.stringify(value).replaceAll('<', '\u003c').replaceAll('>', '\u003e').replaceAll('&', '\u0026')
+}

@@ -30,5 +30,5 @@ La mise à jour demande pour l’instant une modification de fichier et un
 redéploiement. Strapi 5 reste nécessaire pour éditer, relire et publier depuis
 une interface, gérer les rôles et maintenir les offres à grande échelle.
 Le circuit local est volontairement petit et inspectable ; il n’est pas un
-substitut à une administration multi-utilisateur. Les offres expirent et sont
-masquées automatiquement après leur date limite.
+substitut à une administration multi-utilisateur. Les offres expirent le 17 mai 2027 et sont masquées automatiquement après
+leur date limite ; un contrôle GitHub Actions avertit 30 jours avant.

@@ -1,6 +1,9 @@
 # ADR 0001 — Site public de préparation
 
-Date : 17 novembre 2026. Statut : décidé pour la première unité.
+Date : 17 novembre 2026. Statut : préparation initiale, remplacée pour le lancement par l’ADR 0002.
+
+L’ADR 0002 autorise désormais les contenus locaux approuvés et prévaut sur
+la condition initiale d’attendre Strapi pour ouvrir le site.
 
 ## Contexte
 
@@ -23,12 +26,14 @@ publication et modification. Les valeurs de `type` sont `test`, `guide`,
 `tutorial`, `comparison`, `deal`.
 
 Champs attendus de `Product` : `name`, `slug`, `brand`, `category`, `summary`,
-`evidenceLevel`, `testEvidenceApproved`, `specs`, `compatibilities`,
+`evidenceLevel`, `testEvidenceApproved`, `personalReview`, `specs`, `compatibilities`,
 `approvalState`, date de modification. Les valeurs `specs` et
 `compatibilities` exigent chacune une source HTTPS et une date de vérification ;
 les entrées incomplètes sont omises. Le statut « testé » n'est exposé que si
 `evidenceLevel=tested` **et** `testEvidenceApproved=true` ; le futur CMS doit
-exiger un rapport d'essai approuvé pour ce dernier champ.
+exiger un retour d’usage de première main approuvé, avec auteur, contexte,
+observations et limites, pour ce dernier champ. Un test comparatif complet
+exigerait en plus un protocole reproductible.
 
 L'API de comparaison vérifie les identifiants, l'unicité, le nombre (2–4) et
 une catégorie identique côté serveur. La comparaison libre reste `noindex`.

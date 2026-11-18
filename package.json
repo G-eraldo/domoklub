@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs dev",
     "build": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs build",
-    "preview": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs preview"
+    "preview": "cd apps/web && node node_modules/nuxt/bin/nuxt.mjs preview",
+    "check:offers": "node scripts/check-offers.mjs",
+    "check:seo": "node scripts/check-seo.mjs"
   }
 }

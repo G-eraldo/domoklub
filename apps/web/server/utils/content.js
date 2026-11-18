@@ -2,6 +2,7 @@ import { launchArticles, launchProducts, launchOffers } from '../content/launch.
 
 const articleTypes = new Set(['test', 'guide', 'tutorial', 'comparison', 'deal'])
 const sectionByType = { test: 'tests', guide: 'guides', tutorial: 'tutoriels', comparison: 'comparatifs', deal: 'bons-plans' }
+const launchProductOrder = ['sonoff-zbdongle-p', 'aqara-g410-select', 'sonoff-snzb-04p', 'sonoff-zbminil2-e', 'sonoff-orb-socket', 'nodon-sin-4-1-20', 'sonoff-mini-zbrbs', 'sonoff-zbmini-r2', 'home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10']
 
 const cleanSlug = value => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(String(value || '')) ? String(value) : ''
 function localVisible(item) {
@@ -53,6 +54,7 @@ function asPublicArticle(item, detail = false) {
   const article = {
     id: cleanText(item.documentId, 100),
     title: cleanText(item.title, 180),
+    seoTitle: cleanText(item.seoTitle, 100),
     slug: cleanText(item.slug, 160),
     type: item.type,
     topic: cleanText(item.topic, 100),
@@ -70,6 +72,12 @@ function asPublicArticle(item, detail = false) {
       paragraphs: Array.isArray(section?.paragraphs) ? section.paragraphs.slice(0, 8).map(value => cleanText(value, 2000)).filter(Boolean) : [],
       bullets: Array.isArray(section?.bullets) ? section.bullets.slice(0, 12).map(value => cleanText(value, 400)).filter(Boolean) : []
     })).filter(section => section.id && section.title) : []
+    const table = item.decisionTable
+    article.decisionTable = table && Array.isArray(table.columns) && Array.isArray(table.rows) ? {
+      title: cleanText(table.title, 120),
+      columns: table.columns.slice(0, 4).map(value => cleanText(value, 80)),
+      rows: table.rows.slice(0, 12).map(row => Array.isArray(row) ? row.slice(0, 4).map(value => cleanText(value, 200)) : [])
+    } : null
     article.relatedProducts = safeSlugs(item.relatedProducts)
     article.relatedArticles = safeSlugs(item.relatedArticles)
     article.sources = safeSources(item.sources)
@@ -80,14 +88,25 @@ function asPublicArticle(item, detail = false) {
 function asPublicProduct(item) {
   const specs = verifiedValues(item.specs)
   const compatibilities = verifiedValues(item.compatibilities, true)
+  const tested = item.evidenceLevel === 'tested' && item.testEvidenceApproved === true
+  const review = tested && item.personalReview && item.personalReview.rating === 5 ? {
+    author: cleanText(item.personalReview.author, 100),
+    rating: 5,
+    context: cleanText(item.personalReview.context, 500),
+    observations: Array.isArray(item.personalReview.observations) ? item.personalReview.observations.slice(0, 5).map(value => cleanText(value, 700)).filter(Boolean) : [],
+    caveat: cleanText(item.personalReview.caveat, 500)
+  } : null
   return {
     id: cleanText(item.documentId, 100),
     slug: cleanText(item.slug, 160),
     name: cleanText(item.name, 180),
+    seoTitle: cleanText(item.seoTitle, 100),
+    seoDescription: cleanText(item.seoDescription, 180),
     brand: cleanText(item.brand, 100),
     category: cleanText(item.category, 100),
     summary: cleanText(item.summary, 500),
-    evidenceLevel: item.evidenceLevel === 'tested' && item.testEvidenceApproved === true ? 'tested' : 'documentary',
+    evidenceLevel: tested ? 'tested' : 'documentary',
+    personalReview: review,
     specs: specs.display,
     specSources: specs.sources,
     compatibilities: compatibilities.display,
@@ -96,6 +115,10 @@ function asPublicProduct(item) {
     editorialStatus: item.editorialStatus === 'review' ? 'review' : 'approved',
     buyerNote: cleanText(item.buyerNote, 1000),
     limitations: Array.isArray(item.limitations) ? item.limitations.slice(0, 12).map(value => cleanText(value, 500)).filter(Boolean) : [],
+    editorialSections: Array.isArray(item.editorialSections) ? item.editorialSections.slice(0, 8).map(section => ({
+      title: cleanText(section?.title, 160),
+      paragraphs: Array.isArray(section?.paragraphs) ? section.paragraphs.slice(0, 6).map(value => cleanText(value, 1400)).filter(Boolean) : []
+    })).filter(section => section.title && section.paragraphs.length) : [],
     relatedArticles: safeSlugs(item.relatedArticles),
     sources: safeSources(item.sources)
   }
@@ -122,9 +145,9 @@ async function fetchCmsCollection(collection, { fields, filters = {}, page = 1, 
   }
 }
 
-const articleListFields = ['title', 'slug', 'type', 'topic', 'excerpt', 'publishedAt', 'updatedAt']
-const articleDetailFields = [...articleListFields, 'body', 'sources']
-const productFields = ['name', 'slug', 'brand', 'category', 'summary', 'evidenceLevel', 'testEvidenceApproved', 'specs', 'compatibilities', 'updatedAt']
+const articleListFields = ['title', 'seoTitle', 'slug', 'type', 'topic', 'excerpt', 'publishedAt', 'updatedAt']
+const articleDetailFields = [...articleListFields, 'body', 'sources', 'decisionTable']
+const productFields = ['name', 'seoTitle', 'seoDescription', 'slug', 'brand', 'category', 'summary', 'evidenceLevel', 'testEvidenceApproved', 'specs', 'compatibilities', 'updatedAt']
 
 export async function getArticles({ type, topic, page = 1, pageSize = 12 } = {}) {
   const filters = { ...(type ? { type } : {}), ...(topic ? { topic } : {}) }
@@ -144,7 +167,11 @@ export async function getArticle(slug, type) {
 
 export async function getProducts({ page = 1, pageSize = 24 } = {}) {
   const result = !useRuntimeConfig().strapiUrl
-    ? localPage(launchProducts.filter(localVisible).sort((a, b) => a.name.localeCompare(b.name, 'fr')), page, pageSize)
+    ? localPage(launchProducts.filter(localVisible).sort((a, b) => {
+      const first = launchProductOrder.indexOf(a.slug)
+      const second = launchProductOrder.indexOf(b.slug)
+      return (first < 0 ? 999 : first) - (second < 0 ? 999 : second) || a.name.localeCompare(b.name, 'fr')
+    }), page, pageSize)
     : await fetchCmsCollection('products', { fields: productFields, page, pageSize, sort: 'name:asc' })
   return { items: result.data.map(asPublicProduct).filter(item => item.slug && item.name), pagination: result.meta.pagination || {}, configured: result.configured }
 }

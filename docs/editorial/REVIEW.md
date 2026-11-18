@@ -20,6 +20,29 @@ citées et n’ont pas été testés sur le matériel.
 | `/produits/home-assistant-connect-zbt-2` | Fiche documentaire, non testée | Domadoo `domid=159` | `approved` |
 | `/produits/sonoff-dongle-pp10` | Fiche documentaire, non testée | Domadoo `domid=159` | `approved` |
 
+## Avis personnels ajoutés le 17 novembre 2026
+
+L’éditeur a déclaré avoir utilisé les huit modèles ci-dessous et a demandé une note
+personnelle de 5/5 pour chacun. Pour le ZBDongle-P, il précise une utilisation
+avec Zigbee2MQTT depuis juin 2025, une installation « plug and play » et aucun
+incident. Pour les six autres références SONOFF/NodOn, il indique un bon
+fonctionnement sans problème rencontré, sans durée ni protocole détaillé. Pour
+la G410, utilisée avec HomeKit, il signale une difficulté de liaison avec le
+carillon vers 10 m dans son installation. Cette distance n’est pas une mesure de
+portée universelle. Les huit pages distinguent ces observations personnelles
+des caractéristiques issues des fabricants. Les photos sont celles de Domadoo.
+
+| URL | Lien communiqué | Statut |
+| --- | --- | --- |
+| `/produits/sonoff-zbdongle-p` | Domadoo `domid=159` | `approved` |
+| `/produits/sonoff-zbminil2-e` | Domadoo `domid=159` | `approved` |
+| `/produits/sonoff-orb-socket` | Domadoo `domid=159` | `approved` |
+| `/produits/nodon-sin-4-1-20` | Domadoo `domid=159` | `approved` |
+| `/produits/aqara-g410-select` | Domadoo `domid=159` | `approved` |
+| `/produits/sonoff-snzb-04p` | Domadoo `domid=159` | `approved` |
+| `/produits/sonoff-mini-zbrbs` | Domadoo `domid=159` | `approved` |
+| `/produits/sonoff-zbmini-r2` | Domadoo `domid=159` | `approved` |
+
 ## Avant d’approuver
 
 1. Lire chaque guide et chaque fiche affichés dans la prévisualisation ;
@@ -47,9 +70,11 @@ citées et n’ont pas été testés sur le matériel.
 
 ## Maintenance
 
-Les offres locales expirent le 24 novembre 2026 à 10 h, heure de Paris. Une
-révision doit confirmer le lien, le marchand et les règles avant de repousser
-`checkedAt` et `expiresAt`. Les caractéristiques peuvent changer avec les
+Les offres locales expirent le 17 mai 2027 à 10 h, heure de Paris. Chaque
+mois, vérifier les fiches marchandes, le paramètre affilié, la disponibilité
+et les règles du programme. Une nouvelle revue doit confirmer le lien, le
+marchand et les règles avant de repousser `checkedAt` et `expiresAt`.
+GitHub Actions signale les offres à moins de 30 jours de leur expiration. Les caractéristiques peuvent changer avec les
 versions : revoir leurs sources lors des mises à jour éditoriales.
 
 Validation de l’éditeur reçue dans la conversation le 17 novembre 2026 pour les trois guides, les trois fiches, les liens Domadoo et les mentions légales.

@@ -1,63 +1,83 @@
-# Mise en ligne sur Dokploy / VPS IONOS
+# Mise en ligne depuis GitHub vers Dokploy / VPS IONOS
 
-Ce dépôt contient un `Dockerfile` pour Nuxt 4 en rendu serveur. Le conteneur
-écoute le port 3000 et expose `/api/health` pour la supervision.
+Le dépôt Git local est sur la branche `main`, avec `origin` :
+`https://github.com/G-eraldo/domoklub.git`. Le `Dockerfile` à la racine
+compile Nuxt 4 et lance le serveur sur le port interne `3000`.
+`/api/health` répond pour la supervision.
 
-## Préparer la source
+## Publier la version du dépôt
 
-Le dossier local est `/Users/geraldo/Developer/domoklub`. Une archive prête
-à importer est disponible à
-`/Users/geraldo/Developer/domoklub-deploy-2026-11-17.zip`. Dokploy accepte
-l’import d’un ZIP pour une application. Le projet ne comporte pas de dépôt Git :
-le ZIP permet le premier déploiement sans commit ni push.
+Les changements locaux doivent être enregistrés puis poussés vers `main` par
+le propriétaire du dépôt. Aucun secret ne doit être ajouté à GitHub. Le
+répertoire `.env`, `node_modules`, `.nuxt` et `.output` sont ignorés.
 
-Le fichier `.dockerignore` exclut `node_modules`, les sorties de build et les
-fichiers d’environnement. Ne transférer aucune clé ou donnée personnelle
-inutile. Le build Docker utilise Node 24 et pnpm 11.25.0.
+La vérification GitHub Actions `.github/workflows/site-checks.yml` contrôle
+le build et les dates des onze offres sur chaque push et chaque lundi. Elle
+ne remplace pas une visite mensuelle des fiches marchandes. Sur un dépôt
+public inactif, GitHub peut désactiver les exécutions planifiées après
+60 jours ; surveiller l’onglet Actions.
 
-## Application Dokploy
+## Configurer l’application Dokploy
 
-1. Créer une application dans Dokploy, choisir le fournisseur « Drag and Drop .zip » et importer l’archive ci-dessus.
-2. Choisir le type de build `Dockerfile`, chemin `Dockerfile`, contexte `.` et port interne `3000`.
-3. Pour la recette sur le domaine provisoire généré par Dokploy, définir :
+1. Connecter GitHub à Dokploy, puis donner accès au dépôt
+   `G-eraldo/domoklub`. Créer une application depuis ce dépôt et sélectionner
+   la branche `main`, avec chemin de build `/`.
+2. Choisir le type de build `Dockerfile`, chemin `Dockerfile`, contexte
+   `.` et port interne `3000`.
+3. Pour vérifier le site avant l’achat du nom de domaine, générer un domaine
+   provisoire dans Dokploy. Définir dans l’onglet des variables :
 
    ```text
    NUXT_PUBLIC_SITE_URL=http://<domaine-provisoire-Dokploy>
    NUXT_PUBLIC_SITE_LIVE=false
    ```
 
-   Remplacer la valeur entre chevrons par l’hôte réellement affiché dans Dokploy.
-   Le domaine gratuit `sslip.io` de Dokploy fonctionne en HTTP seulement.
-4. Déployer, puis vérifier sur ce domaine provisoire `/api/health`, `/guides`,
-   une fiche produit, `/robots.txt` et `/sitemap.xml`. Le sitemap doit être
-   vide et `robots.txt` doit contenir `Disallow: /`.
-5. Après achat de `domoklub.fr`, créer chez le registraire un enregistrement
-   `A` pour la racine vers l’IPv4 publique du VPS IONOS. Attendre que le DNS
-   pointe vers le VPS **avant** d’ajouter le domaine dans Dokploy. Dans
-   l’application Dokploy, créer le domaine avec hôte `domoklub.fr`, chemin
-   `/`, port conteneur `3000`, HTTPS activé et certificat Let's Encrypt.
-   Pour `www`, créer un `CNAME` vers `domoklub.fr`, puis le domaine et la
-   redirection `www` vers l’hôte sans `www` dans Dokploy.
-6. Modifier les variables dans Dokploy :
+   Remplacer la valeur entre chevrons par l’hôte réellement fourni. Le
+   domaine gratuit `sslip.io` de Dokploy fonctionne en HTTP seulement.
+4. Déployer, puis vérifier sur l’hôte provisoire `/api/health`, `/guides`,
+   `/produits/home-assistant-green`, les photos, les liens Domadoo,
+   `/robots.txt` et `/sitemap.xml`. Le sitemap doit être vide et
+   `robots.txt` doit contenir `Disallow: /`.
+
+## Ouvrir domoklub.fr
+
+Le propriétaire a confirmé le 17 novembre 2026 que le domaine n’est pas
+encore acheté ; le DNS renvoie `NXDOMAIN`. L’achat reste à faire, sous réserve
+de disponibilité chez le registraire.
+
+1. Après achat, créer un enregistrement DNS `A` pour la racine vers l’IPv4
+   publique du VPS IONOS. Attendre que le DNS pointe vers le VPS **avant**
+   d’ajouter le domaine dans Dokploy.
+2. Dans l’application Dokploy, créer le domaine avec hôte
+   `domoklub.fr`, chemin `/`, port conteneur `3000`, HTTPS activé et
+   certificat Let's Encrypt. Pour `www`, créer un `CNAME` vers
+   `domoklub.fr`, puis configurer la redirection vers le domaine sans
+   `www` dans Dokploy.
+3. Modifier les variables dans Dokploy :
 
    ```text
    NUXT_PUBLIC_SITE_URL=https://domoklub.fr
    NUXT_PUBLIC_SITE_LIVE=true
    ```
 
-   Les contenus et mentions de lancement ont été approuvés le 17 novembre.
-   Redéployer, puis vérifier `https://domoklub.fr/api/health`, les guides,
-   fiches et liens affiliés, le sitemap, `robots.txt` et `index,follow`.
+4. Redéployer, puis contrôler `https://domoklub.fr/api/health`, les
+   guides, fiches, photos et liens marchands, le sitemap, `robots.txt` et
+   les balises `index,follow`. Les contenus et mentions de lancement ont été
+   approuvés par l’éditeur le 17 novembre 2026.
 
-Aucun accès Dokploy ni identifiant VPS n’est stocké dans le projet. L’éditeur a confirmé le 17 novembre 2026 que `domoklub.fr` n’est pas encore acheté ; le DNS renvoie `NXDOMAIN`. L’enregistrement du nom reste à faire, sous réserve de sa disponibilité au moment de l’achat. Le certificat HTTPS et le routage du VPS ne
-peuvent pas être confirmés depuis le build local.
+Le certificat HTTPS et le routage VPS restent à confirmer sur le serveur réel.
+Dokploy peut déclencher les déploiements suivants à chaque push GitHub une fois
+le fournisseur et le webhook configurés.
 
-## Contrôles de lancement
+## Après ouverture
 
-- Les guides et fiches affichent des sources et le niveau de preuve.
-- Les liens Domadoo s’ouvrent avec `rel="sponsored noopener noreferrer"`.
-- Les prix ne sont pas affichés ; les stocks se vérifient chez le marchand.
-- Les pages de recherche et comparaison restent `noindex`.
-- Les pages légales affichent les informations confirmées par l’éditeur.
-- Les offres expirées disparaissent automatiquement de l’API ; prévoir une
-  révision régulière.
+- Vérifier mensuellement les trois pages Domadoo, l’attribution des liens,
+  les disponibilités et les sources techniques.
+- Les offres locales expirent le 17 mai 2027. Le contrôle GitHub Actions
+  échoue 30 jours avant cette date pour demander une nouvelle revue.
+- Soumettre `https://domoklub.fr/sitemap.xml` dans Search Console après
+  activation du domaine et suivre les requêtes, clics et conversions réels.
+- Les pages de recherche et comparaison restent `noindex`. Aucun prix
+  marchand n’est affiché sur DomoKlub.
+
+Avant publication, exécuter `npm run build && npm run check:seo` localement ou vérifier le résultat du workflow GitHub Actions. Après branchement du domaine, refaire les contrôles sur l’URL HTTPS réelle : redirection HTTP et www vers le domaine canonique, sitemap, Search Console, Bing Webmaster Tools et performance mobile.

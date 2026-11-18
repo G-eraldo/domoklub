@@ -1,5 +1,6 @@
 <script setup>
 import { canonicalPath, publicRobots } from '~/data/site.js'
+import { productImages } from '~/data/productImages.js'
 definePageMeta({ layout: 'default' })
 
 const route = useRoute()
@@ -7,14 +8,17 @@ const slug = String(route.params.slug)
 const { data: product, pending, error } = await useAsyncData(`product-${slug}`, () => $fetch('/api/public/product', { query: { slug } }))
 if (error.value?.statusCode === 404) throw createError({ statusCode: 404, statusMessage: 'Produit introuvable' })
 const { data: offers, error: offersError } = await useAsyncData(`offers-${slug}`, () => $fetch('/api/public/offers', { query: { slug } }))
-const articleLabels = { 'demarrer-home-assistant-green': 'Démarrer avec Home Assistant Green', 'choisir-coordinateur-zigbee-home-assistant': 'Choisir un coordinateur Zigbee', 'matter-thread-zigbee-differences': 'Matter, Thread et Zigbee' }
+const articleLabels = { 'installer-home-assistant': 'Installer Home Assistant', 'installer-zigbee2mqtt': 'Installer Zigbee2MQTT', 'demarrer-home-assistant-green': 'Démarrer avec Home Assistant Green', 'choisir-coordinateur-zigbee-home-assistant': 'Choisir un coordinateur Zigbee', 'matter-thread-zigbee-differences': 'Matter, Thread et Zigbee' }
 
 const approvedRobots = publicRobots()
+const productPhotoUrl = productImages[slug] ? canonicalPath(productImages[slug].src) : undefined
 useSeoMeta({
-  title: computed(() => product.value ? `${product.value.name} : fiche et compatibilités · DomoKlub` : 'Produit · DomoKlub'),
-  description: computed(() => product.value?.summary || 'Fiche produit documentée par DomoKlub.'),
+  title: computed(() => product.value ? (product.value.seoTitle || `${product.value.name} · DomoKlub`) : 'Produit · DomoKlub'),
+  description: computed(() => product.value?.seoDescription || product.value?.summary || 'Fiche produit documentée par DomoKlub.'),
   ogTitle: computed(() => product.value?.name || 'Produit · DomoKlub'),
   ogDescription: computed(() => product.value?.summary || 'Fiche produit documentée par DomoKlub.'),
+  ogImage: productPhotoUrl,
+  twitterCard: 'summary_large_image',
   robots: computed(() => product.value?.editorialStatus === 'review' ? 'noindex,follow' : approvedRobots)
 })
 useHead({ link: [{ rel: 'canonical', href: canonicalPath(route.path) }] })
@@ -25,13 +29,16 @@ const compatibilities = computed(() => Object.entries(product.value?.compatibili
 
 <template>
   <div>
-    <header class="page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><NuxtLink to="/">Accueil</NuxtLink><span class="separator">/</span><NuxtLink to="/produits">Produits</NuxtLink><span class="separator">/</span><span aria-current="page">{{ product?.name || 'Produit' }}</span></nav><span class="eyebrow">Fiche produit documentée</span><h1>{{ product?.name || 'Produit' }}</h1><p>{{ product?.summary }}</p></div></header>
+    <header class="page-hero product-page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><NuxtLink to="/">Accueil</NuxtLink><span class="separator">/</span><NuxtLink to="/produits">Produits</NuxtLink><span class="separator">/</span><span aria-current="page">{{ product?.name || 'Produit' }}</span></nav><span class="eyebrow">{{ product?.personalReview ? 'Avis personnel et fiche produit' : 'Fiche produit documentée' }}</span><h1>{{ product?.name || 'Produit' }}</h1><p>{{ product?.summary }}</p><p v-if="product" class="affiliate-disclosure">{{ product.personalReview ? 'Avis personnel et caractéristiques documentées' : 'Fiche documentaire' }} · Certains liens marchands sont affiliés : un achat après un clic peut rémunérer DomoKlub.</p><a v-if="offers?.items?.length" class="button button-primary hero-affiliate-button" :href="offers.items[0].url" target="_blank" rel="sponsored noopener noreferrer">Voir chez {{ offers.items[0].merchantName }} <span aria-hidden="true">↗</span></a></div></header>
     <div class="container page-body"><p v-if="pending" role="status">Chargement du produit…</p><div v-else-if="error" class="notice" role="alert">Cette fiche est temporairement indisponible.</div><div v-else-if="product" class="detail-layout"><div class="article-content">
+      <section v-if="product.buyerNote" class="product-decision" aria-labelledby="product-decision-title"><div><span class="eyebrow">En bref</span><h2 id="product-decision-title">À qui convient ce produit ?</h2><p>{{ product.buyerNote }}</p><p class="product-decision-limit">{{ product.limitations?.[0] }}</p></div></section>
+      <figure v-if="productImages[slug]" class="product-detail-photo"><img :src="productImages[slug].src" :alt="productImages[slug].alt" width="800" height="800" fetchpriority="high"><figcaption>Photo du produit : {{ productImages[slug].credit }}.</figcaption></figure>
       <div v-if="product.editorialStatus === 'review'" class="notice">Brouillon en prévisualisation. Vérification éditoriale requise avant l’indexation.</div>
-      <div class="notice">{{ product.evidenceLevel === 'tested' ? 'Produit testé par DomoKlub : le rapport d’essai doit préciser méthode et mesures.' : 'Non testé par DomoKlub. Cette fiche repose sur la documentation du fabricant et ne comporte aucune note.' }}</div>
-      <div class="article-meta"><span>{{ product.brand || 'Marque non renseignée' }}</span><span>{{ product.category || 'Catégorie non renseignée' }}</span><span v-if="product.updatedAt">Vérifié le {{ new Date(product.updatedAt).toLocaleDateString('fr-FR') }}</span></div>
-      <section v-if="product.buyerNote" aria-labelledby="buyer-heading"><h2 id="buyer-heading">Pour qui ?</h2><p>{{ product.buyerNote }}</p></section>
+      <section v-if="product.personalReview" class="personal-review" aria-labelledby="personal-review-heading"><span class="eyebrow">Retour d’usage</span><h2 id="personal-review-heading">L’avis de {{ product.personalReview.author }}</h2><p class="personal-rating"><span class="personal-rating-stars" aria-hidden="true">★★★★★</span><strong>5/5 · note personnelle</strong></p><p>{{ product.personalReview.context }}</p><p v-for="observation in product.personalReview.observations" :key="observation">{{ observation }}</p><p class="personal-review-scope">{{ product.personalReview.caveat }}</p></section>
+      <div v-else class="notice">Non testé par DomoKlub. Cette fiche repose sur la documentation du fabricant et ne comporte aucune note.</div>
+      <div class="article-meta"><span>Fiche par <NuxtLink to="/a-propos">Gérald François</NuxtLink></span><span>{{ product.brand || 'Marque non renseignée' }}</span><span>{{ product.category || 'Catégorie non renseignée' }}</span><span v-if="product.updatedAt">Vérifié le {{ new Date(product.updatedAt).toLocaleDateString('fr-FR') }}</span></div>
       <section v-if="product.limitations?.length" aria-labelledby="limits-heading"><h2 id="limits-heading">À savoir avant l’achat</h2><ul><li v-for="limit in product.limitations" :key="limit">{{ limit }}</li></ul></section>
+      <section v-for="section in product.editorialSections" :key="section.title"><h2>{{ section.title }}</h2><p v-for="paragraph in section.paragraphs" :key="paragraph">{{ paragraph }}</p></section>
       <section aria-labelledby="spec-heading"><h2 id="spec-heading">Caractéristiques vérifiées</h2><p v-if="!specs.length">Aucune caractéristique vérifiée n’est encore renseignée.</p><div v-else class="comparison-scroll"><table class="comparison-table"><tbody><tr v-for="[label, value] in specs" :key="label"><th scope="row">{{ label }}</th><td>{{ value }}<a v-if="product.specSources?.[label]" class="source-note" :href="product.specSources[label].url" target="_blank" rel="noopener noreferrer">Source · {{ new Date(product.specSources[label].checkedAt).toLocaleDateString('fr-FR') }}</a></td></tr></tbody></table></div></section>
       <section aria-labelledby="compat-heading"><h2 id="compat-heading">Compatibilités documentées</h2><p v-if="!compatibilities.length">Compatibilités non vérifiées.</p><div v-else class="comparison-scroll"><table class="comparison-table"><tbody><tr v-for="[label, value] in compatibilities" :key="label"><th scope="row">{{ label }}</th><td>{{ value }}<a v-if="product.compatibilitySources?.[label]" class="source-note" :href="product.compatibilitySources[label].url" target="_blank" rel="noopener noreferrer">Source · {{ new Date(product.compatibilitySources[label].checkedAt).toLocaleDateString('fr-FR') }}</a></td></tr></tbody></table></div></section>
       <section aria-labelledby="offers-heading"><h2 id="offers-heading">Voir chez un marchand</h2><div v-if="offersError" class="notice" role="alert">Les liens marchands sont temporairement indisponibles.</div><div v-else-if="offers?.items?.length" class="offer-list"><div v-for="offer in offers.items" :key="offer.url" class="offer-card"><div><strong>{{ offer.merchantName }}</strong><small>Lien affilié · Vérifié le {{ new Date(offer.checkedAt).toLocaleDateString('fr-FR') }} · Prix et disponibilité à confirmer chez le marchand</small></div><a class="button button-primary" :href="offer.url" target="_blank" rel="sponsored noopener noreferrer">Voir chez {{ offer.merchantName }} <span aria-hidden="true">↗</span></a></div></div><p v-else class="notice">Aucun lien marchand vérifié n’est disponible pour ce produit. Aucun prix n’est affiché.</p></section>

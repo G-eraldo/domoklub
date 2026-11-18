@@ -1,6 +1,9 @@
-// Contenus de lancement : brouillons documentaires soumis à validation humaine.
+// Contenus de lancement approuvés par le responsable de publication le 17 novembre 2026.
 // Les URLs de produits viennent de l'éditeur ; les faits techniques des fabricants.
+import { experiencedProducts, experiencedOffers } from './experiencedProducts.js'
+import { installationGuides } from './installationGuides.js'
 const checkedAt = '2026-11-17T10:00:00+01:00'
+const contentUpdatedAt = '2026-11-17T13:00:00+01:00'
 const haGreen = 'https://www.home-assistant.io/green/'
 const haInstall = 'https://www.home-assistant.io/installation/'
 const haZigbee = 'https://www.home-assistant.io/connectivity/zigbee/'
@@ -11,13 +14,20 @@ const haZbt2 = 'https://www.home-assistant.io/connect/zbt-2/'
 const sonoffPp10 = 'https://dongle.sonoff.tech/guide/dongle-pp10/introduction-dongle-pp10/'
 
 export const launchArticles = [
+  ...installationGuides,
   {
     documentId: 'local-guide-demarrer-home-assistant-green', editorialStatus: 'approved',
     publishedAt: checkedAt, type: 'guide', topic: 'home-assistant', slug: 'demarrer-home-assistant-green',
     title: 'Démarrer avec Home Assistant Green : ce qu’il faut prévoir',
+    seoTitle: 'Home Assistant Green : bien démarrer · DomoKlub',
     excerpt: 'La box est prête à démarrer, mais le choix des appareils et des radios mérite quelques vérifications. Voici un premier parcours sans achat inutile.',
-    updatedAt: checkedAt,
+    updatedAt: contentUpdatedAt,
     intro: 'Home Assistant Green simplifie le démarrage : le système est déjà installé. Le vrai choix se situe ensuite dans les appareils que vous souhaitez relier et les protocoles qu’ils utilisent.',
+    decisionTable: { title: 'Quel matériel faut-il au départ ?', columns: ['Votre situation', 'Choix de départ', 'À vérifier'], rows: [
+      ['Appareils déjà pilotables sur le réseau local', 'Green seule peut suffire', 'Intégration du modèle exact dans Home Assistant'],
+      ['Nouveau réseau Zigbee direct', 'Green et un coordinateur Zigbee', 'Compatibilité du dongle avec ZHA ou Zigbee2MQTT'],
+      ['Appareils Matter sur Thread', 'Routeur de bordure Thread nécessaire', 'Présence éventuelle d’un routeur déjà installé']
+    ] },
     sections: [
       { id: 'avant-achat', title: 'Avant d’acheter : vérifier le besoin', paragraphs: [
         'Si vous voulez surtout centraliser des appareils déjà présents sur votre réseau, Home Assistant Green est une entrée simple dans l’écosystème Home Assistant. Il faut une prise électrique et un port Ethernet disponible sur le réseau local. Le fabricant précise qu’une connexion Internet est nécessaire lors de la configuration initiale.',
@@ -37,7 +47,7 @@ export const launchArticles = [
       ] }
     ],
     relatedProducts: ['home-assistant-green', 'home-assistant-connect-zbt-2'],
-    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
+    relatedArticles: ['installer-home-assistant', 'choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
     sources: [
       { label: 'Home Assistant — Green : contenu et limites matérielles', url: haGreen },
       { label: 'Home Assistant — modes d’installation', url: haInstall },
@@ -49,9 +59,16 @@ export const launchArticles = [
     documentId: 'local-guide-coordinateur-zigbee', editorialStatus: 'approved',
     publishedAt: checkedAt, type: 'guide', topic: 'zigbee', slug: 'choisir-coordinateur-zigbee-home-assistant',
     title: 'Quel coordinateur Zigbee choisir pour Home Assistant ?',
+    seoTitle: 'Quel dongle Zigbee pour Home Assistant ? · DomoKlub',
     excerpt: 'Pour créer un réseau Zigbee, il faut une radio compatible et choisir son logiciel. Les critères qui comptent avant de comparer les dongles.',
-    updatedAt: checkedAt,
+    updatedAt: contentUpdatedAt,
     intro: 'Un coordinateur Zigbee relie vos appareils radio à Home Assistant. Le nom du dongle ne suffit pas : il faut aussi vérifier le logiciel choisi, le firmware, la portée réelle chez vous et la possibilité de maintenir le réseau.',
+    decisionTable: { title: 'Quel dongle selon votre configuration ?', columns: ['Configuration', 'Produit à examiner', 'Vérification décisive'], rows: [
+      ['Premier réseau ZHA', 'Home Assistant Connect ZBT-2', 'Firmware Zigbee et procédure officielle Home Assistant'],
+      ['Installation Zigbee2MQTT', 'Connect ZBT-2 ou SONOFF Dongle-PP10', 'Liste des adaptateurs et firmware du logiciel'],
+      ['Zigbee2MQTT déjà utilisé par l’éditeur', 'SONOFF ZBDongle-P', 'Modèle P exact et support zStack'],
+      ['Zigbee et Thread en parallèle', 'Deux radios ou un routeur Thread déjà présent', 'Un dongle ZBT-2 ne fait pas les deux simultanément']
+    ] },
     sections: [
       { id: 'besoin', title: 'Avez-vous vraiment besoin d’un coordinateur ?', paragraphs: [
         'Si vos appareils utilisent déjà une passerelle intégrée à Home Assistant et que ses fonctions vous suffisent, un dongle supplémentaire n’est pas obligatoire. Un coordinateur devient utile lorsque vous souhaitez créer et administrer directement votre propre réseau Zigbee depuis Home Assistant.',
@@ -61,26 +78,29 @@ export const launchArticles = [
         'ZHA est l’intégration Zigbee de Home Assistant. Sa documentation explique les adaptateurs compatibles, la création du réseau et les conseils contre les interférences. Home Assistant recommande son adaptateur Connect ZBT-2 pour un nouveau réseau ZHA.',
         'Zigbee2MQTT est une autre voie. Avant de choisir un dongle pour cette configuration, consultez sa liste officielle des adaptateurs supportés et la procédure de migration éventuelle. Une compatibilité générale Zigbee ne garantit pas les mêmes fonctions ou la même facilité de mise à jour dans chaque logiciel.'
       ] },
-      { id: 'comparaison', title: 'Deux produits à examiner sans les confondre', paragraphs: [
+      { id: 'comparaison', title: 'Trois dongles à distinguer', paragraphs: [
         'Home Assistant Connect ZBT-2 est conçu par l’équipe Home Assistant. Il prend en charge Zigbee 3.0 ou Thread selon le firmware et le mode choisi. Il ne fait pas fonctionner ces deux protocoles en même temps. Sa page officielle décrit aussi un câble USB et une antenne externe.',
-        'SONOFF Dongle-PP10 utilise une puce CC2674P10. La documentation SONOFF le présente pour Home Assistant, Zigbee2MQTT et OpenThread Border Router. Vérifiez la version du firmware et le guide du logiciel retenu avant de l’acheter. DomoKlub n’a pas mesuré la portée ni comparé la stabilité de ces deux adaptateurs.'
+        'SONOFF Dongle-PP10 utilise une puce CC2674P10. La documentation SONOFF le présente pour Home Assistant, Zigbee2MQTT et OpenThread Border Router. Vérifiez la version du firmware et le guide du logiciel retenu avant de l’acheter.',
+        'SONOFF ZBDongle-P utilise une puce CC2652P et figure dans la liste des adaptateurs zStack de Zigbee2MQTT. Gérald l’utilise avec ce logiciel depuis juin 2025 et décrit une installation simple sans problème rencontré. Ce retour ne mesure pas la portée et ne constitue pas une comparaison directe avec les deux autres dongles.'
       ] },
       { id: 'installation', title: 'Les critères qui évitent les mauvaises surprises', paragraphs: [
         'Vérifiez le support exact de l’adaptateur dans votre logiciel, la procédure de mise à jour du firmware et la disponibilité d’une méthode de sauvegarde ou de migration. Prévoyez un emplacement qui éloigne la radio des sources d’interférences, notamment les ports USB 3.0 et les équipements Wi-Fi proches, comme l’explique Home Assistant.',
         'Ne déduisez pas une portée en mètres d’une fiche commerciale : murs, position, canaux radio et appareils routeurs changent le résultat. Si vous remplacez un réseau existant, lisez d’abord la procédure de migration du logiciel utilisé : une simple substitution de clé peut nécessiter de réassocier des appareils.'
       ] },
       { id: 'verdict', title: 'Par quoi commencer ?', paragraphs: [
-        'Pour un premier réseau ZHA et une intégration officielle, Connect ZBT-2 est le point de départ recommandé par Home Assistant. Pour une configuration Zigbee2MQTT ou une préférence de matériel différente, le Dongle-PP10 mérite un examen de compatibilité à jour. Ce repère repose sur les documentations publiées, pas sur un test comparatif DomoKlub.',
+        'Pour un premier réseau ZHA et une intégration officielle, Connect ZBT-2 est le point de départ recommandé par Home Assistant. Pour Zigbee2MQTT, ZBDongle-P dispose d’un retour d’usage personnel de l’éditeur ; le Dongle-PP10 mérite aussi un examen de compatibilité à jour. Aucun de ces produits n’a fait l’objet d’un test comparatif DomoKlub.',
         'Choisissez enfin un seul protocole radio pour chaque dongle. Si votre projet prévoit à la fois Zigbee et Thread, vérifiez si un routeur de bordure Thread existe déjà chez vous avant d’acheter un second adaptateur.'
       ] }
     ],
-    relatedProducts: ['home-assistant-connect-zbt-2', 'sonoff-dongle-pp10', 'home-assistant-green'],
-    relatedArticles: ['matter-thread-zigbee-differences', 'demarrer-home-assistant-green'],
+    relatedProducts: ['sonoff-zbdongle-p', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10', 'home-assistant-green'],
+    relatedArticles: ['installer-zigbee2mqtt', 'matter-thread-zigbee-differences', 'demarrer-home-assistant-green'],
     sources: [
       { label: 'Home Assistant — choisir un adaptateur Zigbee', url: haZigbee },
       { label: 'Home Assistant — intégration ZHA', url: haZha },
       { label: 'Home Assistant — Connect ZBT-2', url: haZbt2 },
       { label: 'SONOFF — documentation Dongle-PP10', url: sonoffPp10 },
+      { label: 'SONOFF — fiche matérielle ZBDongle-P', url: 'https://dongle.sonoff.tech/guide/zbdongle-p/hardware_specification-2/' },
+      { label: 'Zigbee2MQTT — adaptateurs zStack', url: 'https://www.zigbee2mqtt.io/guide/adapters/zstack.html' },
       { label: 'Zigbee2MQTT — adaptateurs supportés', url: 'https://www.zigbee2mqtt.io/guide/adapters/' }
     ]
   },
@@ -88,9 +108,15 @@ export const launchArticles = [
     documentId: 'local-guide-matter-thread-zigbee', editorialStatus: 'approved',
     publishedAt: checkedAt, type: 'guide', topic: 'matter', slug: 'matter-thread-zigbee-differences',
     title: 'Matter, Thread et Zigbee : quelles différences chez vous ?',
+    seoTitle: 'Matter, Thread, Zigbee : les différences · DomoKlub',
     excerpt: 'Matter décrit une façon de faire communiquer les appareils ; Thread et Zigbee sont des réseaux radio. Ce que ces mots changent dans vos achats.',
-    updatedAt: checkedAt,
+    updatedAt: contentUpdatedAt,
     intro: 'Les emballages mélangent souvent trois noms. Pourtant, ils ne répondent pas à la même question : Matter concerne l’interopérabilité des appareils ; Thread et Zigbee désignent des réseaux utilisés pour les relier.',
+    decisionTable: { title: 'Lire l’étiquette avant d’acheter', columns: ['Mention sur le produit', 'Réseau', 'À vérifier chez vous'], rows: [
+      ['Matter sur Wi-Fi', 'Wi-Fi', 'Contrôleur Matter et compatibilité du modèle'],
+      ['Matter sur Thread', 'Thread', 'Routeur de bordure Thread présent ou à prévoir'],
+      ['Zigbee', 'Zigbee', 'Passerelle intégrée ou coordinateur compatible']
+    ] },
     sections: [
       { id: 'trois-roles', title: 'Trois rôles à distinguer', paragraphs: [
         'Matter est un standard de communication pour la maison connectée. Dans Home Assistant, un appareil Matter peut communiquer sur le réseau Wi-Fi ou sur Thread. Le logo Matter, seul, ne dit donc pas quel équipement réseau il vous faut.',
@@ -109,7 +135,7 @@ export const launchArticles = [
         'Ce guide présente des règles de lecture générales à partir des documentations officielles. Il ne garantit pas la compatibilité d’un appareil particulier et ne remplace pas sa fiche technique à jour.'
       ] }
     ],
-    relatedProducts: ['home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10'],
+    relatedProducts: ['sonoff-orb-socket', 'home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10'],
     relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'demarrer-home-assistant-green'],
     sources: [
       { label: 'Home Assistant — intégration Matter', url: haMatter },
@@ -126,7 +152,8 @@ const compatible = (status, sourceUrl) => ({ status, sourceUrl, checkedAt })
 export const launchProducts = [
   {
     documentId: 'local-home-assistant-green', editorialStatus: 'approved',
-    slug: 'home-assistant-green', name: 'Home Assistant Green', brand: 'Nabu Casa', category: 'Box domotique',
+    slug: 'home-assistant-green', name: 'Home Assistant Green', seoTitle: 'Home Assistant Green : fiche et limites · DomoKlub',
+    seoDescription: 'Home Assistant Green : box prête à démarrer. Vérifiez ses limites, les appareils compatibles et le besoin d’un dongle Zigbee avant de l’acheter.', brand: 'Nabu Casa', category: 'Box domotique',
     summary: 'Une box dédiée avec Home Assistant OS préinstallé. Ethernet obligatoire pour le premier parcours ; un adaptateur séparé est nécessaire pour créer directement un réseau Zigbee.',
     evidenceLevel: 'documentary', updatedAt: checkedAt,
     buyerNote: 'Pour démarrer avec Home Assistant sans installer un système sur un ordinateur. Vérifiez d’abord vos appareils et le besoin d’une radio Zigbee.',
@@ -144,12 +171,13 @@ export const launchProducts = [
       'Zigbee avec Connect ZBT-2': compatible('confirmed', haGreen),
       'Matter sur Wi-Fi': compatible('confirmed', haGreen)
     },
-    relatedArticles: ['demarrer-home-assistant-green', 'choisir-coordinateur-zigbee-home-assistant'],
+    relatedArticles: ['installer-home-assistant', 'demarrer-home-assistant-green', 'choisir-coordinateur-zigbee-home-assistant'],
     sources: [{ label: 'Home Assistant — fiche officielle Green', url: haGreen }, { label: 'Home Assistant — installation', url: haInstall }]
   },
   {
     documentId: 'local-home-assistant-connect-zbt-2', editorialStatus: 'approved',
-    slug: 'home-assistant-connect-zbt-2', name: 'Home Assistant Connect ZBT-2', brand: 'Nabu Casa', category: 'Coordinateur Zigbee',
+    slug: 'home-assistant-connect-zbt-2', name: 'Home Assistant Connect ZBT-2', seoTitle: 'Connect ZBT-2 : compatibilité et limites · DomoKlub',
+    seoDescription: 'Home Assistant Connect ZBT-2 : radio Zigbee ou Thread pour Home Assistant. Vérifiez le logiciel, le firmware et les limites du produit avant l’achat.', brand: 'Nabu Casa', category: 'Coordinateur Zigbee',
     summary: 'Adaptateur USB officiel pour créer un réseau Zigbee ou Thread dans Home Assistant. Il faut choisir un protocole à la fois.',
     evidenceLevel: 'documentary', updatedAt: checkedAt,
     buyerNote: 'Pour ajouter une radio à Home Assistant Green ou à une autre installation compatible. La documentation Home Assistant le recommande pour un nouveau réseau ZHA.',
@@ -170,7 +198,8 @@ export const launchProducts = [
   },
   {
     documentId: 'local-sonoff-dongle-pp10', editorialStatus: 'approved',
-    slug: 'sonoff-dongle-pp10', name: 'SONOFF Dongle-PP10', brand: 'SONOFF', category: 'Coordinateur Zigbee',
+    slug: 'sonoff-dongle-pp10', name: 'SONOFF Dongle-PP10', seoTitle: 'SONOFF Dongle-PP10 : compatibilité · DomoKlub',
+    seoDescription: 'SONOFF Dongle-PP10 : fiche documentaire des compatibilités Home Assistant et Zigbee2MQTT, du firmware requis et des limites connues avant l’achat.', brand: 'SONOFF', category: 'Coordinateur Zigbee',
     summary: 'Dongle USB à puce CC2674P10 présenté par SONOFF pour Zigbee ou Thread. Vérifier le firmware et le logiciel prévus avant l’achat.',
     evidenceLevel: 'documentary', updatedAt: checkedAt,
     buyerNote: 'Une option à examiner pour Home Assistant ou Zigbee2MQTT si vous acceptez de vérifier la configuration et le firmware requis.',
@@ -186,11 +215,13 @@ export const launchProducts = [
     },
     relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
     sources: [{ label: 'SONOFF — documentation Dongle-PP10', url: sonoffPp10 }]
-  }
+  },
+  ...experiencedProducts
 ]
 
 export const launchOffers = [
-  { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-green', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-compatibles-home-assistant/7046-nabu-casa-box-domotique-home-assistant-green-0860011789703.html?domid=159', active: true, checkedAt, expiresAt: '2026-11-24T10:00:00+01:00' },
-  { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-connect-zbt-2', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/dongle-zigbee/8542-nabu-casa-home-assistant-connect-zbt-2-adaptateur-usb-zigbee-ou-matter-thread-0860011789741.html?domid=159', active: true, checkedAt, expiresAt: '2026-11-24T10:00:00+01:00' },
-  { editorialStatus: 'approved', productDocumentId: 'local-sonoff-dongle-pp10', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-de-domotique/9773-sonoff-dongle-pp10-dongle-usb-zigbee-ou-matter-thread-cc2674p10-6979033600850.html?domid=159', active: true, checkedAt, expiresAt: '2026-11-24T10:00:00+01:00' }
+  { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-green', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-compatibles-home-assistant/7046-nabu-casa-box-domotique-home-assistant-green-0860011789703.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
+  { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-connect-zbt-2', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/dongle-zigbee/8542-nabu-casa-home-assistant-connect-zbt-2-adaptateur-usb-zigbee-ou-matter-thread-0860011789741.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
+  { editorialStatus: 'approved', productDocumentId: 'local-sonoff-dongle-pp10', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-de-domotique/9773-sonoff-dongle-pp10-dongle-usb-zigbee-ou-matter-thread-cc2674p10-6979033600850.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
+  ...experiencedOffers
 ]

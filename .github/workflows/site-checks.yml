@@ -1,0 +1,30 @@
+name: Vérifications DomoKlub
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Installer pnpm
+        run: npm install -g pnpm@11.25.0
+      - name: Installer les dépendances
+        run: pnpm install --frozen-lockfile
+      - name: Vérifier les offres
+        run: pnpm run check:offers
+      - name: Compiler le site
+        run: pnpm run build
+      - name: Vérifier le HTML SEO rendu
+        run: pnpm run check:seo

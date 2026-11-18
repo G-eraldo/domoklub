@@ -1,0 +1,221 @@
+// Retours d'usage transmis par Gérald François le 17 novembre 2026.
+// La note est son avis personnel ; les caractéristiques viennent des sources indiquées.
+const checkedAt = '2026-11-17T13:00:00+01:00'
+const spec = (value, sourceUrl) => ({ value, sourceUrl, checkedAt })
+const compatible = (status, sourceUrl) => ({ status, sourceUrl, checkedAt })
+const sonoffP = 'https://dongle.sonoff.tech/guide/zbdongle-p/hardware_specification-2/'
+const z2mP = 'https://www.zigbee2mqtt.io/guide/adapters/zstack.html'
+const orbManual = 'https://support.sonoff.tech/zbminil2-e-usermanual/'
+const orbBundle = 'https://www.domadoo.fr/fr/produits-de-domotique/8412-sonoff-module-zigbee-sans-neutre-interrupteur-zbminil2-e-orb-zbw1l.html'
+const socketManual = 'https://support.sonoff.tech/ws01tpe-e-usermanual/'
+const nodonDoc = 'https://nodon.fr/wp-content/uploads/2021/04/NodOn_Zigbee_MultifunctionRelaySwitch_SIN-4-1-20-Datasheet_FR.pdf'
+const nodonZ2m = 'https://www.zigbee2mqtt.io/devices/SIN-4-1-20.html'
+const aqaraProduct = 'https://www.aqara.com/en/product/doorbell-camera-hub-g410/'
+const aqaraSpecs = 'https://www.aqara.com/en/product/doorbell-camera-hub-g410-specs/'
+const sensorManual = 'https://support.sonoff.tech/snzb-04p-usermanual/'
+const sensorZ2m = 'https://www.zigbee2mqtt.io/devices/SNZB-04P.html'
+const blindManual = 'https://support.sonoff.tech/mini-zbrbs-usermanual/'
+const blindZ2m = 'https://www.zigbee2mqtt.io/devices/MINI-ZBRBS.html'
+const relayManual = 'https://support.sonoff.tech/zbminir2-usermanual/'
+const relayZ2m = 'https://www.zigbee2mqtt.io/devices/ZBMINIR2.html'
+const usage = (context, observation, caveat = 'Aucune mesure instrumentée ni comparaison directe n’a été fournie pour ce produit.') => ({
+  author: 'Gérald François', rating: 5, context, observations: [observation], caveat
+})
+const base = (slug, name, brand, category, seoTitle, seoDescription, summary, buyerNote, limitations, review, specs, compatibilities, relatedArticles, sources) => ({
+  documentId: `local-${slug}`, editorialStatus: 'approved', slug, name, brand, category,
+  seoTitle, seoDescription, summary, buyerNote, limitations,
+  evidenceLevel: 'tested', testEvidenceApproved: true, personalReview: review,
+  updatedAt: checkedAt, specs, compatibilities, relatedArticles, sources
+})
+
+export const experiencedProducts = [
+  base(
+    'sonoff-zbdongle-p', 'SONOFF ZBDongle-P CC2652P', 'SONOFF', 'Coordinateur Zigbee',
+    'SONOFF ZBDongle-P : avis et Zigbee2MQTT · DomoKlub',
+    'Avis personnel sur le SONOFF ZBDongle-P utilisé avec Zigbee2MQTT depuis juin 2025 : installation, limites et caractéristiques vérifiées avant achat.',
+    'Clé USB Zigbee 3.0 avec puce CC2652P et antenne externe. Gérald l’utilise avec Zigbee2MQTT depuis juin 2025.',
+    'Un choix concret pour créer un réseau Zigbee sous Zigbee2MQTT. Vérifiez que vous achetez le modèle P, à distinguer du ZBDongle-E.',
+    ['Dongle Zigbee : il ne remplace pas un routeur de bordure Thread.', 'La portée réelle dépend du logement et du placement USB ; elle n’a pas été mesurée ici.'],
+    usage('Utilisé depuis juin 2025 avec Zigbee2MQTT sur son serveur Home Assistant.', 'Mise en service jugée « plug and play » ; aucun problème rencontré depuis l’installation.', 'Aucun relevé de portée, de nombre d’appareils ou de version de firmware n’a été communiqué.'),
+    { 'Puce': spec('Texas Instruments CC2652P', sonoffP), 'Radio': spec('Zigbee 3.0', sonoffP), 'Connexion': spec('USB avec interface série CP2102(N)', sonoffP), 'Antenne': spec('Externe', sonoffP) },
+    { 'Zigbee2MQTT / adaptateur zStack': compatible('confirmed', z2mP) },
+    ['choisir-coordinateur-zigbee-home-assistant', 'demarrer-home-assistant-green'],
+    [{ label: 'SONOFF — fiche matérielle ZBDongle-P', url: sonoffP }, { label: 'Zigbee2MQTT — adaptateurs zStack', url: z2mP }]
+  ),
+  base(
+    'sonoff-zbminil2-e', 'SONOFF Orb-ZBW1L / ZBMINIL2-E', 'SONOFF', 'Interrupteur Zigbee',
+    'SONOFF ZBMINIL2-E : avis sans neutre · DomoKlub',
+    'Avis personnel sur le SONOFF Orb-ZBW1L ZBMINIL2-E : interrupteur Zigbee sans neutre, charge minimale et contenu de l’offre Domadoo à vérifier.',
+    'Interrupteur mural Zigbee sans neutre, référence ZBMINIL2-E. L’offre Domadoo décrit un module ZBMINIL2 avec boîtier E1GSL.',
+    'Pour rendre un point lumineux pilotable sans neutre au niveau de l’interrupteur. Vérifiez le modèle exact, la charge et le contenu du colis.',
+    ['Charge minimale de 3 W selon SONOFF : contrôler les petits éclairages LED.', 'Installation sur secteur : suivre la notice et faire intervenir un professionnel compétent si nécessaire.', 'La description du lot Domadoo et son visuel commercial doivent être rapprochés avant commande.'],
+    usage('Utilisé personnellement ; durée, logiciel Zigbee et charge raccordée non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Référence': spec('Orb-ZBW1L / ZBMINIL2-E', orbManual), 'Radio': spec('Zigbee 3.0', orbManual), 'Neutre': spec('Non requis', orbManual), 'Charge': spec('6 A max. résistif ; charge minimale 3 W', orbManual), 'Contenu du lot Domadoo': spec('Module ZBMINIL2 et boîtier E1GSL selon la fiche marchande', orbBundle) },
+    {}, ['matter-thread-zigbee-differences'],
+    [{ label: 'SONOFF — manuel ZBMINIL2-E', url: orbManual }, { label: 'Domadoo — description du lot ZBMINIL2-E', url: orbBundle }]
+  ),
+  base(
+    'sonoff-orb-socket', 'SONOFF Orb Socket WS01TPE-E', 'SONOFF', 'Prise Matter',
+    'SONOFF Orb Socket : avis Matter Wi-Fi · DomoKlub',
+    'Avis personnel sur la prise encastrée SONOFF Orb Socket WS01TPE-E : Matter sur Wi-Fi, charge électrique et points à vérifier avec Home Assistant.',
+    'Prise murale de type E compatible Matter sur Wi-Fi 2,4 GHz. Elle ne crée pas de réseau Thread et ne nécessite pas de dongle Zigbee.',
+    'Pour ajouter une prise Matter à une installation compatible. Vérifiez la place dans la boîte d’encastrement et la présence du Wi-Fi 2,4 GHz.',
+    ['Il s’agit de Matter sur Wi-Fi, pas de Matter sur Thread.', 'Charge maximale de 16 A résistifs selon SONOFF ; la nature de la charge compte.', 'Installation sur secteur : respecter la notice et les règles électriques applicables.'],
+    usage('Utilisée personnellement ; durée, contrôleur Matter et type de charge non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Modèle': spec('WS01TPE-E, prise de type E', socketManual), 'Connexion': spec('Matter sur Wi-Fi 2,4 GHz', socketManual), 'Charge': spec('16 A max. résistif', socketManual), 'Format': spec('86 × 86 × 39,3 mm', socketManual) },
+    {}, ['matter-thread-zigbee-differences'],
+    [{ label: 'SONOFF — manuel Orb Socket WS01TPE-E', url: socketManual }]
+  ),
+  base(
+    'nodon-sin-4-1-20', 'NodOn SIN-4-1-20', 'NodOn', 'Module Zigbee',
+    'NodOn SIN-4-1-20 : avis contact sec · DomoKlub',
+    'Avis personnel sur le NodOn SIN-4-1-20 : relais Zigbee à contact sec, usages possibles, limites électriques et compatibilité Zigbee2MQTT documentée.',
+    'Micromodule Zigbee à sortie contact sec pour piloter un équipement adapté, par exemple un portail ou une chaudière selon son entrée de commande.',
+    'Pour commander un appareil qui accepte un contact sec. Avant achat, vérifiez le schéma de commande et les caractéristiques de l’équipement piloté.',
+    ['La compatibilité d’un portail ou d’une chaudière dépend de son entrée de commande, pas du seul mot « contact sec ».', 'Module alimenté sur secteur : installation électrique à confier à une personne compétente.'],
+    usage('Utilisé personnellement ; équipement commandé, durée et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Radio': spec('Zigbee 3.0', nodonDoc), 'Sortie': spec('Contact sec', nodonDoc), 'Alimentation': spec('230 V AC', nodonDoc), 'Dimensions': spec('40 × 44 × 16,9 mm', nodonDoc) },
+    { 'Zigbee2MQTT': compatible('confirmed', nodonZ2m) },
+    ['matter-thread-zigbee-differences'],
+    [{ label: 'NodOn — fiche technique SIN-4-1-20', url: nodonDoc }, { label: 'Zigbee2MQTT — SIN-4-1-20', url: nodonZ2m }]
+  ),
+  base(
+    'aqara-g410-select', 'Aqara Doorbell Camera Hub G410 Select', 'Aqara', 'Sonnette vidéo',
+    'Aqara G410 Select : avis et portée · DomoKlub',
+    'Avis personnel sur la sonnette Aqara G410 Select utilisée avec HomeKit : liaison avec le carillon, alimentation, vidéo et limites observées.',
+    'Sonnette vidéo 2K avec carillon et fonctions de hub. Gérald l’utilise avec HomeKit et signale une limite de distance dans son logement.',
+    'Pour une entrée équipée de HomeKit. Prévoyez une position du carillon qui conserve une liaison fiable avec la sonnette.',
+    ['Dans l’installation de Gérald, la liaison avec le carillon devient problématique vers 10 m ; ce n’est pas une portée maximale universelle.', 'Le flux RTSP annoncé par Aqara exige une alimentation filaire de la sonnette.', 'Les fonctions disponibles dans Home Assistant diffèrent de celles de HomeKit et dépendent du mode d’intégration.'],
+    usage('Utilisée avec HomeKit ; distance évaluée dans son logement, sans protocole de mesure standardisé.', 'Fonctionnement jugé bon. Il a rencontré un problème de liaison entre la sonnette et le hub carillon lorsque leur distance approche 10 m dans son installation.', 'La distance observée dépend des murs, de l’emplacement et de l’environnement radio. Elle ne doit pas être lue comme une spécification Aqara.'),
+    { 'Modèle': spec('G410 Select, série CH-C09D', aqaraSpecs), 'Vidéo': spec('2K, angle de vue de 175° selon Aqara', aqaraProduct), 'Alimentation sonnette': spec('6 piles AA ou 12–24 V AC/DC', aqaraSpecs), 'Réseau du carillon': spec('Wi-Fi 2,4 ou 5 GHz', aqaraSpecs), 'Vidéo locale RTSP': spec('Alimentation filaire nécessaire', aqaraProduct) },
+    {}, ['matter-thread-zigbee-differences'],
+    [{ label: 'Aqara — G410 : fonctions et limites', url: aqaraProduct }, { label: 'Aqara — caractéristiques G410', url: aqaraSpecs }]
+  ),
+  base(
+    'sonoff-snzb-04p', 'SONOFF SNZB-04P', 'SONOFF', 'Capteur Zigbee',
+    'SONOFF SNZB-04P : avis capteur porte · DomoKlub',
+    'Avis personnel sur le capteur de porte SONOFF SNZB-04P : détection ouverture et fermeture, pile, compatibilité Zigbee2MQTT et limites à connaître.',
+    'Capteur d’ouverture de porte ou fenêtre Zigbee alimenté par pile. Zigbee2MQTT documente aussi l’état de sabotage et la batterie.',
+    'Pour déclencher des automatisations à l’ouverture d’une porte ou fenêtre, après vérification de la place disponible pour les deux parties du capteur.',
+    ['L’écart entre les deux parties doit respecter la notice SONOFF.', 'La durée de pile annoncée par le fabricant n’a pas été mesurée ici.'],
+    usage('Utilisé personnellement ; durée, emplacement et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Radio': spec('Zigbee 3.0', sensorManual), 'Pile': spec('CR2477', sensorManual), 'Écart de pose': spec('20 mm maximum selon SONOFF', sensorManual) },
+    { 'Zigbee2MQTT': compatible('confirmed', sensorZ2m) },
+    ['matter-thread-zigbee-differences'],
+    [{ label: 'SONOFF — manuel SNZB-04P', url: sensorManual }, { label: 'Zigbee2MQTT — SNZB-04P', url: sensorZ2m }]
+  ),
+  base(
+    'sonoff-mini-zbrbs', 'SONOFF MINI-ZBRBS', 'SONOFF', 'Module volet roulant',
+    'SONOFF MINI-ZBRBS : avis volet Zigbee · DomoKlub',
+    'Avis personnel sur le module volet roulant SONOFF MINI-ZBRBS : commande Zigbee, calibration, compatibilité Zigbee2MQTT et limites électriques.',
+    'Micromodule Zigbee pour motorisation de volet roulant. Zigbee2MQTT expose ouverture, fermeture et position après calibration.',
+    'Pour piloter un volet motorisé avec Zigbee. Vérifiez le type de moteur, sa charge et la place disponible avant achat.',
+    ['Commande de position en pourcentage : calibration du trajet nécessaire dans Zigbee2MQTT.', 'Charge moteur maximale de 1 A selon SONOFF.', 'Module secteur : installation électrique à réaliser selon la notice.'],
+    usage('Utilisé personnellement ; durée, moteur et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Radio': spec('Zigbee 3.0', blindManual), 'Charge moteur': spec('1 A max.', blindManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', blindManual) },
+    { 'Zigbee2MQTT': compatible('confirmed', blindZ2m) },
+    ['matter-thread-zigbee-differences'],
+    [{ label: 'SONOFF — manuel MINI-ZBRBS', url: blindManual }, { label: 'Zigbee2MQTT — MINI-ZBRBS', url: blindZ2m }]
+  ),
+  base(
+    'sonoff-zbmini-r2', 'SONOFF ZBMINIR2', 'SONOFF', 'Module Zigbee',
+    'SONOFF ZBMINIR2 : avis module Zigbee · DomoKlub',
+    'Avis personnel sur le SONOFF ZBMINIR2 : module Zigbee avec neutre, charge de 10 A, fonctions Zigbee2MQTT et points à vérifier avant achat.',
+    'Micromodule Zigbee de commutation avec neutre. À distinguer du ZBMINIL2 sans neutre ; Zigbee2MQTT documente ses réglages.',
+    'Pour piloter un circuit compatible lorsqu’un neutre est disponible dans le boîtier. Vérifiez la charge et l’espace d’encastrement.',
+    ['Neutre requis : ne convient pas à une boîte où seul le retour lampe est présent.', 'Charge maximale de 10 A résistifs selon SONOFF.', 'Module secteur : installation électrique à réaliser selon la notice.'],
+    usage('Utilisé personnellement ; durée, charge et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    { 'Radio': spec('Zigbee 3.0', relayManual), 'Neutre': spec('Requis', relayManual), 'Charge': spec('10 A max. résistif', relayManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', relayManual) },
+    { 'Zigbee2MQTT': compatible('confirmed', relayZ2m) },
+    ['matter-thread-zigbee-differences'],
+    [{ label: 'SONOFF — manuel ZBMINIR2', url: relayManual }, { label: 'Zigbee2MQTT — ZBMINIR2', url: relayZ2m }]
+  )
+]
+
+const editorialSections = {
+  'sonoff-zbdongle-p': [
+    { title: 'Pourquoi choisir le modèle P ?', paragraphs: [
+      'La référence P utilise une puce TI CC2652P. Dans Zigbee2MQTT, elle figure parmi les adaptateurs zStack. Le nom ZBDongle désigne aussi d’autres variantes : contrôlez la lettre du modèle avant de suivre un tutoriel de firmware ou de migration.',
+      'Le retour de Gérald apporte une indication sur la mise en route avec Zigbee2MQTT, mais ne permet pas de conclure sur la portée ou la capacité maximale du réseau. Pour un réseau existant, préparez une sauvegarde et consultez la procédure de migration du logiciel avant de changer de coordinateur.'
+    ] },
+    { title: 'Le bon usage dans Home Assistant', paragraphs: [
+      'Ce dongle sert de coordinateur Zigbee relié au serveur. Il ne remplace ni Home Assistant lui-même ni un routeur Thread. Le placement de la clé et les interférences USB ou Wi-Fi peuvent compter davantage que la portée annoncée sur une fiche commerciale.'
+    ] }
+  ],
+  'sonoff-zbminil2-e': [
+    { title: 'Le point décisif : pas de neutre', paragraphs: [
+      'SONOFF documente l’Orb-ZBW1L sous la référence ZBMINIL2-E comme interrupteur mural Zigbee sans neutre. La charge minimale annoncée est de 3 W : vérifiez le type d’éclairage utilisé, en particulier avec une LED de faible puissance. Ce n’est pas un variateur de lumière.',
+      'La fiche Domadoo indique un lot composé du module ZBMINIL2 et du boîtier mural E1GSL, tandis que le visuel présente l’Orb-ZBW1L. Avant de commander pour une rénovation, comparez la référence sur le colis, le contenu du lot et la notice du fabricant.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald confirme le bon fonctionnement de son exemplaire sans incident signalé. Il n’a pas fourni la puissance de la lampe, la durée de l’essai ou le logiciel Zigbee utilisé. L’avis ne vaut donc pas validation de toutes les combinaisons d’ampoules et de passerelles.'
+    ] }
+  ],
+  'sonoff-orb-socket': [
+    { title: 'Matter sur Wi-Fi, concrètement', paragraphs: [
+      'La prise WS01TPE-E rejoint un contrôleur Matter via le réseau Wi-Fi 2,4 GHz. Elle n’a pas besoin d’un coordinateur Zigbee ni d’un routeur de bordure Thread. Vérifiez la disponibilité du Wi-Fi à l’emplacement prévu et la prise en charge du modèle par votre contrôleur.',
+      'SONOFF annonce une charge résistive maximale de 16 A. Cette limite ne dispense pas de vérifier le circuit, le câblage et la place dans la boîte murale. Une installation encastrée sur secteur exige les précautions indiquées dans la notice.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald rapporte un fonctionnement satisfaisant sans incident. Le contrôleur Matter employé, la charge raccordée et la durée d’utilisation ne sont pas renseignés ; les fonctions disponibles chez chaque contrôleur doivent être vérifiées séparément.'
+    ] }
+  ],
+  'nodon-sin-4-1-20': [
+    { title: 'À quoi sert le contact sec ?', paragraphs: [
+      'Le SIN-4-1-20 fournit une commande par contact sec. Cette caractéristique est utile lorsque l’équipement à piloter accepte une entrée de commande externe, par exemple certaines motorisations de portail ou certaines chaudières. Elle ne garantit pas la compatibilité avec tous les modèles de ces appareils.',
+      'Le module lui-même demande une alimentation secteur. Vérifiez le schéma électrique de l’équipement piloté et la nature de l’entrée attendue avant de choisir ce relais. La fiche Zigbee2MQTT confirme le modèle et expose notamment son état de commutation.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'L’éditeur a utilisé le produit et ne rapporte aucun dysfonctionnement. Il n’a pas indiqué l’appareil relié ni le logiciel de pilotage : l’avis ne constitue pas une preuve de compatibilité avec un portail ou une chaudière précise.'
+    ] }
+  ],
+  'aqara-g410-select': [
+    { title: 'Vidéo, HomeKit et Home Assistant', paragraphs: [
+      'Aqara présente la G410 comme une sonnette vidéo 2K avec carillon et hub. Gérald l’utilise avec HomeKit. Pour un projet Home Assistant, il faut distinguer la fonction de pont Matter de la vidéo : Aqara annonce un flux RTSP local seulement lorsque la sonnette est alimentée par câble.',
+      'La sonnette peut fonctionner sur piles ou alimentation filaire, mais les modes d’enregistrement et de diffusion ne sont pas identiques. Vérifiez les fonctions réellement utiles avant de choisir son alimentation et l’emplacement du carillon.'
+    ] },
+    { title: 'Distance observée chez l’éditeur', paragraphs: [
+      'Dans la maison de Gérald, la liaison entre la sonnette et le hub carillon a posé problème vers 10 m. C’est la seule limite qu’il a signalée malgré sa note personnelle de 5/5. Murs, matériaux et interférences peuvent changer ce résultat ; il ne s’agit pas d’une portée officielle.'
+    ] }
+  ],
+  'sonoff-snzb-04p': [
+    { title: 'Ce que remonte le capteur', paragraphs: [
+      'Le SNZB-04P sert à signaler l’ouverture ou la fermeture d’un ouvrant. Zigbee2MQTT documente également l’état de pile et le sabotage. Les entités visibles peuvent varier selon le logiciel et sa version ; relevez le modèle exact avant de bâtir une automatisation.',
+      'La pose dépend de l’alignement des deux éléments et de leur écart. SONOFF indique 20 mm au maximum dans la notice. Vérifiez la géométrie de la porte ou de la fenêtre et évitez de juger l’autonomie de la pile sur une simple promesse commerciale.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald signale un bon fonctionnement sans problème rencontré. La durée d’utilisation et le nombre de cycles ne sont pas renseignés ; aucune autonomie de pile n’a été mesurée pour cet avis.'
+    ] }
+  ],
+  'sonoff-mini-zbrbs': [
+    { title: 'Calibration avant commande en pourcentage', paragraphs: [
+      'Zigbee2MQTT documente les commandes ouvrir, fermer, arrêter et la position du volet. Le contrôle précis en pourcentage suppose d’abord une calibration du trajet du moteur. Vérifiez que le moteur utilisé entre dans la limite de charge indiquée par SONOFF.',
+      'Le module est compact, mais il faut aussi prendre en compte les conducteurs et l’espace dans la boîte. Comme pour tout équipement de volet alimenté sur secteur, l’installation doit suivre la notice du fabricant.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald rapporte un fonctionnement satisfaisant, sans incident signalé. Le moteur, la durée d’utilisation et la précision de position obtenue ne sont pas documentés dans son retour.'
+    ] }
+  ],
+  'sonoff-zbmini-r2': [
+    { title: 'Ne pas confondre avec le modèle sans neutre', paragraphs: [
+      'Le ZBMINIR2 demande un neutre. Il convient lorsque la boîte d’encastrement dispose des conducteurs nécessaires et que la charge respecte la limite de 10 A résistifs donnée par SONOFF. Si le neutre manque, cette référence n’est pas interchangeable avec le ZBMINIL2.',
+      'Zigbee2MQTT documente notamment la commande marche/arrêt et le comportement après une coupure de courant. Ce sont des capacités du logiciel ; le retour de Gérald ne porte pas sur chacune de ces options.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'L’éditeur indique que le module fonctionne bien chez lui et qu’il n’a rencontré aucun problème. Il n’a pas précisé la charge, le logiciel Zigbee ni la durée d’utilisation.'
+    ] }
+  ]
+}
+
+for (const product of experiencedProducts) product.editorialSections = editorialSections[product.slug] || []
+
+export const experiencedOffers = [
+  ['sonoff-zbdongle-p', 'https://www.domadoo.fr/fr/french-days/9290-sonoff-dongle-plus-zigbee-30-antenne-externe-zbdongle-p-cc2652p-9888010100046.html?domid=159'],
+  ['sonoff-zbminil2-e', 'https://www.domadoo.fr/fr/produits-de-domotique/8412-sonoff-module-zigbee-sans-neutre-interrupteur-zbminil2-e-orb-zbw1l.html?domid=159'],
+  ['sonoff-orb-socket', 'https://www.domadoo.fr/fr/produits-matter/8829-sonoff-prise-encastree-matter-over-wifi-serie-fusion-orb-socket.html?domid=159'],
+  ['nodon-sin-4-1-20', 'https://www.domadoo.fr/fr/peripheriques/5688-nodon-module-commutateur-contact-sec-zigbee-16a-portail-vmc-chaudiere-sin-4-1-20-3700313925188.html?domid=159'],
+  ['aqara-g410-select', 'https://www.domadoo.fr/fr/produits-zigbee/8148-aqara-sonnette-video-intelligente-wi-fi-aqara-doorbell-camera-hub-g410-select-noir-6975833358380.html?domid=159'],
+  ['sonoff-snzb-04p', 'https://www.domadoo.fr/fr/produits-de-domotique/7058-sonoff-capteur-de-porte-ou-fenetre-zigbee-30-snzb-04p.html?domid=159'],
+  ['sonoff-mini-zbrbs', 'https://www.domadoo.fr/fr/produits-de-domotique/8384-sonoff-mini-zbrbs-module-volet-roulant-zigbee-compatible-home-assistant.html?domid=159'],
+  ['sonoff-zbmini-r2', 'https://www.domadoo.fr/fr/peripheriques/7474-sonoff-zbmini-r2-module-zigbee-commutateur-onoff-10a-zigbee2mqtt-et-home-assistant.html?domid=159']
+].map(([slug, url]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Domadoo', url, active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' }))
