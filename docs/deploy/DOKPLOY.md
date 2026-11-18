@@ -53,7 +53,8 @@ de disponibilité chez le registraire.
    certificat Let's Encrypt. Pour `www`, créer un `CNAME` vers
    `domoklub.fr`, puis configurer la redirection vers le domaine sans
    `www` dans Dokploy.
-3. Modifier les variables dans Dokploy :
+3. Après activation du DNS et du HTTPS, modifier les variables dans
+   Dokploy. Activer NUXT_PUBLIC_SITE_LIVE uniquement sur le domaine définitif :
 
    ```text
    NUXT_PUBLIC_SITE_URL=https://domoklub.fr
@@ -65,13 +66,22 @@ de disponibilité chez le registraire.
    les balises `index,follow`. Les contenus et mentions de lancement ont été
    approuvés par l’éditeur le 17 novembre 2026.
 
+Avant de considérer l’ouverture terminée, contrôler sur le domaine HTTPS :
+
+- robots.txt contient Allow: / et Sitemap: https://domoklub.fr/sitemap.xml ;
+- l’accueil porte index,follow et son canonical est https://domoklub.fr/ ;
+- /produits/sonoff-zbdongle-p/ répond 301 vers la version sans slash ;
+- le sitemap contient les 21 URL attendues et les trois images WebP répondent 200 ;
+- le proxy renvoie Content-Encoding: gzip ou br sur le HTML si le navigateur
+  envoie Accept-Encoding: gzip, br. Contrôler aussi HTTP et www.
+
 Le certificat HTTPS et le routage VPS restent à confirmer sur le serveur réel.
 Dokploy peut déclencher les déploiements suivants à chaque push GitHub une fois
 le fournisseur et le webhook configurés.
 
 ## Après ouverture
 
-- Vérifier mensuellement les trois pages Domadoo, l’attribution des liens,
+- Vérifier mensuellement les onze pages Domadoo, l’attribution des liens,
   les disponibilités et les sources techniques.
 - Les offres locales expirent le 17 mai 2027. Le contrôle GitHub Actions
   échoue 30 jours avant cette date pour demander une nouvelle revue.

@@ -1,11 +1,11 @@
 # DomoKlub
 
 Site Nuxt 4 d’affiliation éditoriale consacré à la maison connectée. La
-version actuelle contient trois guides sourcés, trois fiches produits
+version actuelle contient cinq guides sourcés, trois fiches produits
 documentaires et huit avis d’usage personnel attribués à Gérald François.
 Les onze fiches ont une photo produit Domadoo autorisée et un lien affilié
-fourni par l’éditeur. Les huit notes de 5/5 sont des avis personnels avec
-leur contexte et leurs limites ; aucun prix n’est publié.
+fourni par l’éditeur. Les huit avis d’usage personnels précisent leur contexte
+et leurs limites, sans note chiffrée ; aucun prix n’est publié.
 
 ## Démarrer localement
 
@@ -43,7 +43,7 @@ expirent le 17 mai 2027 ; une vérification mensuelle reste nécessaire.
 GitHub Actions vérifie les offres, compile le site et contrôle son HTML SEO
 sur chaque push et chaque lundi.
 
-Les photos des trois produits proviennent des fiches Domadoo fournies par
+Les photos des onze produits proviennent des fiches Domadoo fournies par
 l’éditeur. Celui-ci a confirmé leur droit de réutilisation le 17 novembre.
 Leurs URLs sources figurent dans `docs/editorial/ASSETS.md`.
 
@@ -54,7 +54,7 @@ le site ne la garantit pas et ne donne aucun prix.
 ## Architecture
 
 - `apps/web/app/` : pages Nuxt, navigation, design, SEO.
-- `apps/web/public/products/` : photos des trois produits.
+- `apps/web/public/products/` : photos des onze produits.
 - `apps/web/server/content/launch.js` : contenus de démarrage approuvés.
 - `apps/web/server/api/public/` : données filtrées et recherche.
 - `apps/web/server/utils/content.js` : catalogue local ; adaptateur Strapi
@@ -67,7 +67,7 @@ Le CMS Strapi 5 est une phase ultérieure. Il servira lorsque les contenus et
 offres devront être rédigés, approuvés et mis à jour depuis une interface
 sans modifier le code. La formation SEO fournie traite de stratégie,
 rédaction, technique et affiliation ; elle ne met pas en place un CMS.
-Pour le lancement avec trois guides et trois produits, les modifications
+Pour le lancement avec cinq guides et onze produits, les modifications
 passent par GitHub et déclenchent un nouveau déploiement.
 
 ## Déploiement

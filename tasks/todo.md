@@ -45,6 +45,8 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [ ] Pousser les changements de `main` vers GitHub, connecter le dépôt dans Dokploy, configurer le domaine/HTTPS et contrôler le site sur le VPS.
 - [ ] Passer `NUXT_PUBLIC_SITE_LIVE=true` dans Dokploy après la recette sur le domaine.
 
+- [ ] Sur le domaine public, vérifier la compression HTML, les redirections et les balises indexables.
+
 ## Reprise de la bibliothèque de prompts et des checklists SEO — 17 novembre
 
 - [x] Lire les captures et distinguer les critères utiles des exemples, gabarits et autres modèles économiques.
@@ -62,6 +64,14 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] Intégrer les pages et offres approuvées après réception des notes personnelles de l’éditeur.
 - [x] Vérifier le build, les quatorze pages, les liens, les balises SEO et le rendu du catalogue et d’une fiche.
 - [x] Publier les huit notes 5/5 attribuées à l’éditeur, sans moyenne ni mesure inventée.
+
+## Avis Openbot — 18 novembre
+- [x] Rediriger les URL avec slash final et vérifier le code HTTP.
+- [x] Corriger les promesses de test et retirer les huit notes chiffrées sans nouvelle évaluation.
+- [x] Optimiser les trois visuels PNG et vérifier le rendu.
+- [x] Actualiser la carte des routes et la procédure de mise en ligne.
+- [x] Recompiler et contrôler le SEO SSR, les offres et les images.
+- [x] Ouvrir les onze liens Domadoo dans un navigateur et vérifier les fiches correspondantes.
 
 ## Guides Home Assistant et Zigbee2MQTT — 18 novembre
 

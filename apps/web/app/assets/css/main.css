@@ -332,9 +332,6 @@ svg { display: block; }
 .personal-review { margin: 1.6rem 0 2rem; padding: 1.45rem 1.55rem; border: 1px solid rgba(251,146,60,.35); border-radius: 18px; background: linear-gradient(145deg,rgba(251,146,60,.11),rgba(255,255,255,.025)); }
 .personal-review h2 { margin: .5rem 0 1rem; }
 .personal-review p { color: #d5dfe9; line-height: 1.65; }
-.personal-rating { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin: .5rem 0 1rem; }
-.personal-rating-stars { color: var(--orange); letter-spacing: .1em; font-size: 1.2rem; }
-.personal-rating strong { color: #fff; font-size: .88rem; }
 .personal-review .personal-review-scope { margin-bottom: 0; color: #b8c6d3; font-size: .83rem; }
 @media (prefers-reduced-motion: reduce) { .product-card { transition: none; } .product-card:hover { transform: none; } }
 

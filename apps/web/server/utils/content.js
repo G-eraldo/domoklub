@@ -88,10 +88,9 @@ function asPublicArticle(item, detail = false) {
 function asPublicProduct(item) {
   const specs = verifiedValues(item.specs)
   const compatibilities = verifiedValues(item.compatibilities, true)
-  const tested = item.evidenceLevel === 'tested' && item.testEvidenceApproved === true
-  const review = tested && item.personalReview && item.personalReview.rating === 5 ? {
+  const experienced = item.evidenceLevel === 'experienced' && item.usageEvidenceApproved === true
+  const review = experienced && item.personalReview ? {
     author: cleanText(item.personalReview.author, 100),
-    rating: 5,
     context: cleanText(item.personalReview.context, 500),
     observations: Array.isArray(item.personalReview.observations) ? item.personalReview.observations.slice(0, 5).map(value => cleanText(value, 700)).filter(Boolean) : [],
     caveat: cleanText(item.personalReview.caveat, 500)
@@ -105,7 +104,7 @@ function asPublicProduct(item) {
     brand: cleanText(item.brand, 100),
     category: cleanText(item.category, 100),
     summary: cleanText(item.summary, 500),
-    evidenceLevel: tested ? 'tested' : 'documentary',
+    evidenceLevel: review ? 'experienced' : 'documentary',
     personalReview: review,
     specs: specs.display,
     specSources: specs.sources,
@@ -147,7 +146,7 @@ async function fetchCmsCollection(collection, { fields, filters = {}, page = 1, 
 
 const articleListFields = ['title', 'seoTitle', 'slug', 'type', 'topic', 'excerpt', 'publishedAt', 'updatedAt']
 const articleDetailFields = [...articleListFields, 'body', 'sources', 'decisionTable']
-const productFields = ['name', 'seoTitle', 'seoDescription', 'slug', 'brand', 'category', 'summary', 'evidenceLevel', 'testEvidenceApproved', 'specs', 'compatibilities', 'updatedAt']
+const productFields = ['name', 'seoTitle', 'seoDescription', 'slug', 'brand', 'category', 'summary', 'evidenceLevel', 'usageEvidenceApproved', 'specs', 'compatibilities', 'updatedAt']
 
 export async function getArticles({ type, topic, page = 1, pageSize = 12 } = {}) {
   const filters = { ...(type ? { type } : {}), ...(topic ? { topic } : {}) }

@@ -12,6 +12,6 @@ defineProps({ product: { type: Object, required: true } })
     <span v-else class="product-icon" aria-hidden="true">◇</span>
     <strong>{{ product.name }}</strong>
     <small>{{ product.brand || 'Marque non renseignée' }} · {{ product.category || 'Catégorie non renseignée' }}</small>
-    <span class="product-footer"><span>{{ product.personalReview ? '5/5 · Avis personnel' : 'Fiche documentaire' }}</span><span aria-hidden="true">↗</span></span>
+    <span class="product-footer"><span>{{ product.personalReview ? 'Avis personnel' : 'Fiche documentaire' }}</span><span aria-hidden="true">↗</span></span>
   </NuxtLink>
 </template>

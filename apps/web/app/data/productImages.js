@@ -19,7 +19,7 @@ export const productImages = {
     sourceUrl: 'https://www.domadoo.fr/47827-large_default/sonoff-dongle-pp10-dongle-usb-zigbee-ou-matter-thread-cc2674p10.jpg'
   },
   'sonoff-zbdongle-p': {
-    src: '/products/sonoff-zbdongle-p.png', alt: 'Clé USB SONOFF ZBDongle-P avec antenne externe', credit: 'Domadoo',
+    src: '/products/sonoff-zbdongle-p.webp', alt: 'Clé USB SONOFF ZBDongle-P avec antenne externe', credit: 'Domadoo',
     sourceUrl: 'https://www.domadoo.fr/44584-large_default/sonoff-dongle-plus-zigbee-30-antenne-externe-zbdongle-p-cc2652p.jpg'
   },
   'sonoff-zbminil2-e': {
@@ -35,7 +35,7 @@ export const productImages = {
     sourceUrl: 'https://www.domadoo.fr/17553-large_default/nodon-module-commutateur-contact-sec-zigbee-16a-portail-vmc-chaudiere-sin-4-1-20.jpg'
   },
   'aqara-g410-select': {
-    src: '/products/aqara-g410-select.png', alt: 'Sonnette vidéo Aqara G410 Select noire et carillon', credit: 'Domadoo',
+    src: '/products/aqara-g410-select.webp', alt: 'Sonnette vidéo Aqara G410 Select noire et carillon', credit: 'Domadoo',
     sourceUrl: 'https://www.domadoo.fr/35663-large_default/aqara-sonnette-video-intelligente-wi-fi-aqara-doorbell-camera-hub-g410-select-noir.jpg'
   },
   'sonoff-snzb-04p': {
@@ -43,7 +43,7 @@ export const productImages = {
     sourceUrl: 'https://www.domadoo.fr/30332-large_default/sonoff-capteur-de-porte-ou-fenetre-zigbee-30-snzb-04p.jpg'
   },
   'sonoff-mini-zbrbs': {
-    src: '/products/sonoff-mini-zbrbs.png', alt: 'Micromodule volet roulant SONOFF MINI-ZBRBS', credit: 'Domadoo',
+    src: '/products/sonoff-mini-zbrbs.webp', alt: 'Micromodule volet roulant SONOFF MINI-ZBRBS', credit: 'Domadoo',
     sourceUrl: 'https://www.domadoo.fr/38256-large_default/sonoff-mini-zbrbs-module-volet-roulant-zigbee-compatible-home-assistant.jpg'
   },
   'sonoff-zbmini-r2': {

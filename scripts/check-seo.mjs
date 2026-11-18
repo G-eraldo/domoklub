@@ -80,14 +80,24 @@ try {
       assert.equal(imageResponse.status, 200, `${path}: photo servie`)
       assert.ok(imageResponse.headers.get('content-type')?.startsWith('image/'), `${path}: vrai fichier image`)
       if (product.personalReview) {
-        assert.ok(html.includes('5/5 · note personnelle'), `${path}: note attribuée`)
+        assert.ok(!html.includes('5/5 · note personnelle'), `${path}: absence de note chiffrée`)
         assert.ok(html.includes('Retour d’usage'), `${path}: contexte d’usage`)
-        assert.ok(html.includes(product.personalReview.author), `${path}: auteur de la note`)
+        assert.ok(html.includes(product.personalReview.author), `${path}: auteur de l’avis`)
       } else {
         assert.ok(html.includes('Non testé par DomoKlub'), `${path}: statut documentaire`)
       }
     }
   }
+  for (const [path, destination] of [
+    ['/produits/', '/produits'],
+    ['/produits/sonoff-zbdongle-p/?source=seo', '/produits/sonoff-zbdongle-p?source=seo']
+  ]) {
+    const response = await fetch(base + path, { redirect: 'manual' })
+    assert.equal(response.status, 301, path + ': redirection permanente')
+    assert.equal(response.headers.get('location'), destination, path + ': destination canonique')
+  }
+  assert.equal((await fetch(base + '/', { redirect: 'manual' })).status, 200, 'accueil sans redirection')
+  assert.ok(!(await page('/')).includes('Tests expliqués'), 'accueil : promesse éditoriale exacte')
   const sitemap = await page('/sitemap.xml')
   for (const path of contentPaths) {
     assert.ok(sitemap.includes(`<loc>https://domoklub.fr${path}</loc><lastmod>`), `${path}: sitemap et lastmod`)

@@ -1,5 +1,5 @@
 // Retours d'usage transmis par Gérald François le 17 novembre 2026.
-// La note est son avis personnel ; les caractéristiques viennent des sources indiquées.
+// Les caractéristiques viennent des sources indiquées ; aucun score chiffré n’est publié.
 const checkedAt = '2026-11-17T13:00:00+01:00'
 const spec = (value, sourceUrl) => ({ value, sourceUrl, checkedAt })
 const compatible = (status, sourceUrl) => ({ status, sourceUrl, checkedAt })
@@ -19,12 +19,12 @@ const blindZ2m = 'https://www.zigbee2mqtt.io/devices/MINI-ZBRBS.html'
 const relayManual = 'https://support.sonoff.tech/zbminir2-usermanual/'
 const relayZ2m = 'https://www.zigbee2mqtt.io/devices/ZBMINIR2.html'
 const usage = (context, observation, caveat = 'Aucune mesure instrumentée ni comparaison directe n’a été fournie pour ce produit.') => ({
-  author: 'Gérald François', rating: 5, context, observations: [observation], caveat
+  author: 'Gérald François', context, observations: [observation], caveat
 })
 const base = (slug, name, brand, category, seoTitle, seoDescription, summary, buyerNote, limitations, review, specs, compatibilities, relatedArticles, sources) => ({
   documentId: `local-${slug}`, editorialStatus: 'approved', slug, name, brand, category,
   seoTitle, seoDescription, summary, buyerNote, limitations,
-  evidenceLevel: 'tested', testEvidenceApproved: true, personalReview: review,
+  evidenceLevel: 'experienced', usageEvidenceApproved: true, personalReview: review,
   updatedAt: checkedAt, specs, compatibilities, relatedArticles, sources
 })
 
@@ -175,7 +175,7 @@ const editorialSections = {
       'La sonnette peut fonctionner sur piles ou alimentation filaire, mais les modes d’enregistrement et de diffusion ne sont pas identiques. Vérifiez les fonctions réellement utiles avant de choisir son alimentation et l’emplacement du carillon.'
     ] },
     { title: 'Distance observée chez l’éditeur', paragraphs: [
-      'Dans la maison de Gérald, la liaison entre la sonnette et le hub carillon a posé problème vers 10 m. C’est la seule limite qu’il a signalée malgré sa note personnelle de 5/5. Murs, matériaux et interférences peuvent changer ce résultat ; il ne s’agit pas d’une portée officielle.'
+      'Dans la maison de Gérald, la liaison entre la sonnette et le hub carillon a posé problème vers 10 m. C’est la seule limite qu’il a signalée dans son retour d’usage. Murs, matériaux et interférences peuvent changer ce résultat ; il ne s’agit pas d’une portée officielle.'
     ] }
   ],
   'sonoff-snzb-04p': [
