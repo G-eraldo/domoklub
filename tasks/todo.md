@@ -117,3 +117,15 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] Photo NodOn remplacée par le visuel du kit marketing officiel NodOn.
 - [ ] Visuels : rejoindre le programme SONOFF (7 produits) et envoyer les demandes de `docs/editorial/DEMANDES_VISUELS.md`.
 - [ ] Après les premières ventes Amazon validées : créer les identifiants Creators API (Associates Central), puis brancher images + liens Amazon via l'API (photo actuelle en secours, accès coupé après 30 jours sans vente). SiteStripe ne fournit plus d'image depuis déc. 2023.
+
+## Audit Rankelio — 27 novembre
+- [x] Lien NodOn mort remplacé par la fiche technique V4 du support NodOn (caractéristiques identiques) ; lien Zigbee2MQTT d'appairage mis à jour.
+- [x] Faux positifs notés : 7 liens SONOFF (anti-robots, pages OK dans un navigateur), « Amazon sans lien » sur /affiliation, « 100 % Amazon » (les 16 liens Domadoo `domid=159` ne sont pas reconnus par l'outil).
+- [x] Pages courtes enrichies : /produits, /guides, /comparatifs, thèmes, fiches ZBT-2 et Dongle-PP10 ; titles des listes allongés.
+- [x] Compression Brotli/gzip du HTML (plugin Nitro), pages d'erreur exclues.
+- [x] /llms.txt généré depuis les contenus.
+- [ ] FAQ sur les guides (citations IA), inscription e-mail, Search Console (connexion Google à faire).
+- [x] Search Console : propriété domaine validée, sitemap lu (37 URL), indexation demandée pour le comparatif.
+- [x] FAQ (2 à 4 questions) sur les 10 guides et comparatifs, balisage FAQPage.
+- [x] Newsletter Resend en double opt-in (formulaire accueil, guides, /newsletter), confidentialité mise à jour.
+- [ ] Resend : vérifier le domaine domoklub.fr, puis définir RESEND_API_KEY, NEWSLETTER_FROM, NEWSLETTER_SECRET (et RESEND_SEGMENT_ID) dans Dokploy.

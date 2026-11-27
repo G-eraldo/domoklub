@@ -4,6 +4,7 @@ import { experiencedProducts, experiencedOffers } from './experiencedProducts.js
 import { installationGuides } from './installationGuides.js'
 import { amazonOffers, amazonReplacementOffers } from './amazonOffers.js'
 import { choiceGuides } from './choiceGuides.js'
+import { faqs } from './faqs.js'
 const checkedAt = '2026-11-17T10:00:00+01:00'
 const contentUpdatedAt = '2026-11-17T13:00:00+01:00'
 const haGreen = 'https://www.home-assistant.io/green/'
@@ -152,6 +153,8 @@ export const launchArticles = [
 const spec = (value, sourceUrl) => ({ value, sourceUrl, checkedAt })
 const compatible = (status, sourceUrl) => ({ status, sourceUrl, checkedAt })
 
+for (const article of launchArticles) if (faqs[article.slug]) article.faq = faqs[article.slug]
+
 export const launchProducts = [
   {
     documentId: 'local-home-assistant-green', editorialStatus: 'approved',
@@ -196,6 +199,18 @@ export const launchProducts = [
       'Zigbee2MQTT': compatible('confirmed', haZbt2),
       'Zigbee et Thread simultanés': compatible('incompatible', haZbt2)
     },
+    editorialSections: [
+      { title: 'À qui s’adresse le ZBT-2 ?', paragraphs: [
+        'Le Connect ZBT-2 est l’adaptateur radio conçu par Nabu Casa, l’entreprise derrière Home Assistant. Il vise d’abord les installations qui n’ont pas de radio intégrée, comme Home Assistant Green, un mini PC ou une machine virtuelle. Home Assistant le recommande pour créer un nouveau réseau ZHA, et Zigbee2MQTT le prend aussi en charge.',
+        'Son intérêt principal est la simplicité : il est reconnu par Home Assistant et sa mise à jour de firmware se fait depuis l’interface. Pour un premier réseau Zigbee sur Home Assistant, c’est le choix le moins risqué.'
+      ] },
+      { title: 'Zigbee ou Thread : un seul à la fois', paragraphs: [
+        'Le ZBT-2 fonctionne soit comme coordinateur Zigbee, soit comme radio Thread, pas les deux en même temps. Si vous voulez à la fois un réseau Zigbee et des appareils Matter sur Thread, prévoyez deux adaptateurs ou utilisez un routeur de bordure Thread déjà présent chez vous.'
+      ] },
+      { title: 'ZBT-2, ZBDongle-P ou Dongle-PP10 ?', paragraphs: [
+        'Pour ZHA, le ZBT-2 est la référence officielle. Pour Zigbee2MQTT, le SONOFF ZBDongle-P a fait ses preuves chez l’éditeur depuis juin 2025, et le Dongle-PP10 est une alternative SONOFF plus récente. Dans tous les cas, le placement du dongle sur une rallonge USB compte davantage que la référence choisie.'
+      ] }
+    ],
     relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'zha-ou-zigbee2mqtt', 'matter-thread-zigbee-differences'],
     sources: [{ label: 'Home Assistant — fiche officielle ZBT-2', url: haZbt2 }, { label: 'Home Assistant — ZHA', url: haZha }]
   },
@@ -216,6 +231,15 @@ export const launchProducts = [
       'Home Assistant': compatible('confirmed', sonoffPp10),
       'Zigbee2MQTT': compatible('confirmed', sonoffPp10)
     },
+    editorialSections: [
+      { title: 'À qui s’adresse le Dongle-PP10 ?', paragraphs: [
+        'Le Dongle-PP10 est un adaptateur USB SONOFF basé sur la puce Texas Instruments CC2674P10. Il s’adresse aux utilisateurs de Home Assistant ou de Zigbee2MQTT qui veulent une alternative au ZBT-2 officiel, et qui acceptent de vérifier le firmware installé selon l’usage prévu.',
+        'Comme le ZBT-2, il fonctionne en Zigbee ou en Thread selon le firmware, pas les deux à la fois. SONOFF publie sa documentation, ses procédures de mise à jour et ses compatibilités sur son site dédié aux dongles.'
+      ] },
+      { title: 'PP10 ou ZBDongle-P ?', paragraphs: [
+        'Le ZBDongle-P, à puce CC2652P, est utilisé par l’éditeur avec Zigbee2MQTT depuis juin 2025 sans problème rencontré. Le PP10 est plus récent et n’a pas encore été utilisé par DomoKlub : cette fiche reste documentaire. Si vous débutez avec Zigbee2MQTT, le modèle P a l’avantage d’une très large base d’utilisateurs.'
+      ] }
+    ],
     relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'zha-ou-zigbee2mqtt', 'matter-thread-zigbee-differences'],
     sources: [{ label: 'SONOFF — documentation Dongle-PP10', url: sonoffPp10 }]
   },

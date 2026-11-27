@@ -15,7 +15,7 @@ const orbManual = 'https://support.sonoff.tech/zbminil2-e-usermanual/'
 const relayManual = 'https://support.sonoff.tech/zbminir2-usermanual/'
 const blindManual = 'https://support.sonoff.tech/mini-zbrbs-usermanual/'
 const sensorManual = 'https://support.sonoff.tech/snzb-04p-usermanual/'
-const nodonDoc = 'https://nodon.fr/wp-content/uploads/2021/04/NodOn_Zigbee_MultifunctionRelaySwitch_SIN-4-1-20-Datasheet_FR.pdf'
+const nodonDoc = 'https://support.nodon.fr/support/solutions/articles/150000192111-module-multifonction-zigbee-sin-4-1-20-'
 
 const base = { editorialStatus: 'approved', publishedAt, updatedAt: publishedAt }
 

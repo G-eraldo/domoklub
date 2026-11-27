@@ -69,6 +69,6 @@ const formats = [
 
     <div class="container"><section class="compare-banner" aria-labelledby="compare-heading"><div><span class="eyebrow">Le bon choix, côte à côte</span><h2 id="compare-heading">Comparez ce qui compte vraiment.</h2><p>Placez de deux à quatre produits d’une même catégorie face à face. Les inconnues restent visibles et chaque donnée publiée conserve sa source.</p></div><NuxtLink to="/comparer" class="button button-primary">Ouvrir le comparateur <span aria-hidden="true">↗</span></NuxtLink></section></div>
 
-    <section class="newsletter-teaser" aria-labelledby="newsletter-heading"><div class="container"><span class="eyebrow">La suite, sans le bruit</span><h2 id="newsletter-heading" class="section-heading">Une newsletter pour garder les bons repères.</h2><p class="section-copy">Les contenus validés, les méthodes utiles et les nouveautés éditoriales, une fois le service activé.</p><NuxtLink to="/newsletter" class="button button-outline">En savoir plus <span aria-hidden="true">↗</span></NuxtLink></div></section>
+    <section class="newsletter-teaser" aria-labelledby="newsletter-heading"><div class="container"><span class="eyebrow">La suite, sans le bruit</span><h2 id="newsletter-heading" class="section-heading">Une newsletter pour garder les bons repères.</h2><p class="section-copy">Les nouveaux guides et retours d’usage sur Home Assistant et Zigbee, un ou deux messages par mois.</p><div style="margin-top:1.5rem"><NewsletterForm compact /></div></div></section>
   </div>
 </template>

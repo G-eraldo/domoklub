@@ -127,7 +127,7 @@ export const installationGuides = [
       { label: 'Zigbee2MQTT — adaptateurs compatibles', url: 'https://www.zigbee2mqtt.io/guide/adapters/' },
       { label: 'Zigbee2MQTT — paramètres de l’adaptateur', url: 'https://www.zigbee2mqtt.io/guide/configuration/adapter-settings.html' },
       { label: 'Zigbee2MQTT — découverte Home Assistant', url: 'https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html' },
-      { label: 'Zigbee2MQTT — autoriser l’association', url: 'https://www.zigbee2mqtt.io/getting_started/pairing_devices.html' },
+      { label: 'Zigbee2MQTT — autoriser l’association', url: 'https://www.zigbee2mqtt.io/guide/usage/pairing_devices.html' },
       { label: 'Zigbee2MQTT — FAQ et migration', url: 'https://www.zigbee2mqtt.io/guide/faq/' }
     ]
   }

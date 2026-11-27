@@ -113,6 +113,7 @@ try {
   const robots = await page('/robots.txt')
   assert.ok(robots.includes('Sitemap: https://domoklub.fr/sitemap.xml'), 'robots et sitemap')
   assert.ok(!robots.includes('Disallow: /comparer'), 'comparateur accessible au crawl pour lire noindex')
+  for (const path of ['/newsletter', '/newsletter?statut=confirme', '/llms.txt', '/comparatifs', '/themes/zigbee', '/mentions-legales', '/confidentialite']) await page(path)
   await page('/guides/page-inexistante', 404)
   const notFound = await (await fetch(base + '/page-inexistante', { headers: { accept: 'text/html' } })).text()
   assert.ok(notFound.includes('Cette page n’existe pas') && notFound.includes('href="/guides"'), '404 HTML avec navigation')

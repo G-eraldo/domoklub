@@ -365,3 +365,14 @@ svg { display: block; }
 .review-rating { margin: .4rem 0 1rem; padding: .7rem 1rem; border: 1px solid rgba(251,146,60,.35); border-radius: 12px; background: rgba(251,146,60,.08); color: #ffe3c7; }
 .review-rating strong { color: var(--orange-light); }
 .offer-card .offer-note { display: block; margin-top: .35rem; color: var(--orange-light); }
+.faq-item { padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.faq-item h3 { margin: 0 0 .4rem; font-size: 1.02rem; }
+.faq-item p { margin: 0; color: #c9d3de; line-height: 1.6; }
+.newsletter-form { display: grid; gap: .8rem; max-width: 560px; }
+.newsletter-row { display: flex; gap: .6rem; }
+.newsletter-row input { flex: 1; min-width: 0; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: #f6f7f9; font: inherit; }
+.newsletter-consent { display: flex; gap: .55rem; align-items: flex-start; color: #aebbc9; font-size: .82rem; line-height: 1.5; }
+.newsletter-consent input { margin-top: .2rem; }
+/* Champ piège anti-robots : retiré de l'affichage sans display:none (ignoré par certains robots). */
+.newsletter-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 520px) { .newsletter-row { flex-direction: column; } }

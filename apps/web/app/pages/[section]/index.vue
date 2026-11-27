@@ -17,8 +17,8 @@ const { data, pending, error } = await useAsyncData(
 
 const description = section.description
 useSeoMeta({
-  title: `${section.title} · DomoKlub`, description,
-  ogTitle: `${section.title} · DomoKlub`, ogDescription: description,
+  title: section.seoTitle || `${section.title} · DomoKlub`, description,
+  ogTitle: section.seoTitle || `${section.title} · DomoKlub`, ogDescription: description,
   robots: computed(() => siteLive && Boolean(data.value?.items?.length) ? 'index,follow' : 'noindex,follow')
 })
 useHead({ link: [{ rel: 'canonical', href: canonicalPath(route.path) }] })
@@ -28,6 +28,7 @@ useHead({ link: [{ rel: 'canonical', href: canonicalPath(route.path) }] })
   <div>
     <header class="page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><NuxtLink to="/">Accueil</NuxtLink><span class="separator">/</span><span aria-current="page">{{ section.title }}</span></nav><span class="eyebrow">{{ section.eyebrow }}</span><h1>{{ section.title }}<span style="color:var(--orange)">.</span></h1><p>{{ section.description }}</p></div></header>
     <div class="container page-body">
+      <p v-if="section.intro" class="lead reading-width" style="margin-bottom:2rem">{{ section.intro }}</p>
       <p v-if="pending" class="status-line" role="status">Chargement des contenus…</p>
       <div v-else-if="error" class="notice" role="alert">Les contenus sont temporairement indisponibles. Réessayez plus tard.</div>
       <div v-else-if="data?.items?.length"><p class="status-line">{{ data.pagination?.total || data.items.length }} contenu{{ (data.pagination?.total || data.items.length) > 1 ? 's' : '' }}</p><div class="article-grid"><ArticleCard v-for="article in data.items" :key="article.id || article.slug" :article="article" /></div><div v-if="data.pagination?.pageCount > 1" class="pagination"><button class="button button-outline" type="button" :disabled="page <= 1" @click="page--">Précédent</button><span>Page {{ page }} / {{ data.pagination.pageCount }}</span><button class="button button-outline" type="button" :disabled="page >= data.pagination.pageCount" @click="page++">Suivant</button></div></div>

@@ -100,3 +100,12 @@ Les liens Amazon sont construits à partir des ASIN de `apps/web/server/content/
 et de la variable `AMAZON_PARTNER_TAG` (identifiant se terminant par `-21`). Sans cette
 variable, aucun bouton Amazon n'est affiché. Après la mise en ligne, déclarer le domaine
 dans le compte Partenaires Amazon (Compte > Sites web et applications).
+
+## Newsletter (Resend)
+
+1. Dans Resend, ajouter et vérifier le domaine `domoklub.fr` (enregistrements DNS chez OVH).
+2. Créer une clé API (droit d'envoi + contacts) et, si souhaité, un segment « Newsletter ».
+3. Dans Dokploy, définir `RESEND_API_KEY`, `NEWSLETTER_FROM` (ex. `DomoKlub <newsletter@domoklub.fr>`),
+   `NEWSLETTER_SECRET` (générer avec `openssl rand -hex 32`) et éventuellement `RESEND_SEGMENT_ID`, puis redéployer.
+4. Tant qu'une variable manque, le formulaire affiche « Les inscriptions ouvrent très bientôt ».
+5. Envoyer les newsletters depuis Resend (Broadcasts) : le lien de désinscription y est ajouté par Resend.

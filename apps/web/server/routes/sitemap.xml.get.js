@@ -9,7 +9,7 @@ export default defineEventHandler(async event => {
   setResponseHeader(event, 'Content-Type', 'application/xml; charset=utf-8')
   if (config.public.siteLive !== true && config.public.siteLive !== 'true') return '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>'
 
-  const paths = new Set(['/', '/methodologie', '/a-propos', '/affiliation'])
+  const paths = new Set(['/', '/methodologie', '/a-propos', '/affiliation', '/newsletter'])
   const modified = new Map()
   function addContent(path, updatedAt) {
     paths.add(path)

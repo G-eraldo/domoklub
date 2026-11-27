@@ -81,6 +81,7 @@ function asPublicArticle(item, detail = false) {
     article.relatedProducts = safeSlugs(item.relatedProducts)
     article.relatedArticles = safeSlugs(item.relatedArticles)
     article.sources = safeSources(item.sources)
+    article.faq = Array.isArray(item.faq) ? item.faq.slice(0, 8).map(entry => ({ q: cleanText(entry?.q, 200), a: cleanText(entry?.a, 800) })).filter(entry => entry.q && entry.a) : []
   }
   return article
 }
@@ -157,7 +158,7 @@ async function fetchCmsCollection(collection, { fields, filters = {}, page = 1, 
 }
 
 const articleListFields = ['title', 'seoTitle', 'slug', 'type', 'topic', 'excerpt', 'publishedAt', 'updatedAt']
-const articleDetailFields = [...articleListFields, 'body', 'sources', 'decisionTable']
+const articleDetailFields = [...articleListFields, 'body', 'sources', 'decisionTable', 'faq']
 const productFields = ['name', 'seoTitle', 'seoDescription', 'slug', 'brand', 'category', 'summary', 'evidenceLevel', 'usageEvidenceApproved', 'specs', 'compatibilities', 'updatedAt']
 
 export async function getArticles({ type, topic, page = 1, pageSize = 12 } = {}) {
