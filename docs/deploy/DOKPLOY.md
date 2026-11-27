@@ -59,6 +59,7 @@ de disponibilité chez le registraire.
    ```text
    NUXT_PUBLIC_SITE_URL=https://domoklub.fr
    NUXT_PUBLIC_SITE_LIVE=true
+   AMAZON_PARTNER_TAG=<votre-identifiant>-21
    ```
 
 4. Redéployer, puis contrôler `https://domoklub.fr/api/health`, les
@@ -91,3 +92,11 @@ le fournisseur et le webhook configurés.
   marchand n’est affiché sur DomoKlub.
 
 Avant publication, exécuter `npm run build && npm run check:seo` localement ou vérifier le résultat du workflow GitHub Actions. Après branchement du domaine, refaire les contrôles sur l’URL HTTPS réelle : redirection HTTP et www vers le domaine canonique, sitemap, Search Console, Bing Webmaster Tools et performance mobile.
+
+
+## Amazon Partenaires
+
+Les liens Amazon sont construits à partir des ASIN de `apps/web/server/content/amazonOffers.js`
+et de la variable `AMAZON_PARTNER_TAG` (identifiant se terminant par `-21`). Sans cette
+variable, aucun bouton Amazon n'est affiché. Après la mise en ligne, déclarer le domaine
+dans le compte Partenaires Amazon (Compte > Sites web et applications).

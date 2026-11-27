@@ -1,5 +1,6 @@
 <script setup>
-import { sections, canonicalPath, publicRobots, safeJsonLd } from '~/data/site.js'
+import { sections, canonicalPath, publicRobots, safeJsonLd, breadcrumbJsonLd, defaultOgImage, useAbsoluteUrl } from '~/data/site.js'
+import { productImages } from '~/data/productImages.js'
 
 definePageMeta({ layout: 'default' })
 
@@ -14,9 +15,16 @@ const { data: article, pending, error } = await useAsyncData(
 if (error.value?.statusCode === 404) throw createError({ statusCode: 404, statusMessage: 'Article introuvable' })
 
 const paragraphs = computed(() => article.value?.body?.split(/\n\s*\n/).filter(Boolean) || [])
-const productLabels = { 'home-assistant-green': 'Home Assistant Green', 'home-assistant-connect-zbt-2': 'Home Assistant Connect ZBT-2', 'sonoff-dongle-pp10': 'SONOFF Dongle-PP10', 'sonoff-zbdongle-p': 'SONOFF ZBDongle-P', 'sonoff-orb-socket': 'SONOFF Orb Socket' }
-const articleLabels = { 'installer-home-assistant': 'Installer Home Assistant', 'installer-zigbee2mqtt': 'Installer Zigbee2MQTT', 'demarrer-home-assistant-green': 'Démarrer avec Home Assistant Green', 'choisir-coordinateur-zigbee-home-assistant': 'Choisir un coordinateur Zigbee', 'matter-thread-zigbee-differences': 'Matter, Thread et Zigbee' }
-const relatedArticlePath = slug => `/guides/${slug}`
+// Libellés et cartes résolus depuis le catalogue : aucun lien interne ne s'affiche avec un slug brut.
+const { data: catalog } = await useAsyncData('catalog-all', () => $fetch('/api/public/products'))
+const { data: guideList } = await useAsyncData('articles-all', () => $fetch('/api/public/articles', { query: { pageSize: 50 } }))
+const articlePath = articleSlug => { const item = guideList.value?.items?.find(entry => entry.slug === articleSlug); return `/${item?.section || 'guides'}/${articleSlug}` }
+const relatedProducts = computed(() => (article.value?.relatedProducts || []).map(productSlug => catalog.value?.items?.find(item => item.slug === productSlug)).filter(Boolean))
+const articleLabel = relatedSlug => guideList.value?.items?.find(item => item.slug === relatedSlug)?.title || relatedSlug.replaceAll('-', ' ')
+const leadImage = computed(() => relatedProducts.value.map(product => productImages[product.slug]).find(Boolean))
+// Google accepte plusieurs formats d'image pour un article : photo produit carrée + visuel 1200 × 630.
+const absoluteUrl = useAbsoluteUrl()
+const schemaImages = computed(() => [leadImage.value?.src, defaultOgImage.path].filter(Boolean).map(absoluteUrl))
 const approvedRobots = publicRobots()
 useSeoMeta({
   title: computed(() => article.value ? (article.value.seoTitle || `${article.value.title} · DomoKlub`) : `${section.title} · DomoKlub`),
@@ -24,6 +32,8 @@ useSeoMeta({
   ogTitle: computed(() => article.value?.title || section.title),
   ogDescription: computed(() => article.value?.excerpt || section.description),
   ogType: 'article',
+  articlePublishedTime: computed(() => article.value?.publishedAt || undefined),
+  articleModifiedTime: computed(() => article.value?.updatedAt || undefined),
   robots: computed(() => article.value?.editorialStatus === 'review' ? 'noindex,follow' : approvedRobots)
 })
 const canonicalUrl = canonicalPath(route.path)
@@ -32,14 +42,18 @@ const authorId = canonicalPath('/a-propos#gerald-francois')
 const publisherId = canonicalPath('/#organization')
 const articleSchema = computed(() => article.value?.editorialStatus === 'approved' && article.value?.publishedAt ? safeJsonLd({
   '@context': 'https://schema.org',
+  '@graph': [{
   '@type': 'Article',
   headline: article.value.title,
+  image: schemaImages.value,
+  inLanguage: 'fr-FR',
   description: article.value.excerpt,
   mainEntityOfPage: canonicalUrl,
   datePublished: article.value.publishedAt,
   dateModified: article.value.updatedAt || article.value.publishedAt,
   author: { '@type': 'Person', '@id': authorId, name: 'Gérald François', url: authorUrl },
   publisher: { '@id': publisherId }
+  }, breadcrumbJsonLd([{ name: 'Accueil', path: '/' }, { name: section.title, path: `/${route.params.section}` }, { name: article.value.title, path: route.path }], absoluteUrl)]
 }) : null)
 useHead(() => ({ link: [{ rel: 'canonical', href: canonicalUrl }], script: articleSchema.value ? [{ type: 'application/ld+json', innerHTML: articleSchema.value }] : [] }))
 </script>
@@ -59,8 +73,8 @@ useHead(() => ({ link: [{ rel: 'canonical', href: canonicalUrl }], script: artic
         <nav v-if="article.sections?.length" class="article-toc" aria-label="Sommaire"><strong>Dans ce guide</strong><ol><li v-for="part in article.sections" :key="part.id"><a :href="`#${part.id}`">{{ part.title }}</a></li></ol></nav>
         <div v-if="article.sections?.length" class="prose"><section v-for="part in article.sections" :id="part.id" :key="part.id" class="article-part"><h2>{{ part.title }}</h2><p v-for="(paragraph, index) in part.paragraphs" :key="index">{{ paragraph }}</p><ul v-if="part.bullets?.length"><li v-for="(point, index) in part.bullets" :key="index">{{ point }}</li></ul></section></div>
         <div v-else class="prose"><p v-for="(paragraph, index) in paragraphs" :key="index" class="body-block">{{ paragraph }}</p></div>
-        <section v-if="article.relatedProducts?.length" class="related-block" aria-labelledby="related-products"><h2 id="related-products">Produits à examiner</h2><p>Chaque fiche précise si elle repose sur un retour d’usage ou sur la documentation, avec ses limites.</p><div class="related-links"><NuxtLink v-for="productSlug in article.relatedProducts" :key="productSlug" :to="`/produits/${productSlug}`">{{ productLabels[productSlug] || productSlug }} <span aria-hidden="true">↗</span></NuxtLink></div></section>
-        <section v-if="article.relatedArticles?.length" class="related-block" aria-labelledby="related-articles"><h2 id="related-articles">Continuer la lecture</h2><div class="related-links"><NuxtLink v-for="relatedSlug in article.relatedArticles" :key="relatedSlug" :to="relatedArticlePath(relatedSlug)">{{ articleLabels[relatedSlug] || relatedSlug }} <span aria-hidden="true">↗</span></NuxtLink></div></section>
+        <section v-if="relatedProducts.length" class="related-block" aria-labelledby="related-products"><h2 id="related-products">Produits à examiner</h2><p>Chaque fiche précise si elle repose sur un retour d’usage ou sur la documentation, avec ses limites et un lien marchand vérifié.</p><div class="product-grid related-product-grid"><ProductCard v-for="product in relatedProducts" :key="product.slug" :product="product" /></div></section>
+        <section v-if="article.relatedArticles?.length" class="related-block" aria-labelledby="related-articles"><h2 id="related-articles">Continuer la lecture</h2><div class="related-links"><NuxtLink v-for="relatedSlug in article.relatedArticles" :key="relatedSlug" :to="articlePath(relatedSlug)">{{ articleLabel(relatedSlug) }} <span aria-hidden="true">↗</span></NuxtLink></div></section>
         <section v-if="article.sources?.length" class="sources-block" aria-labelledby="sources-heading"><h2 id="sources-heading">Sources consultées</h2><p>Les faits techniques viennent de ces documentations. Leur contenu peut évoluer.</p><ul><li v-for="source in article.sources" :key="source.url"><a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label || source.url }}</a></li></ul></section>
       </article>
       <aside v-if="article" class="detail-aside"><h2>À propos de cet article</h2><NuxtLink to="/methodologie">Comment nous travaillons</NuxtLink><NuxtLink to="/affiliation">Liens affiliés et indépendance</NuxtLink><NuxtLink :to="`/${route.params.section}`">Retour aux {{ section.title.toLowerCase() }}</NuxtLink></aside>

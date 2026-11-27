@@ -26,6 +26,11 @@ export default defineEventHandler(async event => {
       for (const article of result.items) if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.slug)) addContent(`/${article.section}/${article.slug}`, article.updatedAt)
     }
   }
+  // Pages thème : seulement celles qui ont des contenus (les autres sont en noindex).
+  for (const topic of ['home-assistant', 'zigbee', 'matter', 'securite', 'eclairage', 'energie']) {
+    const result = await getArticles({ topic, pageSize: 1 })
+    if (result.items.length) paths.add(`/themes/${topic}`)
+  }
   const firstProducts = await getProducts({ pageSize: 100 })
   if (firstProducts.items.length) paths.add('/produits')
   for (const product of firstProducts.items) if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(product.slug)) addContent(`/produits/${product.slug}`, product.updatedAt)

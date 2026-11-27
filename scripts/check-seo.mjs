@@ -51,7 +51,7 @@ async function page(path, expectedStatus = 200) {
 try {
   await ready()
   const contentPaths = [
-    ...launchArticles.filter(item => item.editorialStatus === 'approved').map(item => `/${item.type === 'guide' ? 'guides' : item.type}/${item.slug}`),
+    ...launchArticles.filter(item => item.editorialStatus === 'approved').map(item => `/${{ guide: 'guides', comparison: 'comparatifs', tutorial: 'tutoriels', test: 'tests', deal: 'bons-plans' }[item.type]}/${item.slug}`),
     ...launchProducts.filter(item => item.editorialStatus === 'approved').map(item => `/produits/${item.slug}`)
   ]
   for (const path of contentPaths) {
@@ -65,12 +65,15 @@ try {
     assert.equal(tag(html, 'h1'), 1, `${path}: un seul H1`)
     const scripts = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(match => JSON.parse(match[1]))
     assert.ok(scripts.some(schema => schema['@graph']?.some(entity => entity['@type'] === 'Organization')), `${path}: identité`)
-    if (path.startsWith('/guides/')) {
+    if (!path.startsWith('/produits/')) {
       assert.ok(tag(html, 'table') >= 1, `${path}: tableau de décision`)
-      assert.ok(scripts.some(schema => schema['@type'] === 'Article'), `${path}: Article JSON-LD`)
+      const graphTypes = scripts.flatMap(schema => schema['@graph'] || [schema]).map(entity => entity['@type'])
+      assert.ok(graphTypes.includes('Article'), `${path}: Article JSON-LD`)
+      assert.ok(graphTypes.includes('BreadcrumbList'), `${path}: fil d’Ariane JSON-LD`)
       assert.ok(html.includes('Par <a href="/a-propos"'), `${path}: auteur visible`)
     } else {
       assert.ok(html.includes('/products/'), `${path}: photo produit`)
+      assert.ok(scripts.some(schema => schema['@type'] === 'BreadcrumbList'), `${path}: fil d’Ariane JSON-LD`)
       assert.ok(html.includes('Lien affilié'), `${path}: signalement affilié`)
       assert.ok(/rel="[^"]*sponsored[^"]*"/i.test(html), `${path}: rel sponsored`)
       const product = launchProducts.find(item => `/produits/${item.slug}` === path)
@@ -108,6 +111,10 @@ try {
   assert.ok(robots.includes('Sitemap: https://domoklub.fr/sitemap.xml'), 'robots et sitemap')
   assert.ok(!robots.includes('Disallow: /comparer'), 'comparateur accessible au crawl pour lire noindex')
   await page('/guides/page-inexistante', 404)
+  const notFound = await (await fetch(base + '/page-inexistante', { headers: { accept: 'text/html' } })).text()
+  assert.ok(notFound.includes('Cette page n’existe pas') && notFound.includes('href="/guides"'), '404 HTML avec navigation')
+  assert.ok(meta(await page('/'), 'robots') === 'index,follow' && (await page('/')).includes('og:image" content="https://domoklub.fr/og-default.jpg'), 'accueil : image de partage')
+  assert.ok(sitemap.includes('/themes/zigbee</loc>'), 'thème avec contenus dans le sitemap')
   console.log(`SEO SSR valide : ${contentPaths.length} pages de contenu, sitemap, robots et 404.`)
 } finally {
   server.kill('SIGTERM')

@@ -7,5 +7,6 @@ export default defineEventHandler(async event => {
   const topic = String(query.topic || '')
   if (topic && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(topic)) throw createError({ statusCode: 400, statusMessage: 'Thème invalide' })
   const page = Math.max(1, Math.min(1000, Number.parseInt(query.page, 10) || 1))
-  return getArticles({ type, topic, page, pageSize: 12 })
+  const pageSize = Math.max(1, Math.min(50, Number.parseInt(query.pageSize, 10) || 12))
+  return getArticles({ type, topic, page, pageSize })
 })

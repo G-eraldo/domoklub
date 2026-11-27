@@ -78,3 +78,29 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] Vérifier les méthodes d’installation et la mise en route dans les documentations officielles.
 - [x] Ajouter deux guides complets et les relier aux guides et produits existants.
 - [x] Vérifier la compilation, le contenu rendu, les liens internes et les contrôles SEO.
+
+## Audit avant lancement — 27 novembre
+
+- [x] Page 404/erreur HTML avec navigation (avant : page Nuxt brute sans lien interne).
+- [x] Balises Open Graph globales (site_name, locale, url, image 1200 × 630 `og-default.jpg`, twitter:card).
+- [x] Fil d'Ariane `BreadcrumbList` sur guides et fiches ; image et langue dans `Article`.
+- [x] Guides : produits liés affichés en cartes avec photo (avant : libellés codés en dur, slug brut pour les produits non listés).
+- [x] Fiches : bloc « même catégorie » + lien vers le comparateur pré-rempli (les fiches n'étaient liées que depuis le catalogue).
+- [x] Sitemap : pages thème ayant des contenus.
+- [x] Mentions légales : retrait de l'avertissement « en cours de vérification ».
+- [x] `check:seo` étendu (fil d'Ariane, 404 HTML, image de partage, thèmes au sitemap) : OK.
+
+### Reste à faire (hors code ou décision éditeur)
+- [ ] Compression gzip/brotli du HTML et redirection `www` → apex à configurer dans Dokploy/Traefik.
+- [ ] Mesure : Search Console + Bing Webmaster, analytics sans cookie (Umami auto-hébergé) et suivi des clics affiliés.
+- [ ] Volume de contenu à intention d'achat (comparatifs, « X ou Y », alternatives) et second marchand.
+
+## Amazon et contenus de choix — 27 novembre
+
+- [x] 11 ASIN amazon.fr vérifiés (titre et référence) ; lien construit avec `AMAZON_PARTNER_TAG`.
+- [x] Mention obligatoire « Partenaire Amazon » (pied de page, affiliation, fiches, confidentialité).
+- [x] 5 contenus sourcés : ZHA ou Zigbee2MQTT, Green/Raspberry Pi/mini PC, interrupteur avec ou sans neutre, portée Zigbee, comparatif modules Zigbee.
+- [x] Maillage fiches ↔ nouveaux guides ; rubrique Comparatifs dans le menu ; thème Éclairage alimenté.
+- [x] `check:offers` (22 offres) et `check:seo` (21 pages) OK ; rendu vérifié.
+- [ ] Relecture éditeur des 5 nouveaux contenus avant `NUXT_PUBLIC_SITE_LIVE=true`.
+- [ ] Vérifier que l'ASIN B0F6CJ93GS correspond bien à la variante « G410 Select » achetée.

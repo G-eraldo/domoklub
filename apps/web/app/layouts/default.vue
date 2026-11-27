@@ -46,11 +46,11 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
           <NuxtLink to="/" class="brand" aria-label="DomoKlub, accueil"><span class="brand-symbol" aria-hidden="true"><span /></span><span>Domo<span class="brand-accent">Klub</span><span class="brand-period">.</span></span></NuxtLink>
           <p>La maison connectée, simplement.<br>Des choix éclairés, des sources visibles.</p>
         </div>
-        <div class="footer-column"><h2>Explorer</h2><NuxtLink to="/guides">Guides</NuxtLink><NuxtLink to="/produits">Produits</NuxtLink><NuxtLink to="/comparer">Comparer</NuxtLink><NuxtLink to="/themes/zigbee">Zigbee</NuxtLink></div>
+        <div class="footer-column"><h2>Explorer</h2><NuxtLink to="/guides">Guides</NuxtLink><NuxtLink to="/comparatifs">Comparatifs</NuxtLink><NuxtLink to="/produits">Produits</NuxtLink><NuxtLink to="/comparer">Comparer</NuxtLink><NuxtLink to="/themes/zigbee">Zigbee</NuxtLink></div>
         <div class="footer-column"><h2>DomoKlub</h2><NuxtLink to="/methodologie">Méthodologie</NuxtLink><NuxtLink to="/a-propos">À propos</NuxtLink><NuxtLink to="/affiliation">Affiliation</NuxtLink><NuxtLink to="/contact">Contact</NuxtLink></div>
         <div class="footer-column"><h2>Informations</h2><NuxtLink to="/mentions-legales">Mentions légales</NuxtLink><NuxtLink to="/confidentialite">Confidentialité</NuxtLink><NuxtLink to="/cookies">Cookies</NuxtLink><NuxtLink to="/newsletter">Newsletter</NuxtLink></div>
       </div>
-      <div class="container footer-bottom"><span>© {{ new Date().getFullYear() }} DomoKlub</span><span>Conçu pour mieux comprendre avant de choisir.</span></div>
+      <div class="container footer-bottom"><span>© {{ new Date().getFullYear() }} DomoKlub · En tant que Partenaire Amazon, DomoKlub réalise un bénéfice sur les achats remplissant les conditions requises.</span><span>Conçu pour mieux comprendre avant de choisir.</span></div>
     </footer>
   </div>
 </template>

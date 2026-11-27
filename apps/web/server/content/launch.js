@@ -2,6 +2,8 @@
 // Les URLs de produits viennent de l'éditeur ; les faits techniques des fabricants.
 import { experiencedProducts, experiencedOffers } from './experiencedProducts.js'
 import { installationGuides } from './installationGuides.js'
+import { amazonOffers } from './amazonOffers.js'
+import { choiceGuides } from './choiceGuides.js'
 const checkedAt = '2026-11-17T10:00:00+01:00'
 const contentUpdatedAt = '2026-11-17T13:00:00+01:00'
 const haGreen = 'https://www.home-assistant.io/green/'
@@ -14,6 +16,7 @@ const haZbt2 = 'https://www.home-assistant.io/connect/zbt-2/'
 const sonoffPp10 = 'https://dongle.sonoff.tech/guide/dongle-pp10/introduction-dongle-pp10/'
 
 export const launchArticles = [
+  ...choiceGuides,
   ...installationGuides,
   {
     documentId: 'local-guide-demarrer-home-assistant-green', editorialStatus: 'approved',
@@ -47,7 +50,7 @@ export const launchArticles = [
       ] }
     ],
     relatedProducts: ['home-assistant-green', 'home-assistant-connect-zbt-2'],
-    relatedArticles: ['installer-home-assistant', 'choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
+    relatedArticles: ['installer-home-assistant', 'home-assistant-green-raspberry-pi-ou-mini-pc', 'choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
     sources: [
       { label: 'Home Assistant — Green : contenu et limites matérielles', url: haGreen },
       { label: 'Home Assistant — modes d’installation', url: haInstall },
@@ -93,7 +96,7 @@ export const launchArticles = [
       ] }
     ],
     relatedProducts: ['sonoff-zbdongle-p', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10', 'home-assistant-green'],
-    relatedArticles: ['installer-zigbee2mqtt', 'matter-thread-zigbee-differences', 'demarrer-home-assistant-green'],
+    relatedArticles: ['zha-ou-zigbee2mqtt', 'installer-zigbee2mqtt', 'ameliorer-portee-reseau-zigbee', 'matter-thread-zigbee-differences'],
     sources: [
       { label: 'Home Assistant — choisir un adaptateur Zigbee', url: haZigbee },
       { label: 'Home Assistant — intégration ZHA', url: haZha },
@@ -136,7 +139,7 @@ export const launchArticles = [
       ] }
     ],
     relatedProducts: ['sonoff-orb-socket', 'home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10'],
-    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'demarrer-home-assistant-green'],
+    relatedArticles: ['home-assistant-green-raspberry-pi-ou-mini-pc', 'demarrer-home-assistant-green', 'choisir-coordinateur-zigbee-home-assistant'],
     sources: [
       { label: 'Home Assistant — intégration Matter', url: haMatter },
       { label: 'Home Assistant — réseau Thread', url: haThread },
@@ -193,7 +196,7 @@ export const launchProducts = [
       'Zigbee2MQTT': compatible('confirmed', haZbt2),
       'Zigbee et Thread simultanés': compatible('incompatible', haZbt2)
     },
-    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
+    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'zha-ou-zigbee2mqtt', 'matter-thread-zigbee-differences'],
     sources: [{ label: 'Home Assistant — fiche officielle ZBT-2', url: haZbt2 }, { label: 'Home Assistant — ZHA', url: haZha }]
   },
   {
@@ -213,7 +216,7 @@ export const launchProducts = [
       'Home Assistant': compatible('confirmed', sonoffPp10),
       'Zigbee2MQTT': compatible('confirmed', sonoffPp10)
     },
-    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'matter-thread-zigbee-differences'],
+    relatedArticles: ['choisir-coordinateur-zigbee-home-assistant', 'zha-ou-zigbee2mqtt', 'matter-thread-zigbee-differences'],
     sources: [{ label: 'SONOFF — documentation Dongle-PP10', url: sonoffPp10 }]
   },
   ...experiencedProducts
@@ -223,5 +226,6 @@ export const launchOffers = [
   { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-green', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-compatibles-home-assistant/7046-nabu-casa-box-domotique-home-assistant-green-0860011789703.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
   { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-connect-zbt-2', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/dongle-zigbee/8542-nabu-casa-home-assistant-connect-zbt-2-adaptateur-usb-zigbee-ou-matter-thread-0860011789741.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
   { editorialStatus: 'approved', productDocumentId: 'local-sonoff-dongle-pp10', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-de-domotique/9773-sonoff-dongle-pp10-dongle-usb-zigbee-ou-matter-thread-cc2674p10-6979033600850.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
-  ...experiencedOffers
+  ...experiencedOffers,
+  ...amazonOffers
 ]

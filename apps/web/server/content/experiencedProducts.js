@@ -39,7 +39,7 @@ export const experiencedProducts = [
     usage('Utilisé depuis juin 2025 avec Zigbee2MQTT sur son serveur Home Assistant.', 'Mise en service jugée « plug and play » ; aucun problème rencontré depuis l’installation.', 'Aucun relevé de portée, de nombre d’appareils ou de version de firmware n’a été communiqué.'),
     { 'Puce': spec('Texas Instruments CC2652P', sonoffP), 'Radio': spec('Zigbee 3.0', sonoffP), 'Connexion': spec('USB avec interface série CP2102(N)', sonoffP), 'Antenne': spec('Externe', sonoffP) },
     { 'Zigbee2MQTT / adaptateur zStack': compatible('confirmed', z2mP) },
-    ['choisir-coordinateur-zigbee-home-assistant', 'demarrer-home-assistant-green'],
+    ['zha-ou-zigbee2mqtt', 'choisir-coordinateur-zigbee-home-assistant', 'ameliorer-portee-reseau-zigbee', 'modules-zigbee-pour-debuter'],
     [{ label: 'SONOFF — fiche matérielle ZBDongle-P', url: sonoffP }, { label: 'Zigbee2MQTT — adaptateurs zStack', url: z2mP }]
   ),
   base(
@@ -51,7 +51,7 @@ export const experiencedProducts = [
     ['Charge minimale de 3 W selon SONOFF : contrôler les petits éclairages LED.', 'Installation sur secteur : suivre la notice et faire intervenir un professionnel compétent si nécessaire.', 'La description du lot Domadoo et son visuel commercial doivent être rapprochés avant commande.'],
     usage('Utilisé personnellement ; durée, logiciel Zigbee et charge raccordée non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Référence': spec('Orb-ZBW1L / ZBMINIL2-E', orbManual), 'Radio': spec('Zigbee 3.0', orbManual), 'Neutre': spec('Non requis', orbManual), 'Charge': spec('6 A max. résistif ; charge minimale 3 W', orbManual), 'Contenu du lot Domadoo': spec('Module ZBMINIL2 et boîtier E1GSL selon la fiche marchande', orbBundle) },
-    {}, ['matter-thread-zigbee-differences'],
+    {}, ['interrupteur-zigbee-avec-ou-sans-neutre', 'modules-zigbee-pour-debuter', 'zha-ou-zigbee2mqtt'],
     [{ label: 'SONOFF — manuel ZBMINIL2-E', url: orbManual }, { label: 'Domadoo — description du lot ZBMINIL2-E', url: orbBundle }]
   ),
   base(
@@ -76,7 +76,7 @@ export const experiencedProducts = [
     usage('Utilisé personnellement ; équipement commandé, durée et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', nodonDoc), 'Sortie': spec('Contact sec', nodonDoc), 'Alimentation': spec('230 V AC', nodonDoc), 'Dimensions': spec('40 × 44 × 16,9 mm', nodonDoc) },
     { 'Zigbee2MQTT': compatible('confirmed', nodonZ2m) },
-    ['matter-thread-zigbee-differences'],
+    ['modules-zigbee-pour-debuter', 'interrupteur-zigbee-avec-ou-sans-neutre'],
     [{ label: 'NodOn — fiche technique SIN-4-1-20', url: nodonDoc }, { label: 'Zigbee2MQTT — SIN-4-1-20', url: nodonZ2m }]
   ),
   base(
@@ -101,7 +101,7 @@ export const experiencedProducts = [
     usage('Utilisé personnellement ; durée, emplacement et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', sensorManual), 'Pile': spec('CR2477', sensorManual), 'Écart de pose': spec('20 mm maximum selon SONOFF', sensorManual) },
     { 'Zigbee2MQTT': compatible('confirmed', sensorZ2m) },
-    ['matter-thread-zigbee-differences'],
+    ['modules-zigbee-pour-debuter', 'ameliorer-portee-reseau-zigbee'],
     [{ label: 'SONOFF — manuel SNZB-04P', url: sensorManual }, { label: 'Zigbee2MQTT — SNZB-04P', url: sensorZ2m }]
   ),
   base(
@@ -114,7 +114,7 @@ export const experiencedProducts = [
     usage('Utilisé personnellement ; durée, moteur et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', blindManual), 'Charge moteur': spec('1 A max.', blindManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', blindManual) },
     { 'Zigbee2MQTT': compatible('confirmed', blindZ2m) },
-    ['matter-thread-zigbee-differences'],
+    ['modules-zigbee-pour-debuter', 'interrupteur-zigbee-avec-ou-sans-neutre', 'zha-ou-zigbee2mqtt'],
     [{ label: 'SONOFF — manuel MINI-ZBRBS', url: blindManual }, { label: 'Zigbee2MQTT — MINI-ZBRBS', url: blindZ2m }]
   ),
   base(
@@ -127,7 +127,7 @@ export const experiencedProducts = [
     usage('Utilisé personnellement ; durée, charge et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', relayManual), 'Neutre': spec('Requis', relayManual), 'Charge': spec('10 A max. résistif', relayManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', relayManual) },
     { 'Zigbee2MQTT': compatible('confirmed', relayZ2m) },
-    ['matter-thread-zigbee-differences'],
+    ['interrupteur-zigbee-avec-ou-sans-neutre', 'modules-zigbee-pour-debuter', 'ameliorer-portee-reseau-zigbee'],
     [{ label: 'SONOFF — manuel ZBMINIR2', url: relayManual }, { label: 'Zigbee2MQTT — ZBMINIR2', url: relayZ2m }]
   )
 ]

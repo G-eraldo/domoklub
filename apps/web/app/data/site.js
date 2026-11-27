@@ -2,6 +2,7 @@ import { useRuntimeConfig } from '#imports'
 
 export const navigation = [
   { label: 'Guides', to: '/guides' },
+  { label: 'Comparatifs', to: '/comparatifs' },
   { label: 'Produits', to: '/produits' },
   { label: 'Comparer', to: '/comparer' },
   { label: 'Méthode', to: '/methodologie' }
@@ -40,4 +41,21 @@ export function isSiteLive() {
 
 export function safeJsonLd(value) {
   return JSON.stringify(value).replaceAll('<', '\u003c').replaceAll('>', '\u003e').replaceAll('&', '\u0026')
+}
+
+export const defaultOgImage = { path: '/og-default.jpg', width: 1200, height: 630, alt: 'DomoKlub, la maison connectée simplement' }
+
+// Résolveur d'URL absolue lié à la config dès le setup : utilisable ensuite dans un computed,
+// évalué par unhead hors du contexte Nuxt (où useRuntimeConfig() échoue).
+export function useAbsoluteUrl() {
+  const base = useRuntimeConfig().public.siteUrl
+  return (path = '/') => new URL(path, base).toString()
+}
+
+// Fil d'Ariane schema.org : items = [{ name, path }], le dernier élément est la page courante.
+export function breadcrumbJsonLd(items, toUrl) {
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: toUrl(item.path) }))
+  }
 }

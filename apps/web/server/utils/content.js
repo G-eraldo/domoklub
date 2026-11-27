@@ -182,6 +182,14 @@ export async function getProduct(slug) {
   return result.data[0] ? asPublicProduct(result.data[0]) : null
 }
 
+// Lien Amazon.fr construit à la demande : l'identifiant Partenaire reste une variable d'environnement.
+// Sans identifiant valide, l'URL est invalide et l'offre est ignorée plus bas.
+export function amazonUrl(asin) {
+  const tag = String(process.env.AMAZON_PARTNER_TAG || '').trim()
+  if (!/^[A-Z0-9]{10}$/.test(asin) || !/^[a-z0-9-]{2,40}-21$/.test(tag)) return 'invalid:'
+  return `https://www.amazon.fr/dp/${asin}?tag=${tag}`
+}
+
 export async function getOffersForProduct(productDocumentId) {
   if (!/^[a-zA-Z0-9_-]{1,100}$/.test(productDocumentId)) return []
   const fields = ['merchantName', 'url', 'productDocumentId', 'active', 'checkedAt', 'expiresAt']
@@ -195,7 +203,7 @@ export async function getOffersForProduct(productDocumentId) {
     const expiresAt = cleanText(item.expiresAt, 40)
     if (!merchantName || item.active !== true || Number.isNaN(Date.parse(checkedAt)) || Number.isNaN(Date.parse(expiresAt)) || Date.parse(expiresAt) <= now) return []
     try {
-      const url = new URL(item.url)
+      const url = new URL(item.asin ? amazonUrl(item.asin) : item.url)
       if (url.protocol !== 'https:' || url.username || url.password) return []
       return [{ merchantName, url: url.toString(), checkedAt, expiresAt }]
     } catch { return [] }

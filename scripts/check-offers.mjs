@@ -14,10 +14,15 @@ const reviewWindow = 30 * 24 * 60 * 60 * 1000
 
 for (const offer of launchOffers) {
   if (!expectedProducts.has(offer.productDocumentId)) errors.push(`Produit inconnu : ${offer.productDocumentId}`)
-  if (seenProducts.has(offer.productDocumentId)) errors.push(`Offre en double : ${offer.productDocumentId}`)
-  seenProducts.add(offer.productDocumentId)
+  const key = `${offer.merchantName}:${offer.productDocumentId}`
+  if (seenProducts.has(key)) errors.push(`Offre en double : ${key}`)
+  seenProducts.add(key)
   if (offer.editorialStatus !== 'approved' || offer.active !== true) errors.push(`Offre inactive : ${offer.productDocumentId}`)
-  try {
+  if (offer.merchantName === 'Amazon') {
+    if (!/^[A-Z0-9]{10}$/.test(offer.asin || '')) errors.push(`ASIN Amazon invalide : ${offer.productDocumentId}`)
+    if (seenUrls.has(offer.asin)) errors.push(`ASIN en double : ${offer.productDocumentId}`)
+    seenUrls.add(offer.asin)
+  } else try {
     const url = new URL(offer.url)
     if (url.protocol !== 'https:' || url.host !== 'www.domadoo.fr' || url.searchParams.get('domid') !== '159') {
       errors.push(`Lien partenaire à vérifier : ${offer.productDocumentId}`)
@@ -34,7 +39,7 @@ for (const offer of launchOffers) {
   }
 }
 
-for (const product of expectedProducts) if (!seenProducts.has(product)) errors.push(`Offre manquante : ${product}`)
+for (const product of expectedProducts) for (const merchant of ['Domadoo', 'Amazon']) if (!seenProducts.has(`${merchant}:${product}`)) errors.push(`Offre ${merchant} manquante : ${product}`)
 
 if (errors.length) {
   for (const error of errors) console.error(error)
