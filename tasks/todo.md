@@ -110,4 +110,5 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] Contextes d'usage enrichis depuis l'inventaire Zigbee2MQTT de l'éditeur.
 - [x] Balisage Product + Review (sans prix) sur les fiches notées ; `check:seo` vérifie note visible et JSON-LD.
 - [x] Relecture des 5 guides du 27/11 faite par l'éditeur.
-- [ ] Fiches à créer après identification des modèles : compteur, détecteur garage, lampadaire, télécommande, prises Zigbee.
+- [x] Cinq fiches ajoutées (LiXee ZLinky, NOUS A7Z, Hue Motion Sensor, Hue Dimmer Switch, ampoule Hue E27), notées 5/5, offres Domadoo + Amazon quand le modèle est identique.
+- [ ] Hue Motion Sensor, Dimmer et ampoule E27 signalés indisponibles chez Domadoo au 27/11 : surveiller ou remplacer par la génération actuelle.

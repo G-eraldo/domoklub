@@ -4,6 +4,7 @@
 const checkedAt = '2026-11-27T10:00:00+01:00'
 const expiresAt = '2027-05-27T10:00:00+02:00'
 
+// Hue Motion Sensor et ampoule Hue E27 : Amazon ne propose que des générations différentes (non liées).
 export const amazonOffers = [
   ['sonoff-zbdongle-p', 'B09KXTCMSC'],
   ['sonoff-dongle-pp10', 'B0H5HYZ3LP'],
@@ -15,5 +16,8 @@ export const amazonOffers = [
   ['nodon-sin-4-1-20', 'B09B7TBSP1'],
   ['aqara-g410-select', 'B0F6CJ93GS'],
   ['sonoff-snzb-04p', 'B0C1G7W72B'],
-  ['sonoff-mini-zbrbs', 'B0FDB663JN']
+  ['sonoff-mini-zbrbs', 'B0FDB663JN'],
+  ['lixee-zlinky-tic', 'B0DKLDR69T'],
+  ['philips-hue-dimmer-switch', 'B08PKMT2DV'], // modèle 929002398602 confirmé sur la fiche Amazon
+  ['nous-a7z', 'B0FB4ZSW3D'] // lot de 2 (A7Z-2) : pas d'offre unitaire trouvée
 ].map(([slug, asin]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Amazon', asin, active: true, checkedAt, expiresAt }))

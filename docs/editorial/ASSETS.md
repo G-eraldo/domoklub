@@ -22,3 +22,9 @@ produits exacts ; elles ne sont pas des preuves d’un test DomoKlub.
 Les huit dernières images ont été récupérées le 17 novembre 2026 depuis les fiches
 Domadoo communiquées par l’éditeur. Celui-ci n’a pas de photos personnelles à
 publier ; ces visuels marchands ne prouvent pas les retours d’usage.
+
+## Ajout du 27 novembre 2026
+
+Cinq photos issues des fiches Domadoo fournies par l’éditeur (même programme partenaire que les onze premières),
+converties en WebP 800 × 800 : `lixee-zlinky-tic`, `nous-a7z`, `philips-hue-motion-sensor`,
+`philips-hue-dimmer-switch`, `philips-hue-white-color-e27`. URLs sources dans `apps/web/app/data/productImages.js`.

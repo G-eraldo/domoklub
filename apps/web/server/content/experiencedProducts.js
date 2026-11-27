@@ -132,6 +132,92 @@ export const experiencedProducts = [
   )
 ]
 
+// Cinq appareils ajoutés le 27 novembre 2026 depuis l'inventaire Zigbee2MQTT de l'éditeur.
+const zlinkyZ2m = 'https://www.zigbee2mqtt.io/devices/ZLinky_TIC.html'
+const zlinkyDoc = 'https://github.com/fairecasoimeme/Zlinky_TIC'
+const zlinkyShop = 'https://www.domadoo.fr/fr/eco-energie/7492-lixee-module-tic-vers-zigbee-30-pour-compteur-linky-v2-zlinky-v4000-0014-3770014375179.html'
+const dimmerZ2m = 'https://www.zigbee2mqtt.io/devices/929002398602.html'
+const dimmerShop = 'https://www.domadoo.fr/fr/telecommandes-badges-claviers-a-code/6848-philips-hue-telecommande-zigbee-dimmer-switch-8719514274617.html'
+const motionZ2m = 'https://www.zigbee2mqtt.io/devices/9290012607.html'
+const motionShop = 'https://www.domadoo.fr/fr/objets-communicants/3889-philips-detecteur-de-mouvement-intelligent-hue-motion-sensor-8718696595190.html'
+const bulbZ2m = 'https://www.zigbee2mqtt.io/devices/9290012573A.html'
+const bulbShop = 'https://www.domadoo.fr/fr/objets-communicants/3991-philips-ampoule-philips-hue-white-and-color-10w-e27-8718696592984.html'
+const plugZ2m = 'https://www.zigbee2mqtt.io/devices/A7Z.html'
+const plugShop = 'https://www.domadoo.fr/fr/produits-zigbee/8059-nous-a7z-prise-zigbee-tuya-16a-avec-mesure-de-consommation-5905072800891.html'
+
+experiencedProducts.push(
+  base(
+    'lixee-zlinky-tic', 'LiXee ZLinky TIC V2', 'LiXee', 'Module énergie',
+    'LiXee ZLinky : avis compteur Linky Zigbee · DomoKlub',
+    'Avis personnel sur le LiXee ZLinky TIC branché sur un compteur Linky : données de consommation dans Home Assistant via Zigbee2MQTT, modes TIC et limites.',
+    'Module Zigbee 3.0 qui se branche sur la prise de téléinformation (TIC) du compteur Linky et transmet index, puissance et tarifs à votre domotique.',
+    'Pour suivre sa consommation électrique dans Home Assistant sans pince ni électricien : le module se clipse sur le compteur et s’alimente par la téléinformation.',
+    ['Le compteur doit être accessible et à portée du réseau Zigbee ; un compteur en limite de propriété est souvent trop loin.', 'Les données disponibles dépendent du mode TIC du compteur (historique ou standard).', 'Si la LED reste éteinte après une mise à jour du Linky ou une coupure, LiXee conseille de débrancher le module au moins 30 minutes.'],
+    usage('Branché sur le compteur Linky de Gérald et intégré à son réseau Zigbee2MQTT, où il apparaît sous le nom « Compteur ».', 'Les données du compteur remontent dans Home Assistant sans problème rencontré.', 'Aucune comparaison avec les index de la facture ni mesure de fréquence de remontée n’a été fournie.'),
+    { 'Radio': spec('Zigbee 3.0', zlinkyShop), 'Alimentation': spec('Par la téléinformation du compteur, sans pile', zlinkyDoc), 'Modes TIC': spec('Historique et standard', zlinkyDoc), 'Rôle Zigbee': spec('Routeur par défaut à partir du firmware V7 (5 appareils au plus)', zlinkyDoc) },
+    { 'Zigbee2MQTT': compatible('confirmed', zlinkyZ2m) },
+    ['ameliorer-portee-reseau-zigbee', 'zha-ou-zigbee2mqtt'],
+    [{ label: 'LiXee — documentation ZLinky TIC', url: zlinkyDoc }, { label: 'Zigbee2MQTT — ZLinky_TIC', url: zlinkyZ2m }, { label: 'Domadoo — fiche ZLinky V2', url: zlinkyShop }]
+  ),
+  base(
+    'nous-a7z', 'NOUS A7Z', 'NOUS', 'Prise Zigbee',
+    'NOUS A7Z : avis prise Zigbee 16 A · DomoKlub',
+    'Avis personnel sur la prise Zigbee NOUS A7Z : 16 A, mesure de consommation, fonctionnement sous Zigbee2MQTT sans application cloud et limites à connaître.',
+    'Prise Zigbee 3.0 de 16 A avec mesure de puissance, courant, tension et énergie. Zigbee2MQTT la prend en charge sans passer par l’application NOUS.',
+    'Pour piloter un appareil et suivre sa consommation dans Home Assistant. Branchée sur secteur, elle renforce aussi le maillage Zigbee.',
+    ['16 A selon le fabricant : vérifiez la puissance des appareils de chauffage branchés.', 'Fabriquée sur une base Tuya : les options exposées dépendent de la version de Zigbee2MQTT.'],
+    usage('Plusieurs prises utilisées dans l’installation Zigbee2MQTT de Gérald.', 'Fonctionnent bien, avec la mesure de consommation disponible dans Home Assistant ; aucun problème rencontré.', 'La précision de la mesure d’énergie n’a pas été comparée à un appareil de référence.'),
+    { 'Radio': spec('Zigbee 3.0', plugShop), 'Intensité maximale': spec('16 A', plugShop), 'Mesures': spec('Puissance, courant, tension, énergie', plugZ2m), 'Options Zigbee2MQTT': spec('Mémoire après coupure, verrouillage enfant, mises à jour OTA', plugZ2m) },
+    { 'Zigbee2MQTT': compatible('confirmed', plugZ2m) },
+    ['ameliorer-portee-reseau-zigbee', 'modules-zigbee-pour-debuter', 'zha-ou-zigbee2mqtt'],
+    [{ label: 'Zigbee2MQTT — NOUS A7Z', url: plugZ2m }, { label: 'Domadoo — fiche NOUS A7Z', url: plugShop }]
+  ),
+  base(
+    'philips-hue-motion-sensor', 'Philips Hue Motion Sensor', 'Philips Hue', 'Capteur Zigbee',
+    'Hue Motion Sensor : avis sans pont Hue · DomoKlub',
+    'Avis personnel sur le détecteur de mouvement Philips Hue utilisé sans pont Hue, avec Zigbee2MQTT : présence, luminosité, température et limites.',
+    'Détecteur de mouvement intérieur à piles qui remonte aussi la luminosité et la température. Il fonctionne avec Zigbee2MQTT sans pont Hue.',
+    'Pour allumer automatiquement une pièce de passage comme un garage ou un couloir, avec un seuil de luminosité pour éviter d’éclairer en plein jour.',
+    ['Usage intérieur selon le marchand.', 'Fonctionne sur deux piles AAA ; leur autonomie n’a pas été mesurée ici.', 'Domadoo signale cette référence indisponible lors de notre contrôle ; Philips commercialise une génération plus récente.'],
+    usage('Installé dans le garage de Gérald (« Détecteur garage » dans Zigbee2MQTT), relié directement à son coordinateur, sans pont Hue.', 'Détection fiable pour l’éclairage du garage ; aucun problème rencontré.'),
+    { 'Modèle': spec('9290012607', motionZ2m), 'Piles': spec('2 × AAA', motionZ2m), 'Mesures': spec('Mouvement, luminosité, température', motionZ2m), 'Usage': spec('Intérieur', motionShop) },
+    { 'Zigbee2MQTT': compatible('confirmed', motionZ2m) },
+    ['zha-ou-zigbee2mqtt', 'ameliorer-portee-reseau-zigbee'],
+    [{ label: 'Zigbee2MQTT — Hue motion sensor 9290012607', url: motionZ2m }, { label: 'Domadoo — fiche Hue Motion Sensor', url: motionShop }]
+  ),
+  base(
+    'philips-hue-dimmer-switch', 'Philips Hue Dimmer Switch', 'Philips Hue', 'Télécommande Zigbee',
+    'Hue Dimmer Switch : avis sans pont Hue · DomoKlub',
+    'Avis personnel sur la télécommande Philips Hue Dimmer Switch (929002398602) utilisée sans pont Hue avec Zigbee2MQTT : boutons, pile et automatisations.',
+    'Télécommande murale à quatre boutons, aimantée sur son support. Avec Zigbee2MQTT, chaque appui devient une action utilisable dans Home Assistant.',
+    'Pour garder une commande physique simple dans une pièce pilotée par Home Assistant, sans percer ni tirer de câble.',
+    ['Pile CR2032 : la télécommande ne relaie pas le signal Zigbee.', 'Sans pont Hue, les actions des boutons se programment dans Home Assistant.', 'Domadoo signale cette référence indisponible lors de notre contrôle.'],
+    usage('Utilisée dans le réseau Zigbee2MQTT de Gérald (« Télécommande »), sans pont Hue.', 'Fonctionne bien comme commande d’éclairage ; aucun problème rencontré.'),
+    { 'Modèle': spec('929002398602 (2e génération)', dimmerZ2m), 'Pile': spec('CR2032', dimmerZ2m), 'Boutons': spec('4', dimmerZ2m) },
+    { 'Zigbee2MQTT': compatible('confirmed', dimmerZ2m) },
+    ['zha-ou-zigbee2mqtt', 'interrupteur-zigbee-avec-ou-sans-neutre'],
+    [{ label: 'Zigbee2MQTT — Hue dimmer switch gen 2', url: dimmerZ2m }, { label: 'Domadoo — fiche Hue Dimmer Switch', url: dimmerShop }]
+  ),
+  base(
+    'philips-hue-white-color-e27', 'Philips Hue White and Color Ambiance E27', 'Philips Hue', 'Ampoule connectée',
+    'Ampoule Hue E27 couleur : avis Zigbee2MQTT · DomoKlub',
+    'Avis personnel sur l’ampoule Philips Hue White and Color Ambiance E27 pilotée sans pont Hue par Zigbee2MQTT : couleurs, blancs, effets et limites.',
+    'Ampoule E27 couleur et blancs réglables. Reliée directement à Zigbee2MQTT, elle expose luminosité, température de blanc, couleurs et effets.',
+    'Pour un lampadaire ou une lampe d’ambiance pilotée par Home Assistant. Restez alimenté en permanence : un interrupteur coupé la rend injoignable.',
+    ['Couper l’alimentation au mur coupe aussi la radio : préférez une télécommande ou un module adapté.', 'La référence Domadoo (10 W) est une ancienne génération signalée indisponible ; les modèles actuels diffèrent.'],
+    usage('Installée dans le lampadaire de Gérald, reliée sans pont Hue à son réseau Zigbee2MQTT.', 'Rendu des couleurs et pilotage jugés excellents ; aucun problème rencontré.'),
+    { 'Culot': spec('E27', bulbShop), 'Puissance': spec('10 W', bulbShop), 'Fonctions': spec('Luminosité, blancs réglables, couleurs, effets', bulbZ2m) },
+    { 'Zigbee2MQTT': compatible('confirmed', bulbZ2m) },
+    ['zha-ou-zigbee2mqtt', 'ameliorer-portee-reseau-zigbee'],
+    [{ label: 'Zigbee2MQTT — Hue White and Color Ambiance E27', url: bulbZ2m }, { label: 'Domadoo — fiche ampoule Hue E27', url: bulbShop }]
+  )
+)
+
+const usedProductOffers = [
+  ['lixee-zlinky-tic', zlinkyShop], ['nous-a7z', plugShop], ['philips-hue-motion-sensor', motionShop],
+  ['philips-hue-dimmer-switch', dimmerShop], ['philips-hue-white-color-e27', bulbShop]
+].map(([slug, url]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Domadoo', url: `${url}?domid=159`, active: true, checkedAt: '2026-11-27T12:00:00+01:00', expiresAt: '2027-05-27T10:00:00+02:00' }))
+
 const editorialSections = {
   'sonoff-zbdongle-p': [
     { title: 'Pourquoi choisir le modèle P ?', paragraphs: [
@@ -196,6 +282,49 @@ const editorialSections = {
       'Avec douze exemplaires installés, c’est l’appareil le plus représenté chez Gérald : tous ses volets roulants passent par un MINI-ZBRBS piloté par Zigbee2MQTT, sans incident signalé. Il lui attribue la note de 5/5. Les moteurs et la précision de position obtenue ne sont pas documentés.'
     ] }
   ],
+  'lixee-zlinky-tic': [
+    { title: 'Ce que le module apporte à Home Assistant', paragraphs: [
+      'Le ZLinky lit la téléinformation client (TIC) du Linky : index de consommation, puissance apparente, période tarifaire et, selon le mode du compteur, de nombreuses autres valeurs. Zigbee2MQTT liste ces données, que Home Assistant peut ensuite utiliser dans son tableau de bord Énergie.',
+      'Il s’alimente par la prise TIC du compteur : pas de pile à changer ni de câblage. D’après la documentation LiXee, il fonctionne par défaut en routeur à partir du firmware V7 et peut relayer jusqu’à cinq appareils Zigbee.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald utilise ce module sur son compteur avec Zigbee2MQTT, sans problème rencontré, et lui attribue la note de 5/5. Les valeurs n’ont pas été comparées aux relevés du fournisseur.'
+    ] }
+  ],
+  'nous-a7z': [
+    { title: 'Une prise qui sert aussi de répéteur', paragraphs: [
+      'Comme la plupart des appareils Zigbee branchés sur secteur, une prise joue le rôle de routeur et relaie le signal des capteurs voisins. Quelques prises bien réparties suffisent souvent à stabiliser un réseau.',
+      'Zigbee2MQTT expose l’état marche/arrêt, la puissance instantanée, le courant, la tension et l’énergie cumulée, ainsi qu’un comportement après coupure de courant réglable.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald utilise plusieurs A7Z sous Zigbee2MQTT sans problème rencontré et leur attribue la note de 5/5. Les appareils branchés et la précision des mesures ne sont pas documentés.'
+    ] }
+  ],
+  'philips-hue-motion-sensor': [
+    { title: 'Sans pont Hue, avec Zigbee2MQTT', paragraphs: [
+      'Le capteur s’associe directement à un coordinateur Zigbee. Zigbee2MQTT expose la présence, la luminosité, la température, la sensibilité et le délai de retour à l’état inoccupé : de quoi écrire une automatisation qui n’allume que lorsqu’il fait sombre.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald l’utilise dans son garage sans problème rencontré et lui attribue la note de 5/5. L’autonomie des piles n’a pas été mesurée.'
+    ] }
+  ],
+  'philips-hue-dimmer-switch': [
+    { title: 'Une télécommande qui pilote Home Assistant', paragraphs: [
+      'Associée à Zigbee2MQTT, la télécommande remonte chaque appui (court, long, relâché) comme une action. On peut ainsi lui faire piloter n’importe quel appareil de Home Assistant, pas seulement des ampoules Hue.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald l’utilise sans pont Hue, sans problème rencontré, et lui attribue la note de 5/5.'
+    ] }
+  ],
+  'philips-hue-white-color-e27': [
+    { title: 'Une ampoule Hue sans pont Hue', paragraphs: [
+      'Les ampoules Hue sont des appareils Zigbee : elles peuvent rejoindre directement un réseau Zigbee2MQTT ou ZHA. Branchées en permanence, elles servent aussi de routeur pour les appareils voisins.',
+      'Une ampoule déjà associée à un pont Hue doit être réinitialisée avant de rejoindre un autre réseau ; Zigbee2MQTT décrit plusieurs méthodes de réinitialisation.'
+    ] },
+    { title: 'Ce que couvre l’avis', paragraphs: [
+      'Gérald l’utilise dans son lampadaire et lui attribue la note de 5/5. Son retour porte sur l’usage quotidien, pas sur une mesure du flux lumineux ou de la fidélité des couleurs.'
+    ] }
+  ],
   'sonoff-zbmini-r2': [
     { title: 'Ne pas confondre avec le modèle sans neutre', paragraphs: [
       'Le ZBMINIR2 demande un neutre. Il convient lorsque la boîte d’encastrement dispose des conducteurs nécessaires et que la charge respecte la limite de 10 A résistifs donnée par SONOFF. Si le neutre manque, cette référence n’est pas interchangeable avec le ZBMINIL2.',
@@ -217,13 +346,20 @@ const ratings = {
   'sonoff-zbmini-r2': 'Quatre circuits d’éclairage pilotés au quotidien, sans incident signalé.',
   'sonoff-zbminil2-e': 'Éclairage du garage piloté sans neutre, sans incident signalé.',
   'nodon-sin-4-1-20': 'Commande du portail fiable, sans dysfonctionnement rapporté.',
-  'sonoff-snzb-04p': 'Détection d’ouverture fiable, sans problème rencontré.'
+  'sonoff-snzb-04p': 'Détection d’ouverture fiable, sans problème rencontré.',
+  'lixee-zlinky-tic': 'Données du Linky disponibles dans Home Assistant sans câblage ni incident.',
+  'nous-a7z': 'Plusieurs prises fiables avec mesure de consommation, sans incident.',
+  'philips-hue-motion-sensor': 'Détection fiable dans le garage, sans pont Hue.',
+  'philips-hue-dimmer-switch': 'Commande physique simple et fiable, sans pont Hue.',
+  'philips-hue-white-color-e27': 'Rendu des couleurs et pilotage excellents dans le lampadaire.'
 }
 for (const product of experiencedProducts) {
   if (ratings[product.slug]) product.personalReview.rating = { value: 5, best: 5, motivation: ratings[product.slug], ratedAt: '2026-11-27T12:00:00+01:00' }
 }
 
 export const experiencedOffers = [
+  ...usedProductOffers,
+  ...[
   ['sonoff-zbdongle-p', 'https://www.domadoo.fr/fr/french-days/9290-sonoff-dongle-plus-zigbee-30-antenne-externe-zbdongle-p-cc2652p-9888010100046.html?domid=159'],
   ['sonoff-zbminil2-e', 'https://www.domadoo.fr/fr/produits-de-domotique/8412-sonoff-module-zigbee-sans-neutre-interrupteur-zbminil2-e-orb-zbw1l.html?domid=159'],
   ['sonoff-orb-socket', 'https://www.domadoo.fr/fr/produits-matter/8829-sonoff-prise-encastree-matter-over-wifi-serie-fusion-orb-socket.html?domid=159'],
@@ -232,4 +368,4 @@ export const experiencedOffers = [
   ['sonoff-snzb-04p', 'https://www.domadoo.fr/fr/produits-de-domotique/7058-sonoff-capteur-de-porte-ou-fenetre-zigbee-30-snzb-04p.html?domid=159'],
   ['sonoff-mini-zbrbs', 'https://www.domadoo.fr/fr/produits-de-domotique/8384-sonoff-mini-zbrbs-module-volet-roulant-zigbee-compatible-home-assistant.html?domid=159'],
   ['sonoff-zbmini-r2', 'https://www.domadoo.fr/fr/peripheriques/7474-sonoff-zbmini-r2-module-zigbee-commutateur-onoff-10a-zigbee2mqtt-et-home-assistant.html?domid=159']
-].map(([slug, url]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Domadoo', url, active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' }))
+].map(([slug, url]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Domadoo', url, active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' }))]

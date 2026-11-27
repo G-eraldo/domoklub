@@ -49,5 +49,15 @@ export const productImages = {
   'sonoff-zbmini-r2': {
     src: '/products/sonoff-zbmini-r2.jpg', alt: 'Micromodule SONOFF ZBMINIR2', credit: 'Domadoo',
     sourceUrl: 'https://www.domadoo.fr/40264-large_default/sonoff-zbmini-r2-module-zigbee-commutateur-onoff-10a-zigbee2mqtt-et-home-assistant.jpg'
-  }
+  },
+  'lixee-zlinky-tic': { src: '/products/lixee-zlinky-tic.webp', alt: 'Module LiXee ZLinky TIC pour compteur Linky', credit: 'Domadoo',
+    sourceUrl: 'https://www.domadoo.fr/30796-large_default/lixee-module-tic-vers-zigbee-30-pour-compteur-linky-v2-zlinky-v4000-0014.jpg' },
+  'nous-a7z': { src: '/products/nous-a7z.webp', alt: 'Prise Zigbee NOUS A7Z blanche', credit: 'Domadoo',
+    sourceUrl: 'https://www.domadoo.fr/34734-large_default/nous-a7z-prise-zigbee-tuya-16a-avec-mesure-de-consommation.jpg' },
+  'philips-hue-motion-sensor': { src: '/products/philips-hue-motion-sensor.webp', alt: 'Détecteur de mouvement Philips Hue Motion Sensor', credit: 'Domadoo',
+    sourceUrl: 'https://www.domadoo.fr/8389-large_default/philips-detecteur-de-mouvement-intelligent-hue-motion-sensor.jpg' },
+  'philips-hue-dimmer-switch': { src: '/products/philips-hue-dimmer-switch.webp', alt: 'Télécommande Philips Hue Dimmer Switch sur son support mural', credit: 'Domadoo',
+    sourceUrl: 'https://www.domadoo.fr/27495-large_default/philips-hue-telecommande-zigbee-dimmer-switch.jpg' },
+  'philips-hue-white-color-e27': { src: '/products/philips-hue-white-color-e27.webp', alt: 'Ampoule Philips Hue White and Color Ambiance E27', credit: 'Domadoo',
+    sourceUrl: 'https://www.domadoo.fr/8828-large_default/philips-ampoule-philips-hue-white-and-color-10w-e27.jpg' }
 }

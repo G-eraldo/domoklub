@@ -39,7 +39,7 @@ for (const offer of launchOffers) {
   }
 }
 
-for (const product of expectedProducts) for (const merchant of ['Domadoo', 'Amazon']) if (!seenProducts.has(`${merchant}:${product}`)) errors.push(`Offre ${merchant} manquante : ${product}`)
+for (const product of expectedProducts) for (const merchant of ['Domadoo']) if (!seenProducts.has(`${merchant}:${product}`)) errors.push(`Offre ${merchant} manquante : ${product}`)
 
 if (errors.length) {
   for (const error of errors) console.error(error)

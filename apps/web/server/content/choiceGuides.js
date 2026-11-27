@@ -145,7 +145,7 @@ export const choiceGuides = [
         'Côté domotique, il vous faut un coordinateur Zigbee et Home Assistant (avec ZHA ou Zigbee2MQTT). Les deux modules SONOFF sont documentés sur le site de Zigbee2MQTT.'
       ] }
     ],
-    relatedProducts: ['sonoff-zbmini-r2', 'sonoff-zbminil2-e', 'sonoff-mini-zbrbs', 'nodon-sin-4-1-20'],
+    relatedProducts: ['sonoff-zbmini-r2', 'sonoff-zbminil2-e', 'philips-hue-dimmer-switch', 'sonoff-mini-zbrbs'],
     relatedArticles: ['modules-zigbee-pour-debuter', 'zha-ou-zigbee2mqtt', 'ameliorer-portee-reseau-zigbee'],
     sources: [
       { label: 'SONOFF — manuel ZBMINIR2', url: relayManual },
@@ -174,7 +174,7 @@ export const choiceGuides = [
       ] },
       { id: 'routeurs', title: 'Ajouter des routeurs : le maillage fait la portée', paragraphs: [
         'Zigbee est un réseau maillé : la plupart des appareils alimentés sur secteur jouent le rôle de routeurs et répètent le signal. Les capteurs à pile, eux, ne relaient rien. Un réseau composé surtout de capteurs à pile éloignés du coordinateur sera donc fragile.',
-        'Un micromodule d’éclairage comme le SONOFF ZBMINIR2 ou une prise Zigbee placée à mi-chemin suffit souvent à stabiliser une pièce difficile. Après l’ajout d’un routeur, il peut être utile de réappairer à proximité les appareils à pile qui décrochaient.'
+        'Un micromodule d’éclairage comme le SONOFF ZBMINIR2 ou une prise Zigbee comme la NOUS A7Z placée à mi-chemin suffit souvent à stabiliser une pièce difficile. Après l’ajout d’un routeur, il peut être utile de réappairer à proximité les appareils à pile qui décrochaient.'
       ] },
       { id: 'wifi', title: 'Cohabiter avec le Wi-Fi', paragraphs: [
         'Zigbee et le Wi-Fi 2,4 GHz partagent la même bande de fréquences. La documentation ZHA conseille de commencer par fixer un canal Wi-Fi statique sur votre box ou vos points d’accès, plutôt que de changer immédiatement le canal Zigbee.',
@@ -185,7 +185,7 @@ export const choiceGuides = [
         'Si votre coordinateur est ancien, la documentation de Zigbee2MQTT recommande d’utiliser un adaptateur de la liste conseillée. Un dongle avec antenne externe, comme le SONOFF ZBDongle-P, est une option courante, mais le placement reste plus déterminant que la référence.'
       ] }
     ],
-    relatedProducts: ['sonoff-zbdongle-p', 'home-assistant-connect-zbt-2', 'sonoff-zbmini-r2'],
+    relatedProducts: ['sonoff-zbdongle-p', 'nous-a7z', 'sonoff-zbmini-r2', 'lixee-zlinky-tic'],
     relatedArticles: ['zha-ou-zigbee2mqtt', 'choisir-coordinateur-zigbee-home-assistant', 'modules-zigbee-pour-debuter'],
     sources: [
       { label: 'Home Assistant — ZHA : interférences et bonnes pratiques', url: haZha },
@@ -198,15 +198,18 @@ export const choiceGuides = [
     documentId: 'local-comparatif-modules-zigbee', type: 'comparison', topic: 'zigbee', slug: 'modules-zigbee-pour-debuter',
     title: 'Modules et capteurs Zigbee pour débuter avec Home Assistant : notre sélection',
     seoTitle: 'Modules Zigbee pour débuter : sélection · DomoKlub',
-    excerpt: 'Éclairage avec ou sans neutre, volets, portail, capteur d’ouverture : six appareils Zigbee utilisés chez l’éditeur, classés par usage, avec leurs limites.',
-    intro: 'Pour équiper une maison en Zigbee, commencez par un bon coordinateur, puis choisissez chaque module selon l’usage et le câblage disponible. Les six appareils ci-dessous sont utilisés par l’éditeur dans son installation Home Assistant et fonctionnent sans problème signalé. Il s’agit de retours d’usage, pas d’un banc d’essai comparatif : les caractéristiques citées viennent des fabricants.',
+    excerpt: 'Éclairage, volets, portail, prises, compteur Linky, détecteurs : neuf appareils Zigbee utilisés chez l’éditeur, classés par usage, avec leurs limites.',
+    intro: 'Pour équiper une maison en Zigbee, commencez par un bon coordinateur, puis choisissez chaque module selon l’usage et le câblage disponible. Les appareils ci-dessous sont utilisés par l’éditeur dans son installation Home Assistant et fonctionnent sans problème signalé. Il s’agit de retours d’usage, pas d’un banc d’essai comparatif : les caractéristiques citées viennent des fabricants.',
     decisionTable: { title: 'Quel appareil pour quel usage ?', columns: ['Usage', 'Appareil', 'Condition principale'], rows: [
       ['Réseau Zigbee (indispensable)', 'SONOFF ZBDongle-P', 'Compatible ZHA et Zigbee2MQTT ; rallonge USB conseillée'],
       ['Lumière avec neutre', 'SONOFF ZBMINIR2', 'Neutre requis, 10 A max.'],
       ['Lumière sans neutre', 'SONOFF ZBMINIL2-E', 'Charge minimale 3 W'],
       ['Volet roulant', 'SONOFF MINI-ZBRBS', 'Moteur 1 A max., calibration'],
       ['Portail, chaudière, VMC', 'NodOn SIN-4-1-20', 'Entrée contact sec sur l’équipement'],
-      ['Ouverture de porte ou fenêtre', 'SONOFF SNZB-04P', 'Pile CR2477, écart de pose 20 mm max.']
+      ['Ouverture de porte ou fenêtre', 'SONOFF SNZB-04P', 'Pile CR2477, écart de pose 20 mm max.'],
+      ['Consommation d’un appareil', 'NOUS A7Z', '16 A max., sert aussi de routeur'],
+      ['Consommation de la maison', 'LiXee ZLinky TIC', 'Compteur Linky à portée du réseau'],
+      ['Présence et luminosité', 'Philips Hue Motion Sensor', 'Usage intérieur, 2 piles AAA']
     ] },
     sections: [
       { id: 'coordinateur', title: '1. Le coordinateur : SONOFF ZBDongle-P', paragraphs: [
@@ -224,12 +227,18 @@ export const choiceGuides = [
       { id: 'capteur', title: '5. Les ouvertures : SONOFF SNZB-04P', paragraphs: [
         'Ce capteur à pile CR2477 détecte l’ouverture d’une porte ou d’une fenêtre et signale aussi le sabotage selon Zigbee2MQTT. C’est la base d’automatisations simples : couper le chauffage fenêtre ouverte, allumer l’entrée, recevoir une alerte. Comme tout appareil à pile, il ne relaie pas le signal Zigbee.'
       ] },
+      { id: 'prises', title: '6. Les prises et la consommation : NOUS A7Z et LiXee ZLinky', paragraphs: [
+        'La prise NOUS A7Z (16 A) mesure la consommation de l’appareil branché et renforce le maillage, comme tout appareil Zigbee sur secteur. Pour la consommation de toute la maison, le LiXee ZLinky se branche sur la téléinformation du compteur Linky et alimente le tableau de bord Énergie de Home Assistant. Gérald utilise les deux sans problème rencontré.'
+      ] },
+      { id: 'presence', title: '7. La présence : Philips Hue Motion Sensor', paragraphs: [
+        'Les produits Hue sont des appareils Zigbee : le détecteur de mouvement Hue fonctionne avec Zigbee2MQTT sans pont Hue et remonte aussi luminosité et température. Gérald l’utilise pour éclairer son garage.'
+      ] },
       { id: 'ordre', title: 'Dans quel ordre équiper la maison ?', paragraphs: [
         'Commencez par le coordinateur et deux ou trois modules sur secteur répartis dans le logement : ils forment l’ossature du maillage. Ajoutez ensuite les capteurs à pile. Cet ordre évite la plupart des problèmes de portée décrits dans notre guide dédié.',
         'Pour les modules raccordés au 230 V, coupez le disjoncteur et suivez la notice ; en cas de doute, confiez l’installation à un électricien.'
       ] }
     ],
-    relatedProducts: ['sonoff-zbdongle-p', 'sonoff-zbmini-r2', 'sonoff-zbminil2-e', 'sonoff-mini-zbrbs', 'nodon-sin-4-1-20', 'sonoff-snzb-04p'],
+    relatedProducts: ['sonoff-zbdongle-p', 'sonoff-zbmini-r2', 'sonoff-zbminil2-e', 'sonoff-mini-zbrbs', 'nodon-sin-4-1-20', 'sonoff-snzb-04p', 'nous-a7z', 'philips-hue-motion-sensor', 'lixee-zlinky-tic'],
     relatedArticles: ['interrupteur-zigbee-avec-ou-sans-neutre', 'ameliorer-portee-reseau-zigbee', 'zha-ou-zigbee2mqtt'],
     sources: [
       { label: 'SONOFF — manuel ZBMINIR2', url: relayManual },

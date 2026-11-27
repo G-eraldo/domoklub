@@ -2,7 +2,7 @@ import { launchArticles, launchProducts, launchOffers } from '../content/launch.
 
 const articleTypes = new Set(['test', 'guide', 'tutorial', 'comparison', 'deal'])
 const sectionByType = { test: 'tests', guide: 'guides', tutorial: 'tutoriels', comparison: 'comparatifs', deal: 'bons-plans' }
-const launchProductOrder = ['sonoff-zbdongle-p', 'aqara-g410-select', 'sonoff-snzb-04p', 'sonoff-zbminil2-e', 'sonoff-orb-socket', 'nodon-sin-4-1-20', 'sonoff-mini-zbrbs', 'sonoff-zbmini-r2', 'home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10']
+const launchProductOrder = ['sonoff-zbdongle-p', 'aqara-g410-select', 'sonoff-snzb-04p', 'sonoff-zbminil2-e', 'sonoff-orb-socket', 'nodon-sin-4-1-20', 'sonoff-mini-zbrbs', 'sonoff-zbmini-r2', 'lixee-zlinky-tic', 'nous-a7z', 'philips-hue-motion-sensor', 'philips-hue-dimmer-switch', 'philips-hue-white-color-e27', 'home-assistant-green', 'home-assistant-connect-zbt-2', 'sonoff-dongle-pp10']
 
 const cleanSlug = value => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(String(value || '')) ? String(value) : ''
 function localVisible(item) {
