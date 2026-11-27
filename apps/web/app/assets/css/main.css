@@ -361,3 +361,6 @@ svg { display: block; }
 /* Cartes produits insérées dans la colonne de lecture (guides, fiches) : deux colonnes au lieu de trois. */
 .related-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1rem; }
 @media (max-width: 640px) { .related-product-grid { grid-template-columns: 1fr; } }
+
+.review-rating { margin: .4rem 0 1rem; padding: .7rem 1rem; border: 1px solid rgba(251,146,60,.35); border-radius: 12px; background: rgba(251,146,60,.08); color: #ffe3c7; }
+.review-rating strong { color: var(--orange-light); }

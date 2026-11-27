@@ -73,7 +73,7 @@ try {
       assert.ok(html.includes('Par <a href="/a-propos"'), `${path}: auteur visible`)
     } else {
       assert.ok(html.includes('/products/'), `${path}: photo produit`)
-      assert.ok(scripts.some(schema => schema['@type'] === 'BreadcrumbList'), `${path}: fil d’Ariane JSON-LD`)
+      assert.ok(scripts.some(schema => schema['@graph']?.some(entity => entity['@type'] === 'BreadcrumbList')), `${path}: fil d’Ariane JSON-LD`)
       assert.ok(html.includes('Lien affilié'), `${path}: signalement affilié`)
       assert.ok(/rel="[^"]*sponsored[^"]*"/i.test(html), `${path}: rel sponsored`)
       const product = launchProducts.find(item => `/produits/${item.slug}` === path)
@@ -83,7 +83,10 @@ try {
       assert.equal(imageResponse.status, 200, `${path}: photo servie`)
       assert.ok(imageResponse.headers.get('content-type')?.startsWith('image/'), `${path}: vrai fichier image`)
       if (product.personalReview) {
-        assert.ok(!html.includes('5/5 · note personnelle'), `${path}: absence de note chiffrée`)
+        if (product.personalReview.rating) {
+          assert.ok(html.includes(`Note de ${product.personalReview.author} : ${product.personalReview.rating.value}/5`), `${path}: note visible`)
+          assert.ok(scripts.some(schema => schema['@graph']?.some(entity => entity['@type'] === 'Product' && entity.review?.reviewRating?.ratingValue === product.personalReview.rating.value)), `${path}: Review JSON-LD`)
+        }
         assert.ok(html.includes('Retour d’usage'), `${path}: contexte d’usage`)
         assert.ok(html.includes(product.personalReview.author), `${path}: auteur de l’avis`)
       } else {

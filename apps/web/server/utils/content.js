@@ -85,6 +85,17 @@ function asPublicArticle(item, detail = false) {
   return article
 }
 
+// Une note n'est publiée que si elle est motivée et datée (voir la méthodologie).
+function publicRating(rating) {
+  if (!rating || typeof rating !== 'object') return null
+  const value = Number(rating.value)
+  const best = Number(rating.best) || 5
+  const motivation = cleanText(rating.motivation, 300)
+  const ratedAt = cleanText(rating.ratedAt, 40)
+  if (!Number.isFinite(value) || value < 1 || value > best || !motivation || Number.isNaN(Date.parse(ratedAt))) return null
+  return { value, best, motivation, ratedAt }
+}
+
 function asPublicProduct(item) {
   const specs = verifiedValues(item.specs)
   const compatibilities = verifiedValues(item.compatibilities, true)
@@ -93,7 +104,8 @@ function asPublicProduct(item) {
     author: cleanText(item.personalReview.author, 100),
     context: cleanText(item.personalReview.context, 500),
     observations: Array.isArray(item.personalReview.observations) ? item.personalReview.observations.slice(0, 5).map(value => cleanText(value, 700)).filter(Boolean) : [],
-    caveat: cleanText(item.personalReview.caveat, 500)
+    caveat: cleanText(item.personalReview.caveat, 500),
+    rating: publicRating(item.personalReview.rating)
   } : null
   return {
     id: cleanText(item.documentId, 100),

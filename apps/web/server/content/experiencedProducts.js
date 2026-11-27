@@ -36,7 +36,7 @@ export const experiencedProducts = [
     'Clé USB Zigbee 3.0 avec puce CC2652P et antenne externe. Gérald l’utilise avec Zigbee2MQTT depuis juin 2025.',
     'Un choix concret pour créer un réseau Zigbee sous Zigbee2MQTT. Vérifiez que vous achetez le modèle P, à distinguer du ZBDongle-E.',
     ['Dongle Zigbee : il ne remplace pas un routeur de bordure Thread.', 'La portée réelle dépend du logement et du placement USB ; elle n’a pas été mesurée ici.'],
-    usage('Utilisé depuis juin 2025 avec Zigbee2MQTT sur son serveur Home Assistant.', 'Mise en service jugée « plug and play » ; aucun problème rencontré depuis l’installation.', 'Aucun relevé de portée, de nombre d’appareils ou de version de firmware n’a été communiqué.'),
+    usage('Coordinateur de tout le réseau Zigbee2MQTT de Gérald depuis juin 2025 : une vingtaine de modules, capteurs et prises répartis dans la maison.', 'Mise en service jugée « plug and play » ; aucun problème rencontré depuis l’installation.', 'Aucun relevé de portée ni de version de firmware n’a été communiqué.'),
     { 'Puce': spec('Texas Instruments CC2652P', sonoffP), 'Radio': spec('Zigbee 3.0', sonoffP), 'Connexion': spec('USB avec interface série CP2102(N)', sonoffP), 'Antenne': spec('Externe', sonoffP) },
     { 'Zigbee2MQTT / adaptateur zStack': compatible('confirmed', z2mP) },
     ['zha-ou-zigbee2mqtt', 'choisir-coordinateur-zigbee-home-assistant', 'ameliorer-portee-reseau-zigbee', 'modules-zigbee-pour-debuter'],
@@ -49,7 +49,7 @@ export const experiencedProducts = [
     'Interrupteur mural Zigbee sans neutre, référence ZBMINIL2-E. L’offre Domadoo décrit un module ZBMINIL2 avec boîtier E1GSL.',
     'Pour rendre un point lumineux pilotable sans neutre au niveau de l’interrupteur. Vérifiez le modèle exact, la charge et le contenu du colis.',
     ['Charge minimale de 3 W selon SONOFF : contrôler les petits éclairages LED.', 'Installation sur secteur : suivre la notice et faire intervenir un professionnel compétent si nécessaire.', 'La description du lot Domadoo et son visuel commercial doivent être rapprochés avant commande.'],
-    usage('Utilisé personnellement ; durée, logiciel Zigbee et charge raccordée non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    usage('Module ZBMINIL2 utilisé pour l’éclairage du garage, sous Zigbee2MQTT ; puissance de la charge raccordée non communiquée.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Référence': spec('Orb-ZBW1L / ZBMINIL2-E', orbManual), 'Radio': spec('Zigbee 3.0', orbManual), 'Neutre': spec('Non requis', orbManual), 'Charge': spec('6 A max. résistif ; charge minimale 3 W', orbManual), 'Contenu du lot Domadoo': spec('Module ZBMINIL2 et boîtier E1GSL selon la fiche marchande', orbBundle) },
     {}, ['interrupteur-zigbee-avec-ou-sans-neutre', 'modules-zigbee-pour-debuter', 'zha-ou-zigbee2mqtt'],
     [{ label: 'SONOFF — manuel ZBMINIL2-E', url: orbManual }, { label: 'Domadoo — description du lot ZBMINIL2-E', url: orbBundle }]
@@ -73,7 +73,7 @@ export const experiencedProducts = [
     'Micromodule Zigbee à sortie contact sec pour piloter un équipement adapté, par exemple un portail ou une chaudière selon son entrée de commande.',
     'Pour commander un appareil qui accepte un contact sec. Avant achat, vérifiez le schéma de commande et les caractéristiques de l’équipement piloté.',
     ['La compatibilité d’un portail ou d’une chaudière dépend de son entrée de commande, pas du seul mot « contact sec ».', 'Module alimenté sur secteur : installation électrique à confier à une personne compétente.'],
-    usage('Utilisé personnellement ; équipement commandé, durée et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    usage('Utilisé pour commander le portail de Gérald, sous Zigbee2MQTT.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', nodonDoc), 'Sortie': spec('Contact sec', nodonDoc), 'Alimentation': spec('230 V AC', nodonDoc), 'Dimensions': spec('40 × 44 × 16,9 mm', nodonDoc) },
     { 'Zigbee2MQTT': compatible('confirmed', nodonZ2m) },
     ['modules-zigbee-pour-debuter', 'interrupteur-zigbee-avec-ou-sans-neutre'],
@@ -98,7 +98,7 @@ export const experiencedProducts = [
     'Capteur d’ouverture de porte ou fenêtre Zigbee alimenté par pile. Zigbee2MQTT documente aussi l’état de sabotage et la batterie.',
     'Pour déclencher des automatisations à l’ouverture d’une porte ou fenêtre, après vérification de la place disponible pour les deux parties du capteur.',
     ['L’écart entre les deux parties doit respecter la notice SONOFF.', 'La durée de pile annoncée par le fabricant n’a pas été mesurée ici.'],
-    usage('Utilisé personnellement ; durée, emplacement et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    usage('Utilisé comme détecteur d’ouverture dans l’installation Zigbee2MQTT de Gérald.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', sensorManual), 'Pile': spec('CR2477', sensorManual), 'Écart de pose': spec('20 mm maximum selon SONOFF', sensorManual) },
     { 'Zigbee2MQTT': compatible('confirmed', sensorZ2m) },
     ['modules-zigbee-pour-debuter', 'ameliorer-portee-reseau-zigbee'],
@@ -111,7 +111,7 @@ export const experiencedProducts = [
     'Micromodule Zigbee pour motorisation de volet roulant. Zigbee2MQTT expose ouverture, fermeture et position après calibration.',
     'Pour piloter un volet motorisé avec Zigbee. Vérifiez le type de moteur, sa charge et la place disponible avant achat.',
     ['Commande de position en pourcentage : calibration du trajet nécessaire dans Zigbee2MQTT.', 'Charge moteur maximale de 1 A selon SONOFF.', 'Module secteur : installation électrique à réaliser selon la notice.'],
-    usage('Utilisé personnellement ; durée, moteur et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    usage('Douze modules installés : ils pilotent tous les volets roulants de la maison de Gérald (chambre, cuisine, salon, bureau, salle de bain, cellier, baies et fenêtres coulissantes), sous Zigbee2MQTT.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', blindManual), 'Charge moteur': spec('1 A max.', blindManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', blindManual) },
     { 'Zigbee2MQTT': compatible('confirmed', blindZ2m) },
     ['modules-zigbee-pour-debuter', 'interrupteur-zigbee-avec-ou-sans-neutre', 'zha-ou-zigbee2mqtt'],
@@ -124,7 +124,7 @@ export const experiencedProducts = [
     'Micromodule Zigbee de commutation avec neutre. À distinguer du ZBMINIL2 sans neutre ; Zigbee2MQTT documente ses réglages.',
     'Pour piloter un circuit compatible lorsqu’un neutre est disponible dans le boîtier. Vérifiez la charge et l’espace d’encastrement.',
     ['Neutre requis : ne convient pas à une boîte où seul le retour lampe est présent.', 'Charge maximale de 10 A résistifs selon SONOFF.', 'Module secteur : installation électrique à réaliser selon la notice.'],
-    usage('Utilisé personnellement ; durée, charge et logiciel Zigbee non communiqués.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
+    usage('Quatre modules installés pour l’éclairage de la cuisine, de l’îlot, de la salle à manger et du salon, sous Zigbee2MQTT.', 'Fonctionne bien dans son installation ; aucun problème rencontré à ce jour.'),
     { 'Radio': spec('Zigbee 3.0', relayManual), 'Neutre': spec('Requis', relayManual), 'Charge': spec('10 A max. résistif', relayManual), 'Dimensions': spec('39,5 × 33 × 16,8 mm', relayManual) },
     { 'Zigbee2MQTT': compatible('confirmed', relayZ2m) },
     ['interrupteur-zigbee-avec-ou-sans-neutre', 'modules-zigbee-pour-debuter', 'ameliorer-portee-reseau-zigbee'],
@@ -136,7 +136,7 @@ const editorialSections = {
   'sonoff-zbdongle-p': [
     { title: 'Pourquoi choisir le modèle P ?', paragraphs: [
       'La référence P utilise une puce TI CC2652P. Dans Zigbee2MQTT, elle figure parmi les adaptateurs zStack. Le nom ZBDongle désigne aussi d’autres variantes : contrôlez la lettre du modèle avant de suivre un tutoriel de firmware ou de migration.',
-      'Le retour de Gérald apporte une indication sur la mise en route avec Zigbee2MQTT, mais ne permet pas de conclure sur la portée ou la capacité maximale du réseau. Pour un réseau existant, préparez une sauvegarde et consultez la procédure de migration du logiciel avant de changer de coordinateur.'
+      'Chez Gérald, ce dongle coordonne depuis juin 2025 un réseau Zigbee2MQTT d’une vingtaine d’appareils, dont douze modules de volets ; il lui attribue la note de 5/5. Ce retour ne permet pas de conclure sur la portée ou la capacité maximale du réseau. Pour un réseau existant, préparez une sauvegarde et consultez la procédure de migration du logiciel avant de changer de coordinateur.'
     ] },
     { title: 'Le bon usage dans Home Assistant', paragraphs: [
       'Ce dongle sert de coordinateur Zigbee relié au serveur. Il ne remplace ni Home Assistant lui-même ni un routeur Thread. Le placement de la clé et les interférences USB ou Wi-Fi peuvent compter davantage que la portée annoncée sur une fiche commerciale.'
@@ -148,7 +148,7 @@ const editorialSections = {
       'La fiche Domadoo indique un lot composé du module ZBMINIL2 et du boîtier mural E1GSL, tandis que le visuel présente l’Orb-ZBW1L. Avant de commander pour une rénovation, comparez la référence sur le colis, le contenu du lot et la notice du fabricant.'
     ] },
     { title: 'Ce que couvre l’avis', paragraphs: [
-      'Gérald confirme le bon fonctionnement de son exemplaire sans incident signalé. Il n’a pas fourni la puissance de la lampe, la durée de l’essai ou le logiciel Zigbee utilisé. L’avis ne vaut donc pas validation de toutes les combinaisons d’ampoules et de passerelles.'
+      'Gérald utilise le module ZBMINIL2 pour l’éclairage de son garage avec Zigbee2MQTT, sans incident signalé, et lui attribue la note de 5/5. Il n’a pas fourni la puissance de la lampe : l’avis ne vaut pas validation de toutes les combinaisons d’ampoules, en particulier sous la charge minimale de 3 W.'
     ] }
   ],
   'sonoff-orb-socket': [
@@ -166,7 +166,7 @@ const editorialSections = {
       'Le module lui-même demande une alimentation secteur. Vérifiez le schéma électrique de l’équipement piloté et la nature de l’entrée attendue avant de choisir ce relais. La fiche Zigbee2MQTT confirme le modèle et expose notamment son état de commutation.'
     ] },
     { title: 'Ce que couvre l’avis', paragraphs: [
-      'L’éditeur a utilisé le produit et ne rapporte aucun dysfonctionnement. Il n’a pas indiqué l’appareil relié ni le logiciel de pilotage : l’avis ne constitue pas une preuve de compatibilité avec un portail ou une chaudière précise.'
+      'Gérald commande son portail avec ce module sous Zigbee2MQTT, sans dysfonctionnement rapporté, et lui attribue la note de 5/5. Le modèle de motorisation n’est pas précisé : l’avis ne constitue pas une preuve de compatibilité avec un portail ou une chaudière précise.'
     ] }
   ],
   'aqara-g410-select': [
@@ -184,7 +184,7 @@ const editorialSections = {
       'La pose dépend de l’alignement des deux éléments et de leur écart. SONOFF indique 20 mm au maximum dans la notice. Vérifiez la géométrie de la porte ou de la fenêtre et évitez de juger l’autonomie de la pile sur une simple promesse commerciale.'
     ] },
     { title: 'Ce que couvre l’avis', paragraphs: [
-      'Gérald signale un bon fonctionnement sans problème rencontré. La durée d’utilisation et le nombre de cycles ne sont pas renseignés ; aucune autonomie de pile n’a été mesurée pour cet avis.'
+      'Gérald l’utilise sous Zigbee2MQTT sans problème rencontré et lui attribue la note de 5/5. La durée d’utilisation et le nombre de cycles ne sont pas renseignés ; aucune autonomie de pile n’a été mesurée pour cet avis.'
     ] }
   ],
   'sonoff-mini-zbrbs': [
@@ -193,7 +193,7 @@ const editorialSections = {
       'Le module est compact, mais il faut aussi prendre en compte les conducteurs et l’espace dans la boîte. Comme pour tout équipement de volet alimenté sur secteur, l’installation doit suivre la notice du fabricant.'
     ] },
     { title: 'Ce que couvre l’avis', paragraphs: [
-      'Gérald rapporte un fonctionnement satisfaisant, sans incident signalé. Le moteur, la durée d’utilisation et la précision de position obtenue ne sont pas documentés dans son retour.'
+      'Avec douze exemplaires installés, c’est l’appareil le plus représenté chez Gérald : tous ses volets roulants passent par un MINI-ZBRBS piloté par Zigbee2MQTT, sans incident signalé. Il lui attribue la note de 5/5. Les moteurs et la précision de position obtenue ne sont pas documentés.'
     ] }
   ],
   'sonoff-zbmini-r2': [
@@ -202,12 +202,26 @@ const editorialSections = {
       'Zigbee2MQTT documente notamment la commande marche/arrêt et le comportement après une coupure de courant. Ce sont des capacités du logiciel ; le retour de Gérald ne porte pas sur chacune de ces options.'
     ] },
     { title: 'Ce que couvre l’avis', paragraphs: [
-      'L’éditeur indique que le module fonctionne bien chez lui et qu’il n’a rencontré aucun problème. Il n’a pas précisé la charge, le logiciel Zigbee ni la durée d’utilisation.'
+      'Quatre ZBMINIR2 commandent l’éclairage de la cuisine, de l’îlot, de la salle à manger et du salon de Gérald, sous Zigbee2MQTT, sans problème rencontré. Il leur attribue la note de 5/5. Les charges raccordées ne sont pas précisées.'
     ] }
   ]
 }
 
 for (const product of experiencedProducts) product.editorialSections = editorialSections[product.slug] || []
+
+// Notes personnelles attribuées par Gérald François le 27 novembre 2026, motivées par son usage réel
+// (appareils visibles dans son installation Zigbee2MQTT). Orb Socket et Aqara G410 restent sans note.
+const ratings = {
+  'sonoff-zbdongle-p': 'Coordinateur de tout le réseau depuis juin 2025, mise en service immédiate et aucun incident.',
+  'sonoff-mini-zbrbs': 'Douze volets pilotés au quotidien, sans incident signalé.',
+  'sonoff-zbmini-r2': 'Quatre circuits d’éclairage pilotés au quotidien, sans incident signalé.',
+  'sonoff-zbminil2-e': 'Éclairage du garage piloté sans neutre, sans incident signalé.',
+  'nodon-sin-4-1-20': 'Commande du portail fiable, sans dysfonctionnement rapporté.',
+  'sonoff-snzb-04p': 'Détection d’ouverture fiable, sans problème rencontré.'
+}
+for (const product of experiencedProducts) {
+  if (ratings[product.slug]) product.personalReview.rating = { value: 5, best: 5, motivation: ratings[product.slug], ratedAt: '2026-11-27T12:00:00+01:00' }
+}
 
 export const experiencedOffers = [
   ['sonoff-zbdongle-p', 'https://www.domadoo.fr/fr/french-days/9290-sonoff-dongle-plus-zigbee-30-antenne-externe-zbdongle-p-cc2652p-9888010100046.html?domid=159'],

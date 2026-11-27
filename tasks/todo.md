@@ -104,3 +104,10 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] `check:offers` (22 offres) et `check:seo` (21 pages) OK ; rendu vérifié.
 - [ ] Relecture éditeur des 5 nouveaux contenus avant `NUXT_PUBLIC_SITE_LIVE=true`.
 - [ ] Vérifier que l'ASIN B0F6CJ93GS correspond bien à la variante « G410 Select » achetée.
+
+## Notes personnelles — 27 novembre
+- [x] Notes 5/5 attribuées par Gérald à six produits utilisés (ZBDongle-P, MINI-ZBRBS ×12, ZBMINIR2 ×4, ZBMINIL2, NodOn portail, SNZB-04P), motivées et datées ; Orb Socket et G410 sans note.
+- [x] Contextes d'usage enrichis depuis l'inventaire Zigbee2MQTT de l'éditeur.
+- [x] Balisage Product + Review (sans prix) sur les fiches notées ; `check:seo` vérifie note visible et JSON-LD.
+- [x] Relecture des 5 guides du 27/11 faite par l'éditeur.
+- [ ] Fiches à créer après identification des modèles : compteur, détecteur garage, lampadaire, télécommande, prises Zigbee.
