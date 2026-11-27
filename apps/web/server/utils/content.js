@@ -217,7 +217,7 @@ export async function getOffersForProduct(productDocumentId) {
     try {
       const url = new URL(item.asin ? amazonUrl(item.asin) : item.url)
       if (url.protocol !== 'https:' || url.username || url.password) return []
-      return [{ merchantName, url: url.toString(), checkedAt, expiresAt }]
+      return [{ merchantName, url: url.toString(), checkedAt, expiresAt, note: cleanText(item.note, 300) }]
     } catch { return [] }
   })
 }

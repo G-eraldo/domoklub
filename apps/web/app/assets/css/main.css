@@ -364,3 +364,4 @@ svg { display: block; }
 
 .review-rating { margin: .4rem 0 1rem; padding: .7rem 1rem; border: 1px solid rgba(251,146,60,.35); border-radius: 12px; background: rgba(251,146,60,.08); color: #ffe3c7; }
 .review-rating strong { color: var(--orange-light); }
+.offer-card .offer-note { display: block; margin-top: .35rem; color: var(--orange-light); }

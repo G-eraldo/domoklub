@@ -2,3 +2,4 @@
 
 - Quand des photos produit sont demandées, utiliser des visuels authentiques des références exactes et vérifier leur provenance et leur droit de réutilisation avant intégration.
 - Aligner le guide de déploiement sur le flux GitHub choisi par l’utilisateur dès que ce choix est connu.
+- Ne jamais supposer qu’un accord donné pour un lot d’images couvre un nouveau lot : demander explicitement, et distinguer « image trouvable en ligne » de « droit de réutilisation ».

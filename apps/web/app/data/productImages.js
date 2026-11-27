@@ -31,8 +31,8 @@ export const productImages = {
     sourceUrl: 'https://www.domadoo.fr/41293-large_default/sonoff-prise-encastree-matter-over-wifi-serie-fusion-orb-socket.jpg'
   },
   'nodon-sin-4-1-20': {
-    src: '/products/nodon-sin-4-1-20.jpg', alt: 'Micromodule Zigbee NodOn SIN-4-1-20', credit: 'Domadoo',
-    sourceUrl: 'https://www.domadoo.fr/17553-large_default/nodon-module-commutateur-contact-sec-zigbee-16a-portail-vmc-chaudiere-sin-4-1-20.jpg'
+    src: '/products/nodon-sin-4-1-20.webp', alt: 'Micromodule Zigbee NodOn SIN-4-1-20', credit: 'NodOn (kit marketing officiel)',
+    sourceUrl: 'https://support.nodon.fr/support/solutions/articles/150000207634-sin-4-1-20-zigbee-multifonction-module'
   },
   'aqara-g410-select': {
     src: '/products/aqara-g410-select.webp', alt: 'Sonnette vidéo Aqara G410 Select noire et carillon', credit: 'Domadoo',

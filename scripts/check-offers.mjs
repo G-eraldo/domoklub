@@ -14,7 +14,7 @@ const reviewWindow = 30 * 24 * 60 * 60 * 1000
 
 for (const offer of launchOffers) {
   if (!expectedProducts.has(offer.productDocumentId)) errors.push(`Produit inconnu : ${offer.productDocumentId}`)
-  const key = `${offer.merchantName}:${offer.productDocumentId}`
+  const key = `${offer.merchantName}:${offer.productDocumentId}${offer.note ? ':remplacement' : ''}`
   if (seenProducts.has(key)) errors.push(`Offre en double : ${key}`)
   seenProducts.add(key)
   if (offer.editorialStatus !== 'approved' || offer.active !== true) errors.push(`Offre inactive : ${offer.productDocumentId}`)

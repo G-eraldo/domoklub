@@ -2,7 +2,7 @@
 // Les URLs de produits viennent de l'éditeur ; les faits techniques des fabricants.
 import { experiencedProducts, experiencedOffers } from './experiencedProducts.js'
 import { installationGuides } from './installationGuides.js'
-import { amazonOffers } from './amazonOffers.js'
+import { amazonOffers, amazonReplacementOffers } from './amazonOffers.js'
 import { choiceGuides } from './choiceGuides.js'
 const checkedAt = '2026-11-17T10:00:00+01:00'
 const contentUpdatedAt = '2026-11-17T13:00:00+01:00'
@@ -227,5 +227,6 @@ export const launchOffers = [
   { editorialStatus: 'approved', productDocumentId: 'local-home-assistant-connect-zbt-2', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/dongle-zigbee/8542-nabu-casa-home-assistant-connect-zbt-2-adaptateur-usb-zigbee-ou-matter-thread-0860011789741.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
   { editorialStatus: 'approved', productDocumentId: 'local-sonoff-dongle-pp10', merchantName: 'Domadoo', url: 'https://www.domadoo.fr/fr/produits-de-domotique/9773-sonoff-dongle-pp10-dongle-usb-zigbee-ou-matter-thread-cc2674p10-6979033600850.html?domid=159', active: true, checkedAt, expiresAt: '2027-05-17T10:00:00+02:00' },
   ...experiencedOffers,
-  ...amazonOffers
+  ...amazonOffers,
+  ...amazonReplacementOffers
 ]

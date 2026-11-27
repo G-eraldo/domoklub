@@ -4,7 +4,6 @@
 const checkedAt = '2026-11-27T10:00:00+01:00'
 const expiresAt = '2027-05-27T10:00:00+02:00'
 
-// Hue Motion Sensor et ampoule Hue E27 : Amazon ne propose que des générations différentes (non liées).
 export const amazonOffers = [
   ['sonoff-zbdongle-p', 'B09KXTCMSC'],
   ['sonoff-dongle-pp10', 'B0H5HYZ3LP'],
@@ -21,3 +20,10 @@ export const amazonOffers = [
   ['philips-hue-dimmer-switch', 'B08PKMT2DV'], // modèle 929002398602 confirmé sur la fiche Amazon
   ['nous-a7z', 'B0FB4ZSW3D'] // lot de 2 (A7Z-2) : pas d'offre unitaire trouvée
 ].map(([slug, asin]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Amazon', asin, active: true, checkedAt, expiresAt }))
+
+// Générations actuelles qui remplacent un modèle utilisé par l'éditeur et devenu introuvable.
+// La fiche reste celle du modèle de Gérald ; la note est affichée à côté du bouton.
+export const amazonReplacementOffers = [
+  ['philips-hue-motion-sensor', 'B09CV78GV1', 'Modèle qui remplace celui de Gérald : Hue Motion Sensor 929003067501, nouvelle génération (pris en charge par Zigbee2MQTT sous la référence 9290030675).'],
+  ['philips-hue-white-color-e27', 'B0FJ8TQFGP', 'Modèle qui remplace celui de Gérald : Hue White & Color A60 E27 1100 lm (929003853501), Zigbee et Matter. Sa prise en charge par Zigbee2MQTT n’était pas confirmée dans la liste officielle au 27 novembre 2026.']
+].map(([slug, asin, note]) => ({ editorialStatus: 'approved', productDocumentId: `local-${slug}`, merchantName: 'Amazon', asin, note, active: true, checkedAt, expiresAt }))

@@ -3,7 +3,7 @@
 Site Nuxt 4 d’affiliation éditoriale consacré à la maison connectée. La
 version actuelle contient cinq guides sourcés, trois fiches produits
 documentaires et huit avis d’usage personnel attribués à Gérald François.
-Les onze fiches ont une photo produit Domadoo autorisée et un lien affilié
+Les fiches ont une photo produit Domadoo (droits à confirmer, voir `docs/editorial/ASSETS.md`) et un lien affilié
 fourni par l’éditeur. Les huit avis d’usage personnels précisent leur contexte
 et leurs limites, sans note chiffrée ; aucun prix n’est publié.
 
@@ -44,7 +44,7 @@ GitHub Actions vérifie les offres, compile le site et contrôle son HTML SEO
 sur chaque push et chaque lundi.
 
 Les photos des onze produits proviennent des fiches Domadoo fournies par
-l’éditeur. Celui-ci a confirmé leur droit de réutilisation le 17 novembre.
+l’éditeur. Leur droit de réutilisation reste à confirmer (voir `docs/editorial/ASSETS.md`).
 Leurs URLs sources figurent dans `docs/editorial/ASSETS.md`.
 
 Le lien Home Assistant Green menait lors du contrôle initial à une fiche
