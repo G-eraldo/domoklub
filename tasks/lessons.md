@@ -4,3 +4,4 @@
 - Aligner le guide de déploiement sur le flux GitHub choisi par l’utilisateur dès que ce choix est connu.
 - Ne jamais supposer qu’un accord donné pour un lot d’images couvre un nouveau lot : demander explicitement, et distinguer « image trouvable en ligne » de « droit de réutilisation ».
 - Nuxt : ne jamais appeler `useRuntimeConfig()` (donc `canonicalPath`, `publicRobots`, `isSiteLive`) dans un `computed` ou un `useHead(() => …)` ; précalculer la valeur dans le setup, sinon erreur 500 « nuxt instance unavailable ».
+- Visuels de remplacement : l’éditeur veut des rendus réalistes type photo studio, pas des pictogrammes plats ; rester générique (sans marque) et le signaler en légende.

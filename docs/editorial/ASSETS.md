@@ -1,6 +1,31 @@
 # Photos produits
 
-Les photos ci-dessous ont été prises sur les fiches Domadoo envoyées
+## Situation au 27 novembre 2026 : visuels génériques
+
+Les quinze photos Domadoo ont été retirées du site faute d’accord écrit
+(elles restent dans l’historique Git). Elles sont remplacées par des rendus
+génériques « studio » créés par DomoKlub :
+
+- source : `scripts/illustrations/build.mjs` (SVG dans `scripts/illustrations/svg/`),
+  rendus WebP 800 × 800 dans `apps/web/public/products/illustrations/` ;
+- aucune marque, aucun logo, aucun calque d’une photo existante : chaque visuel
+  représente un type d’appareil (box, clé USB, micromodule, prise, ampoule…),
+  pas le modèle exact ;
+- la légende et le texte alternatif l’indiquent (« Visuel générique DomoKlub,
+  ce n’est pas une photo du produit ») ;
+- ces visuels sont exclus de `og:image` et du balisage `Product`/`Article` : ils
+  ne doivent jamais passer pour la photo du produit.
+
+Seule la photo NodOn SIN-4-1-20 (kit marketing officiel) reste une photo réelle.
+Pour remplacer un visuel générique par une photo, ajouter le fichier dans
+`apps/web/public/products/`, puis l’entrée correspondante dans
+`apps/web/app/data/productImages.js` avec `credit` et `sourceUrl` (sans `generic`).
+Ordre de préférence : photo personnelle de l’éditeur, kit officiel aux conditions
+claires, autorisation écrite. Amazon : uniquement via l’API Creators.
+
+## Historique
+
+Les photos ci-dessous (retirées le 27 novembre 2026) avaient été prises sur les fiches Domadoo envoyées
 par l’éditeur. Elles montrent les produits exacts ; elles ne sont pas des
 preuves d’un test DomoKlub.
 

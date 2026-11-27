@@ -129,3 +129,11 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [x] FAQ (2 à 4 questions) sur les 10 guides et comparatifs, balisage FAQPage.
 - [x] Newsletter Resend (inscription simple + e-mail de bienvenue depuis le 27/11) (formulaire accueil, guides, /newsletter), confidentialité mise à jour.
 - [ ] Resend : vérifier le domaine domoklub.fr, puis définir RESEND_API_KEY, NEWSLETTER_FROM (et RESEND_SEGMENT_ID) dans Dokploy.
+
+## Visuels génériques — 27 novembre 2026
+
+- [x] Créer 13 rendus « studio » génériques sans marque (script `scripts/illustrations/build.mjs`).
+- [x] Remplacer les 15 photos Domadoo aux droits non confirmés ; garder la photo officielle NodOn.
+- [x] Exclure les visuels génériques de `og:image` et des données structurées.
+- [x] Mettre à jour `docs/editorial/ASSETS.md`.
+- [ ] Remplacer progressivement par des photos personnelles ou des kits officiels (SONOFF après adhésion au programme).

@@ -18,7 +18,8 @@ const otherProducts = computed(() => (sameCategory.value.length ? sameCategory.v
 const comparePath = computed(() => sameCategory.value.length ? `/comparer?produits=${[slug, ...sameCategory.value.slice(0, 3).map(item => item.slug)].join(',')}` : '')
 
 const approvedRobots = publicRobots()
-const productPhotoUrl = productImages[slug] ? canonicalPath(productImages[slug].src) : undefined
+// Les visuels génériques restent hors des métadonnées : ils ne doivent pas passer pour une photo du produit.
+const productPhotoUrl = productImages[slug] && !productImages[slug].generic ? canonicalPath(productImages[slug].src) : undefined
 useSeoMeta({
   title: computed(() => product.value ? (product.value.seoTitle || `${product.value.name} · DomoKlub`) : 'Produit · DomoKlub'),
   description: computed(() => product.value?.seoDescription || product.value?.summary || 'Fiche produit documentée par DomoKlub.'),
@@ -27,7 +28,7 @@ useSeoMeta({
   ogImage: productPhotoUrl,
   ogImageWidth: productPhotoUrl ? 800 : undefined,
   ogImageHeight: productPhotoUrl ? 800 : undefined,
-  ogImageAlt: productImages[slug]?.alt,
+  ogImageAlt: productPhotoUrl ? productImages[slug].alt : undefined,
   twitterCard: 'summary_large_image',
   robots: computed(() => product.value?.editorialStatus === 'review' ? 'noindex,follow' : approvedRobots)
 })
@@ -66,7 +67,7 @@ const compatibilities = computed(() => Object.entries(product.value?.compatibili
     <header class="page-hero product-page-hero"><div class="container"><nav class="breadcrumbs" aria-label="Fil d’Ariane"><NuxtLink to="/">Accueil</NuxtLink><span class="separator">/</span><NuxtLink to="/produits">Produits</NuxtLink><span class="separator">/</span><span aria-current="page">{{ product?.name || 'Produit' }}</span></nav><span class="eyebrow">{{ product?.personalReview ? 'Avis personnel et fiche produit' : 'Fiche produit documentée' }}</span><h1>{{ product?.name || 'Produit' }}</h1><p>{{ product?.summary }}</p><p v-if="product" class="affiliate-disclosure">{{ product.personalReview ? 'Avis personnel et caractéristiques documentées' : 'Fiche documentaire' }} · Les liens marchands sont affiliés (Domadoo, Amazon) : un achat après un clic peut rémunérer DomoKlub, sans surcoût pour vous.</p><a v-if="offers?.items?.length" class="button button-primary hero-affiliate-button" :href="offers.items[0].url" target="_blank" rel="sponsored noopener noreferrer">Voir chez {{ offers.items[0].merchantName }} <span aria-hidden="true">↗</span></a></div></header>
     <div class="container page-body"><p v-if="pending" role="status">Chargement du produit…</p><div v-else-if="error" class="notice" role="alert">Cette fiche est temporairement indisponible.</div><div v-else-if="product" class="detail-layout"><div class="article-content">
       <section v-if="product.buyerNote" class="product-decision" aria-labelledby="product-decision-title"><div><span class="eyebrow">En bref</span><h2 id="product-decision-title">À qui convient ce produit ?</h2><p>{{ product.buyerNote }}</p><p class="product-decision-limit">{{ product.limitations?.[0] }}</p></div></section>
-      <figure v-if="productImages[slug]" class="product-detail-photo"><img :src="productImages[slug].src" :alt="productImages[slug].alt" width="800" height="800" fetchpriority="high"><figcaption>Photo du produit : {{ productImages[slug].credit }}.</figcaption></figure>
+      <figure v-if="productImages[slug]" class="product-detail-photo"><img :src="productImages[slug].src" :alt="productImages[slug].alt" width="800" height="800" fetchpriority="high"><figcaption>{{ productImages[slug].credit }}.</figcaption></figure>
       <div v-if="product.editorialStatus === 'review'" class="notice">Brouillon en prévisualisation. Vérification éditoriale requise avant l’indexation.</div>
       <section v-if="product.personalReview" class="personal-review" aria-labelledby="personal-review-heading"><span class="eyebrow">Retour d’usage</span><h2 id="personal-review-heading">L’avis de {{ product.personalReview.author }}</h2><p v-if="product.personalReview.rating" class="review-rating"><strong>Note de {{ product.personalReview.author }} : {{ product.personalReview.rating.value }}/{{ product.personalReview.rating.best }}</strong> · {{ product.personalReview.rating.motivation }}</p><p>{{ product.personalReview.context }}</p><p v-for="observation in product.personalReview.observations" :key="observation">{{ observation }}</p><p class="personal-review-scope">{{ product.personalReview.caveat }}</p></section>
       <div v-else class="notice">Non testé par DomoKlub. Cette fiche repose sur la documentation du fabricant et ne comporte aucune note.</div>

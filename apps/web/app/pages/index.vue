@@ -43,7 +43,7 @@ const formats = [
           <div class="visual-glow" aria-hidden="true" />
           <div class="visual-ring" aria-hidden="true" />
           <NuxtLink class="house-card hero-product-card" to="/produits/home-assistant-green" aria-label="Voir la fiche Home Assistant Green">
-            <img src="/products/home-assistant-green.jpg" alt="Home Assistant Green avec sa boîte" width="800" height="800" fetchpriority="high">
+            <img src="/products/illustrations/hub.webp" alt="Visuel générique d’une box domotique compacte" width="800" height="800" fetchpriority="high">
           </NuxtLink>
           <div class="scene-chip top" aria-hidden="true"><span class="chip-icon">✳</span><span>Éclairage<small>Une ambiance à votre rythme</small></span></div>
           <div class="scene-chip left" aria-hidden="true"><span class="chip-icon">⌁</span><span>Énergie<small>Des usages plus lisibles</small></span></div>

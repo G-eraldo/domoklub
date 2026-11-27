@@ -21,7 +21,7 @@ const { data: guideList } = await useAsyncData('articles-all', () => $fetch('/ap
 const articlePath = articleSlug => { const item = guideList.value?.items?.find(entry => entry.slug === articleSlug); return `/${item?.section || 'guides'}/${articleSlug}` }
 const relatedProducts = computed(() => (article.value?.relatedProducts || []).map(productSlug => catalog.value?.items?.find(item => item.slug === productSlug)).filter(Boolean))
 const articleLabel = relatedSlug => guideList.value?.items?.find(item => item.slug === relatedSlug)?.title || relatedSlug.replaceAll('-', ' ')
-const leadImage = computed(() => relatedProducts.value.map(product => productImages[product.slug]).find(Boolean))
+const leadImage = computed(() => relatedProducts.value.map(product => productImages[product.slug]).find(image => image && !image.generic))
 // Google accepte plusieurs formats d'image pour un article : photo produit carrée + visuel 1200 × 630.
 const absoluteUrl = useAbsoluteUrl()
 const schemaImages = computed(() => [leadImage.value?.src, defaultOgImage.path].filter(Boolean).map(absoluteUrl))
