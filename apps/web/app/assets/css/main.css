@@ -376,3 +376,14 @@ svg { display: block; }
 /* Champ piège anti-robots : retiré de l'affichage sans display:none (ignoré par certains robots). */
 .newsletter-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 @media (max-width: 520px) { .newsletter-row { flex-direction: column; } }
+/* Formulaire newsletter : toujours aligné à gauche, même dans le bloc centré de l'accueil. */
+.newsletter-form-wrap { max-width: 560px; text-align: left; }
+.newsletter-teaser .newsletter-form-wrap { margin-inline: auto; }
+.newsletter-row { align-items: stretch; }
+.newsletter-row .button { margin-top: 0; flex-shrink: 0; }
+.newsletter-consent a { color: var(--orange-light); text-decoration: underline; text-underline-offset: 2px; }
+.newsletter-success { display: flex; gap: .9rem; align-items: flex-start; padding: 1.1rem 1.2rem; border: 1px solid rgba(134,239,172,.3); border-radius: 16px; background: rgba(134,239,172,.07); color: #d6f5df; }
+.newsletter-success strong { display: block; margin-bottom: .25rem; color: #f6f7f9; font-size: 1rem; }
+.newsletter-success p { margin: 0; font-size: .86rem; line-height: 1.6; }
+.newsletter-success b { color: #f6f7f9; word-break: break-all; }
+.newsletter-success-icon { display: grid; place-items: center; flex-shrink: 0; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: rgba(134,239,172,.15); font-size: 1.1rem; }

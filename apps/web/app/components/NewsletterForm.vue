@@ -24,7 +24,7 @@ async function submit() {
 <template>
   <div class="newsletter-form-wrap">
     <p v-if="!status?.enabled" class="notice">Les inscriptions ouvrent très bientôt.</p>
-    <p v-else-if="state === 'sent'" class="notice" role="status">Presque fini : un e-mail de confirmation vient de partir. Cliquez sur le lien qu’il contient pour valider votre inscription (pensez à vérifier les indésirables).</p>
+    <div v-else-if="state === 'sent'" class="newsletter-success" role="status"><span class="newsletter-success-icon" aria-hidden="true">✓</span><div><strong>Merci, vous êtes inscrit !</strong><p>Un e-mail de bienvenue part à <b>{{ email }}</b>. Rien reçu d’ici quelques minutes ? Regardez dans les indésirables.</p></div></div>
     <form v-else class="newsletter-form" :class="{ compact }" @submit.prevent="submit">
       <label class="sr-only" for="newsletter-email">Adresse e-mail</label>
       <div class="newsletter-row">
