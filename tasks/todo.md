@@ -116,3 +116,4 @@ inspectable et testable sans inventer des contenus, prix, tests ni revenus.
 - [ ] Droits des 16 photos Domadoo non confirmés : conditions du programme Domadoo, accord écrit, kits presse ou photos personnelles.
 - [x] Photo NodOn remplacée par le visuel du kit marketing officiel NodOn.
 - [ ] Visuels : rejoindre le programme SONOFF (7 produits) et envoyer les demandes de `docs/editorial/DEMANDES_VISUELS.md`.
+- [ ] Après les premières ventes Amazon validées : créer les identifiants Creators API (Associates Central), puis brancher images + liens Amazon via l'API (photo actuelle en secours, accès coupé après 30 jours sans vente). SiteStripe ne fournit plus d'image depuis déc. 2023.
