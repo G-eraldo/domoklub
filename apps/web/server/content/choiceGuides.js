@@ -29,7 +29,7 @@ export const choiceGuides = [
     "title": "Suivre sa consommation électrique dans Home Assistant",
     "seoTitle": "Consommation électrique dans Home Assistant",
     "excerpt": "Suivre sa consommation électrique dans Home Assistant avec le compteur Linky ou une prise à mesure : ce que chaque méthode donne, et ce qu'elle ne dit pas.",
-    "intro": "Deux moyens suffisent, et ils ne mesurent pas la même chose : le module ZLinky TIC lit les index du compteur Linky sans électricien et donne le total du logement ; une prise à mesure isole un appareil à l'intérieur de ce total, elle ne s'y ajoute pas. Le prix du kWh sert à convertir ces kilowattheures en euros. Aucun des deux ne remplace le relevé de votre facture. Ce guide contient des liens vers des fiches qui proposent des liens affiliés. Un achat après un clic peut rémunérer DomoKlub, sans surcoût pour vous. Notre politique d'affiliation.",
+    "intro": "Deux moyens suffisent, et ils ne mesurent pas la même chose : le module ZLinky TIC lit les index du compteur Linky sans électricien et donne le total du logement ; une prise à mesure isole un appareil à l'intérieur de ce total, elle ne s'y ajoute pas. Le prix du kWh sert à convertir ces kilowattheures en euros. Aucun des deux ne remplace le relevé de votre facture. Ce guide contient des liens vers des fiches qui proposent des liens affiliés. Un achat après un clic peut rémunérer DomoKlub, sans surcoût pour vous.",
     "sections": [
       {
         "id": "section-1",
@@ -72,7 +72,10 @@ export const choiceGuides = [
         "paragraphs": [
           "Home Assistant convertit des kWh en euros si vous lui donnez le prix du kWh, en prix fixe ou via une entité qui suit votre tarif. Sans ce prix, vous avez un compteur, pas un budget.",
           "Repère de calcul, à adapter à votre contrat :",
-          "text coût = énergie (kWh) × prix du kWh 2 000 W pendant 2 h = 4 kWh 4 kWh × 0,25 €/kWh = 1,00 €   (0,25 € est un exemple, pas un tarif) ",
+          "coût = énergie (kWh) × prix du kWh",
+          "2 000 W pendant 2 h = 4 kWh",
+          "4 kWh × 0,25 €/kWh = 1,00 €",
+          "(0,25 € est un exemple, pas un tarif)",
           "En heures pleines / heures creuses, le prix change selon la période. Le module expose la période tarifaire, ce qui permet de séparer les deux dans les automatisations ; le tableau de bord Énergie, lui, reste juste si vous lui fournissez le bon prix au bon moment."
         ]
       },
@@ -115,7 +118,7 @@ export const choiceGuides = [
           "Zigbee2MQTT — page du convertisseur ZLinky_TIC (index en kWh, PTEC, linky_mode historique/standard), consultée le 28/11/2026.",
           "Home Assistant — documentation « Home energy management » (capteur d'énergie en kWh, conversion d'un capteur de puissance), consultée le 28/11/2026.",
           "Fiches DomoKlub LiXee ZLinky TIC V2 et NOUS A7Z, vérifiées le 17/11/2026.",
-          "*Fiche documentaire : DomoKlub n'a pas réalisé de mesure comparative pour ce guide. Les valeurs de consommation citées sont des calculs, pas des relevés.*"
+          "Fiche documentaire : DomoKlub n'a pas réalisé de mesure comparative pour ce guide. Les valeurs de consommation citées sont des calculs, pas des relevés."
         ]
       }
     ],
