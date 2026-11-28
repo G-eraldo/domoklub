@@ -41,25 +41,38 @@ export const choiceGuides = [
       },
       {
         "id": "section-2",
-        "title": "2. Le Linky : ce qu'il donne, et ce qu'il ne donne pas",
+        "title": "2. Le Linky : ce qu'il donne",
         "paragraphs": [
           "Le compteur Linky expose une téléinformation client (TIC), une liaison série destinée à l'origine aux boîtiers des fournisseurs. Le ZLinky se clipse dessus et s'alimente par cette même liaison : pas de pile, pas de câblage, pas de coupure de courant à prévoir.",
           "Les valeurs disponibles dépendent du mode TIC du compteur, historique ou standard. C'est le point à vérifier avant d'acheter : deux compteurs voisins peuvent ne pas exposer les mêmes informations.",
-          "Ce que Zigbee2MQTT publie, d'après la documentation du convertisseur ZLinky :",
-          "les index de consommation en kWh (par exemple l'index 01, EASF01) ;",
-          "la puissance apparente en VA ;",
-          "la période tarifaire en cours (PTEC), donc le repérage heures pleines / heures creuses quand le contrat en a.",
-          "Trois limites à connaître :",
+          "Ce que Zigbee2MQTT publie, d'après la documentation du convertisseur ZLinky :"
+        ],
+        "bullets": [
+          "les index de consommation en kWh (par exemple l'index 01, EASF01)",
+          "la puissance apparente en VA",
+          "la période tarifaire en cours (PTEC), donc le repérage heures pleines / heures creuses quand le contrat en a."
+        ]
+      },
+      {
+        "id": "section-2-limites",
+        "title": "3. Le Linky : ce qu'il ne donne pas",
+        "paragraphs": [
+          "Trois limites à connaître avant d'acheter, et un dépannage utile :"
+        ],
+        "bullets": [
           "Puissance apparente ≠ puissance réelle. Le compteur donne des VA, pas des watts. L'écart dépend du facteur de puissance de vos appareils. Pour un suivi de facture, ce sont les index en kWh qui comptent.",
           "Pas de détail par appareil. Le compteur voit la maison entière. Un talon de 300 W à 3 h du matin est une information, pas une identification : il faut ensuite isoler.",
           "Le compteur doit être à portée du réseau Zigbee. En maison, le Linky est souvent en limite de propriété ou dans un coffret extérieur : c'est le principal échec d'installation. Un routeur Zigbee intermédiaire, ou un module alimenté plus proche, règle parfois le problème ; sinon la méthode ne vaut pas.",
-          "La fiche produit documente aussi un point de dépannage : après une mise à jour du Linky ou une coupure, si la LED du module reste éteinte, LiXee conseille de le débrancher au moins 30 minutes."
+          "Dépannage : après une mise à jour du Linky ou une coupure, si la LED du module reste éteinte, LiXee conseille de le débrancher au moins 30 minutes (point documenté sur la fiche produit)."
         ]
       },
       {
         "id": "section-3",
-        "title": "3. Brancher le compteur dans le tableau de bord Énergie",
+        "title": "4. Brancher le compteur dans le tableau de bord Énergie",
         "paragraphs": [
+          "Quatre étapes, dans l'ordre :"
+        ],
+        "bullets": [
           "Associer le module au réseau Zigbee, dans Zigbee2MQTT (la compatibilité confirmée est celle de Zigbee2MQTT ; pour ZHA, vérifiez votre version avant d'acheter).",
           "Vérifier les entités : les index doivent apparaître en kWh et évoluer. Un index figé est un problème de portée ou de mode TIC, pas un problème Home Assistant.",
           "Déclarer le capteur dans le tableau de bord Énergie, côté « consommation du réseau ». Home Assistant attend un capteur d'énergie en kWh ; la documentation officielle précise qu'un capteur de puissance en W doit d'abord être converti (intégrale).",
@@ -68,32 +81,30 @@ export const choiceGuides = [
       },
       {
         "id": "section-4",
-        "title": "4. Chiffrer en euros",
+        "title": "5. Chiffrer en euros",
         "paragraphs": [
           "Home Assistant convertit des kWh en euros si vous lui donnez le prix du kWh, en prix fixe ou via une entité qui suit votre tarif. Sans ce prix, vous avez un compteur, pas un budget.",
-          "Repère de calcul, à adapter à votre contrat :",
-          "coût = énergie (kWh) × prix du kWh",
-          "2 000 W pendant 2 h = 4 kWh",
-          "4 kWh × 0,25 €/kWh = 1,00 €",
-          "(0,25 € est un exemple, pas un tarif)",
+          "Repère de calcul, à adapter à votre contrat : coût = énergie (kWh) × prix du kWh. Exemple : 2 000 W pendant 2 h = 4 kWh, et 4 kWh × 0,25 €/kWh = 1,00 € (0,25 € est un exemple, pas un tarif).",
           "En heures pleines / heures creuses, le prix change selon la période. Le module expose la période tarifaire, ce qui permet de séparer les deux dans les automatisations ; le tableau de bord Énergie, lui, reste juste si vous lui fournissez le bon prix au bon moment."
         ]
       },
       {
         "id": "section-5",
-        "title": "5. Mesurer un appareil précis",
+        "title": "6. Mesurer un appareil précis",
         "paragraphs": [
-          "La prise à mesure donne la puissance, le courant, la tension et l'énergie de l'appareil branché dessus, et Zigbee2MQTT la reconnaît sans passer par l'application du fabricant. Trois usages typiques :",
+          "La prise à mesure donne la puissance, le courant, la tension et l'énergie de l'appareil branché dessus, et Zigbee2MQTT la reconnaît sans passer par l'application du fabricant. Elle complète le compteur : lui valide le total, les prises expliquent les postes. Trois usages typiques :"
+        ],
+        "bullets": [
           "Un radiateur d'appoint : la prise 16 A suffit pour un appareil de 2 000 W (environ 8,7 A). Un modèle de 2 500 W approche 11 A : la marge se réduit, et un chauffage qui consomme autant mérite une vérification de la prise et de la ligne.",
           "Un appareil à cycle (lave-linge, sèche-linge) : vous obtenez l'énergie du cycle, pas son coût exact si le tarif change en cours de route.",
-          "Le talon de consommation : la somme des prises installées sur les veilles et le réseau, à comparer avec le chiffre du compteur.",
-          "Les deux méthodes se complètent : le compteur valide le total, les prises expliquent les postes."
+          "Le talon de consommation : la somme des prises installées sur les veilles et le réseau, à comparer avec le chiffre du compteur."
         ]
       },
       {
         "id": "section-6",
-        "title": "6. Trois erreurs qui faussent le suivi",
-        "paragraphs": [
+        "title": "7. Trois erreurs qui faussent le suivi",
+        "paragraphs": [],
+        "bullets": [
           "Confondre VA et W. Un onduleur, un moteur ou une alimentation à découpage affichent une puissance apparente supérieure à la puissance réelle. Ne comparez pas une mesure en VA avec la puissance inscrite sur la plaque d'un appareil.",
           "Oublier le prix. Un tableau de bord en kWh ne dit rien de la facture. Le prix du kWh, l'abonnement et les taxes restent hors du calcul.",
           "Comparer un index à une facture sans tenir compte du décalage. Le relevé du fournisseur, la date de facturation et les estimations ne tombent pas au même moment. Un écart de quelques jours est normal ; un écart structurel mérite de vérifier le mode TIC."
@@ -101,7 +112,7 @@ export const choiceGuides = [
       },
       {
         "id": "section-7",
-        "title": "7. Questions fréquentes",
+        "title": "8. Questions fréquentes",
         "paragraphs": [
           "Faut-il un électricien pour le ZLinky ? Non : il se clipse sur la prise TIC, si le compteur est accessible. Le second point est la vraie contrainte, pas le raccordement.",
           "Mon compteur est en limite de propriété, est-ce rédhibitoire ? Souvent, oui, à cause de la portée Zigbee. Testez avec un routeur intermédiaire avant d'acheter, ou partez sur une prise à mesure pour les appareils qui vous intéressent.",
@@ -114,11 +125,13 @@ export const choiceGuides = [
         "id": "section-8",
         "title": "Sources",
         "paragraphs": [
+          "Fiche documentaire : DomoKlub n'a pas réalisé de mesure comparative pour ce guide. Les valeurs de consommation citées sont des calculs, pas des relevés."
+        ],
+        "bullets": [
           "LiXee — documentation ZLinky TIC, reprise de la fiche produit DomoKlub vérifiée le 17/11/2026.",
           "Zigbee2MQTT — page du convertisseur ZLinky_TIC (index en kWh, PTEC, linky_mode historique/standard), consultée le 28/11/2026.",
           "Home Assistant — documentation « Home energy management » (capteur d'énergie en kWh, conversion d'un capteur de puissance), consultée le 28/11/2026.",
-          "Fiches DomoKlub LiXee ZLinky TIC V2 et NOUS A7Z, vérifiées le 17/11/2026.",
-          "Fiche documentaire : DomoKlub n'a pas réalisé de mesure comparative pour ce guide. Les valeurs de consommation citées sont des calculs, pas des relevés."
+          "Fiches DomoKlub LiXee ZLinky TIC V2 et NOUS A7Z, vérifiées le 17/11/2026."
         ]
       }
     ],
