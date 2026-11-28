@@ -22,7 +22,7 @@ const base = { editorialStatus: 'approved', publishedAt, updatedAt: publishedAt 
 export const choiceGuides = [
   {
     "documentId": "local-guide-suivre-consommation-electrique-home-assistant",
-    "editorialStatus": "review",
+    "editorialStatus": "approved",
     "type": "guide",
     "topic": "energie",
     "slug": "suivre-consommation-electrique-home-assistant",
