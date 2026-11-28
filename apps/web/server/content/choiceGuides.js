@@ -27,15 +27,16 @@ export const choiceGuides = [
     "topic": "energie",
     "slug": "suivre-consommation-electrique-home-assistant",
     "title": "Suivre sa consommation électrique dans Home Assistant",
-    "seoTitle": "Suivre sa consommation électrique dans Home Assistant (Linky, prises)",
+    "seoTitle": "Consommation électrique dans Home Assistant",
     "excerpt": "Suivre sa consommation électrique dans Home Assistant avec le compteur Linky ou une prise à mesure : ce que chaque méthode donne, et ce qu'elle ne dit pas.",
-    "intro": "Deux moyens suffisent, et ils ne mesurent pas la même chose : le module ZLinky TIC lit les index du compteur Linky sans électricien, une prise à mesure isole un appareil. Home Assistant additionne les deux dans son tableau de bord Énergie, à condition de lui donner le prix du kWh. Aucun des deux ne remplace le relevé de votre facture. Ce guide renvoie à des fiches contenant des liens affiliés.",
+    "intro": "Deux moyens suffisent, et ils ne mesurent pas la même chose : le module ZLinky TIC lit les index du compteur Linky sans électricien, une prise à mesure isole un appareil. Home Assistant additionne les deux dans son tableau de bord Énergie, à condition de lui donner le prix du kWh. Aucun des deux ne remplace le relevé de votre facture. Ce guide contient des liens vers des fiches qui proposent des liens affiliés. Un achat après un clic peut rémunérer DomoKlub, sans surcoût pour vous. Notre politique d'affiliation.",
     "sections": [
       {
         "id": "section-1",
         "title": "1. Ce que chaque méthode mesure vraiment",
         "paragraphs": [
-          "Le choix se joue sur la question que vous vous posez. « Combien coûte la maison ce mois-ci ? » → compteur. « Combien coûte le sèche-linge ? » → prise. « Combien coûte le chauffage ? » → prise par radiateur, ou pince sur le circuit dédié si vous en avez un."
+          "Le choix se joue sur la question que vous vous posez. « Combien coûte la maison ce mois-ci ? » → compteur. « Combien coûte le sèche-linge ? » → prise. « Combien coûte le chauffage ? » → prise par radiateur, ou pince sur le circuit dédié si vous en avez un.",
+          "Une réserve sur la référence de prise citée : le catalogue du site associe le NOUS A7Z à un lot de deux, sans offre unitaire trouvée, et cette correspondance n'a pas pu être confirmée sur Amazon.fr. Lisez la ligne « prise à mesure » comme un moyen de mesure, pas comme le prix d'une prise seule : vérifiez le conditionnement sur la page du marchand avant de comparer."
         ]
       },
       {
@@ -102,7 +103,7 @@ export const choiceGuides = [
           "Faut-il un électricien pour le ZLinky ? Non : il se clipse sur la prise TIC, si le compteur est accessible. Le second point est la vraie contrainte, pas le raccordement.",
           "Mon compteur est en limite de propriété, est-ce rédhibitoire ? Souvent, oui, à cause de la portée Zigbee. Testez avec un routeur intermédiaire avant d'acheter, ou partez sur une prise à mesure pour les appareils qui vous intéressent.",
           "Le ZLinky fonctionne-t-il avec ZHA ? La compatibilité confirmée par la fiche est Zigbee2MQTT. Pour ZHA, vérifiez la version et le convertisseur avant l'achat : DomoKlub ne l'affirme pas pour ce module.",
-          "Peut-on suivre le chauffage sans Linky ? Oui, avec une prise à mesure par appareil. Vous perdez la vue d'ensemble, vous gagnez le détail.",
+          "Peut-on suivre le chauffage sans Linky ? Oui, avec une prise à mesure par appareil : voir la réserve sur le conditionnement de la référence citée en §1. Vous perdez la vue d'ensemble, vous gagnez le détail.",
           "Pourquoi mon total diffère de la facture ? Parce que la facture inclut l'abonnement et les taxes, et parce que les dates de relevé diffèrent. Le compteur mesure des kWh, pas des euros."
         ]
       },
