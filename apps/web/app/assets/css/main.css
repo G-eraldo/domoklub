@@ -186,7 +186,7 @@ svg { display: block; }
 .product-card strong { margin-top: 1.3rem; font-size: 1.16rem; }
 .product-card small { color: #9caab9; margin-top: .35rem; }
 .product-card .product-footer { display: flex; justify-content: space-between; margin-top: auto; padding-top: 1.3rem; color: var(--orange); font-size: .77rem; font-weight: 700; }
-.article-content { max-width: 760px; }
+.article-content { min-width: 0; max-width: 760px; }
 .article-content h2 { margin-top: 2.2rem; }
 .article-content a { color: var(--orange); text-decoration: underline; text-underline-offset: 3px; }
 .article-content .notice { margin-block: 1.5rem; }
@@ -250,7 +250,7 @@ svg { display: block; }
   .topic-grid, .formats-grid, .article-grid, .product-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .manifesto-grid { grid-template-columns: 1fr; gap: 3rem; }
   .footer-main { grid-template-columns: repeat(2, 1fr); }
-  .detail-layout { grid-template-columns: 1fr; }
+  .detail-layout { grid-template-columns: minmax(0, 1fr); }
   .detail-aside { display: none; }
 }
 @media (max-width: 600px) {
