@@ -27,7 +27,7 @@ export const choiceGuides = [
     "topic": "energie",
     "slug": "suivre-consommation-electrique-home-assistant",
     "title": "Suivre sa consommation électrique dans Home Assistant",
-    "seoTitle": "Consommation électrique dans Home Assistant",
+    "seoTitle": "Consommation électrique dans Home Assistant · DomoKlub",
     "excerpt": "Suivre sa consommation électrique dans Home Assistant avec le compteur Linky ou une prise à mesure : ce que chaque méthode donne, et ce qu'elle ne dit pas.",
     "intro": "Deux moyens suffisent, et ils ne mesurent pas la même chose : le module ZLinky TIC lit les index du compteur Linky sans électricien et donne le total du logement ; une prise à mesure isole un appareil à l'intérieur de ce total, elle ne s'y ajoute pas. Le prix du kWh sert à convertir ces kilowattheures en euros. Aucun des deux ne remplace le relevé de votre facture. Ce guide contient des liens vers des fiches qui proposent des liens affiliés. Un achat après un clic peut rémunérer DomoKlub, sans surcoût pour vous.",
     "sections": [

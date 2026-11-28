@@ -69,14 +69,14 @@ function asPublicArticle(item, detail = false) {
     article.intro = cleanText(item.intro, 1200)
     article.sections = Array.isArray(item.sections) ? item.sections.slice(0, 16).map(section => ({
       id: cleanSlug(section?.id), title: cleanText(section?.title, 160),
-      paragraphs: Array.isArray(section?.paragraphs) ? section.paragraphs.slice(0, 8).map(value => cleanText(value, 2000)).filter(Boolean) : [],
+      paragraphs: Array.isArray(section?.paragraphs) ? section.paragraphs.slice(0, 12).map(value => cleanText(value, 2000)).filter(Boolean) : [],
       bullets: Array.isArray(section?.bullets) ? section.bullets.slice(0, 12).map(value => cleanText(value, 400)).filter(Boolean) : []
     })).filter(section => section.id && section.title) : []
     const table = item.decisionTable
     article.decisionTable = table && Array.isArray(table.columns) && Array.isArray(table.rows) ? {
       title: cleanText(table.title, 120),
-      columns: table.columns.slice(0, 4).map(value => cleanText(value, 80)),
-      rows: table.rows.slice(0, 12).map(row => Array.isArray(row) ? row.slice(0, 4).map(value => cleanText(value, 200)) : [])
+      columns: table.columns.slice(0, 5).map(value => cleanText(value, 80)),
+      rows: table.rows.slice(0, 12).map(row => Array.isArray(row) ? row.slice(0, 5).map(value => cleanText(value, 200)) : [])
     } : null
     article.relatedProducts = safeSlugs(item.relatedProducts)
     article.relatedArticles = safeSlugs(item.relatedArticles)
